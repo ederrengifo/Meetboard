@@ -1,5 +1,6 @@
 require 'google/api_client/client_secrets.rb'
 require 'google/apis/calendar_v3'
+require 'googleauth'
 
 class SessionsController < ApplicationController
   def create
@@ -9,7 +10,7 @@ class SessionsController < ApplicationController
     user.google_token = access_token.credentials.token
     refresh_token = access_token.credentials.refresh_token
     user.google_refresh_token = refresh_token if refresh_token.present?
-    user.save
+    user.save!
     redirect_to root_path
   end
 
