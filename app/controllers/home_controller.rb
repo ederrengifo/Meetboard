@@ -6,7 +6,9 @@ require 'googleauth'
 class HomeController < ApplicationController
 
   def show
-    @calendars = get_calendar(current_user)
+    if current_user.present? 
+      @calendars = get_calendar(current_user)
+    end
   end
 
   private
@@ -18,6 +20,8 @@ class HomeController < ApplicationController
           "refresh_token" => user.google_refresh_token,
           "client_id" => Rails.application.secrets.google_client_id,
           "client_secret" => Rails.application.secrets.google_client_secret,
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://accounts.google.com/o/oauth2/token",
         }
       }
     )
@@ -28,7 +32,11 @@ class HomeController < ApplicationController
     service.client_options.application_name = "Meetboard"
     service.authorization = google_secret(user).to_authorization
 
-    event_list = service.list_events('primary',single_events: true, order_by: 'updated', max_results: 300).items
+    event_list = service.list_events('primary',
+                                      single_events: true, 
+                                      order_by: 'startTime', 
+                                      max_results: 10,
+                                      time_min: Time.now.iso8601).items
   end
 
 end

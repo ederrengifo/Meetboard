@@ -1,11 +1,13 @@
-<h1>Home#show</h1>
-<p>Find me in app/views/home/show.html.erb</p>
+<% if current_user %> 
+  <h1><%= current_user.name %> meetings</h1>     
+  <%= @calendars.count %>
 
-<%= @calendars.count %>
-
-<ul>
-  <% @calendars.each do |calendar| %>
-    <li><strong><%= calendar.summary %></strong> </br>
-    (<%= calendar.start.date_time %>) to (<%= calendar.end.date_time %>)</li>
-  <% end %>
-</ul>
+  <ul>
+    <% @calendars.each do |calendar| %>
+      <li><strong><%= calendar.summary %></strong> </br>
+      <%= calendar.start.date_time.strftime("%I:%M%p")%> to <%=calendar.end.date_time.strftime("%I:%M%p") %></li>
+    <% end %>
+  </ul>
+<% else %>
+      Nothing!
+<% end %>

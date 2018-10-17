@@ -3,6 +3,7 @@ require 'google/apis/calendar_v3'
 require 'googleauth'
 
 class SessionsController < ApplicationController
+  # First search of an active session. That is a session for the users.email that hasn´t expired and returned that.
   def create
     access_token = request.env["omniauth.auth"]
     user = User.from_omniauth(access_token)
