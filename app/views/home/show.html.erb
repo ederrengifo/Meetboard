@@ -4,7 +4,9 @@
 
   <ul>
     <% @calendars.each do |calendar| %>
-      <li><strong><%= calendar.summary %></strong> </br>
+      <li>
+      <i><%= calendar.start.date_time.strftime("%A %d") %></i> </br>
+      <strong><%= calendar.summary %></strong> </br>
       <%= calendar.start.date_time.strftime("%I:%M%p")%> to <%=calendar.end.date_time.strftime("%I:%M%p") %></li>
     <% end %>
   </ul>
