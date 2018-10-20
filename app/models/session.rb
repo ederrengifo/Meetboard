@@ -1,3 +1,3 @@
-class Session < Application
+class Session < ApplicationRecord
   belongs_to :user
 end

@@ -47,6 +47,8 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.5.0)
+    binding_of_caller (0.8.0)
+      debug_inspector (>= 0.0.1)
     builder (3.2.3)
     byebug (10.0.2)
     coderay (1.1.2)
@@ -59,6 +61,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    debug_inspector (0.0.3)
     declarative (0.0.10)
     declarative-option (0.1.0)
     dotenv (2.5.0)
@@ -234,6 +237,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   better_errors
+  binding_of_caller
   byebug
   coffee-rails (~> 4.2)
   dotenv-rails
@@ -254,4 +258,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.11.2
+   1.16.3

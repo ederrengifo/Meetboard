@@ -5,14 +5,15 @@ require 'googleauth'
 
 class HomeController < ApplicationController
 
-  def show
-    if current_user.present? 
-      @calendars = get_calendar(current_user)
+  def index
+    unless signed_in?
+      redirect_to new_session_path
     end
+    # @calendars = get_calendar(current_user)
   end
-
-  private
   
+  private
+
   def google_secret(user)
     Google::APIClient::ClientSecrets.new(
       { "web" =>
@@ -37,5 +38,4 @@ class HomeController < ApplicationController
                                       time_min: Time.now.iso8601,).items
 
   end
-
 end
