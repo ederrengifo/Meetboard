@@ -9,10 +9,6 @@
   </head>
 
   <body>
-      <% if current_user %>
-        <%= yield %>
-      <% else %>
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-      <% end %>
+    <%= yield %>
   </body>
 </html>
