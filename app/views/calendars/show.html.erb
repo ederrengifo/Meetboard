@@ -1,33 +1,11 @@
-<% if current_user %> 
-  <main class="board">
-    <aside id="sidebar">
-      <div class="user-options">
-        <%= current_user.name %>
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-      </div>
-    <h2>Today</h2>
-    <ul>
-      <% @calendars.each do |calendar| %>
-        <li>
-          <a class="event-link">
-            <div class="event-name">
-              <%= calendar.summary %></strong>
-            </div>
-            <div class="timelapse">
-              <%= calendar.start.date_time&.strftime("%I:%M%p")%> to <%=calendar.end.date_time&.strftime("%I:%M%p") %>
-            </div>
-          </a>
-        </li>
-      <% end %>
-    </ul>
-    </aside>
+<main class="board">
+    
+    <%= render "sidebar" %>
+
     <div id="workspace">
         hello
     </div>
     <div id="todobar">
         world
     </div>
-  </main>
-<% else %>
-      Nothing!
-<% end %>
+</main>
