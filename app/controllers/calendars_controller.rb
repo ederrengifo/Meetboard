@@ -13,12 +13,18 @@ class CalendarsController < ApplicationController
       @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
 
       @calendars.each do |google_event|
-        event = Event.new
-        event.gid = google_event.id
-        event.title = google_event.summary
-        event.description = google_event.description
-        event.hangout_link = google_event.hangout_link
-        event.save
+        event = Event.find_by(gid: google_event.id)
+
+        if event.present?
+        else
+          new_event = Event.new
+          new_event.gid = google_event.id
+          new_event.title = google_event.summary
+          new_event.description = google_event.description
+          new_event.hangout_link = google_event.hangout_link
+          new_event.save!
+        end
+        
       end
 
     end
