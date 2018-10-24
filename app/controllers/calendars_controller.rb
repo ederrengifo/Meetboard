@@ -11,6 +11,16 @@ class CalendarsController < ApplicationController
       @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
       @today = Time.now.strftime("%Y-%m-%d").to_time
       @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
+
+      @calendars.each do |google_event|
+        event = Event.new
+        event.gid = google_event.id
+        event.title = google_event.summary
+        event.description = google_event.description
+        event.hangout_link = google_event.hangout_link
+        event.save
+      end
+
     end
   end
 
