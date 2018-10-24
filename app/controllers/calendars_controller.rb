@@ -7,7 +7,10 @@ class CalendarsController < ApplicationController
 
   def show
     if current_user.present? 
-      @calendars = get_calendar(current_user)
+      @calendars = get_calendar(current_user).to_a
+      @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
+      @today = Time.now.strftime("%Y-%m-%d").to_time
+      @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
     end
   end
 
