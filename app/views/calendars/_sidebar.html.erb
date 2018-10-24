@@ -1,35 +1,38 @@
 <aside id="sidebar">
-        <div class="user-options">
-            <%= current_user.name %>
-            <%= link_to "Sign out", signout_path, id: "sign_out" %>
-        </div>
 
-    <% @calendar_days.each do |day, calendars| %>
-        <h2>
-            <% if day == @today %>
-                Today
-            <% else %>
-                <% if day == @tomorrow %>
-                    Tomorrow
+    <div class="user-options">
+        <%= current_user.name %>
+        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+    </div>
+
+    <div class="scroll-bar-container">
+        <% @calendar_days.each do |day, calendars| %>
+            <h2>
+                <% if day == @today %>
+                    Today
                 <% else %>
-                    <%= day.strftime("%A %d") %> 
+                    <% if day == @tomorrow %>
+                        Tomorrow
+                    <% else %>
+                        <%= day.strftime("%A %d") %> 
+                    <% end %>
                 <% end %>
-            <% end %>
-        </h2>
-        <ul>
-            <% for calendar in calendars %>
-                <li>
-                    <a class="event-link">
-                        <div class="event-name">
-                            <%= calendar.summary %>
-                        </div>
-                        <div class="timelapse">
-                            <%= calendar.start.date_time&.strftime("%I:%M%p")%> to <%=calendar.end.date_time&.strftime("%I:%M%p") %>
-                        </div>
-                    </a>
-                </li>
-            <% end %>
-        </ul>
-    <% end %>
+            </h2>
+            <ul>
+                <% for calendar in calendars %>
+                    <li>
+                        <a class="event-link">
+                            <div class="event-name">
+                                <%= calendar.summary %>
+                            </div>
+                            <div class="timelapse">
+                                <%= calendar.start.date_time&.strftime("%I:%M%p")%> to <%=calendar.end.date_time&.strftime("%I:%M%p") %>
+                            </div>
+                        </a>
+                    </li>
+                <% end %>
+            </ul>
+        <% end %>
+    </div>
     
 </aside>
