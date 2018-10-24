@@ -6,15 +6,18 @@ require 'googleauth'
 class CalendarsController < ApplicationController
 
   def show
+    # Showing calendars when current user is logged
     if current_user.present? 
       @calendars = get_calendar(current_user).to_a
       @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
       @today = Time.now.strftime("%Y-%m-%d").to_time
       @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
 
+      # Creating a new event for each item of the event_list is being called
       @calendars.each do |google_event|
         event = Event.find_by(gid: google_event.id)
 
+        # Creating a new element only if this doesn't exist
         if event.present?
         else
           new_event = Event.new
@@ -24,7 +27,6 @@ class CalendarsController < ApplicationController
           new_event.hangout_link = google_event.hangout_link
           new_event.save!
         end
-        
       end
 
     end
