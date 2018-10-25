@@ -5,6 +5,14 @@
     <div id="workspace">
         <h1>Meeting Title </h1>
         <p>This is the meeting description and the beginning of the notes!</p>
+        <ul>
+            <% @events.each do |event| %>
+                <li>
+                    <strong><%= event.title %></strong>
+                    <%= event.description %>
+                </li>
+            <% end %>
+        </ul>
     </div>
     <div id="todobar">
         <h2>Meeting Tasks</h2>

@@ -29,6 +29,8 @@ class CalendarsController < ApplicationController
         end
       end
 
+      @events = Event.all
+
     end
   end
 
