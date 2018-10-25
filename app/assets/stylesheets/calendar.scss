@@ -25,7 +25,6 @@ main {
         font-size: 14px;
         line-height: 20px;
         height: 100vh;
-        padding-bottom: 32px;
         scroll-behavior: smooth;
 
         .user-options {
@@ -48,6 +47,7 @@ main {
             min-height: 1px;
             overflow-y: scroll;
             position: relative;
+            padding-bottom: 32px;
         }
 
         h2 {
@@ -68,6 +68,7 @@ main {
                 .event-link {
                     cursor: pointer;
                     width: 100%;
+                    color: #FFFFFF;
 
                     .event-name {
                         opacity: 0.5;
@@ -107,7 +108,15 @@ main {
         width: 48%;
         float: left;     
         height: 100vh;  
-        padding: 32px;
+        scroll-behavior: smooth;
+
+        .scroll-workspace-container {
+            flex: 1 1 auto;
+            min-height: 1px;
+            overflow-y: scroll;
+            position: relative;
+            padding: 32px;
+        }
 
         h1 {
             color: $neutral-1;
@@ -119,6 +128,10 @@ main {
         p {
             font-size: 16px;
             line-height: 24px;
+        }
+
+        li {
+            margin-top: 16px;
         }
     }
 
