@@ -1,12 +1,20 @@
-<p>
-    <strong>Title:</strong>
-    <%= @event.title %>
-</p>
-<p>
-    <strong>Description:</strong>
-    <%= @event.description %>
-</p>
-<p>
-    <strong>Hangout:</strong>
-    <%= @event.hangout_link %>
-</p>
+<main class="board">
+
+    <%= render "sidebar" %>
+
+    <div class="workspace">
+        <div class="scroll-workspace-container">
+            <h1>
+                <%= @event.title %>
+            </h1>
+            <p>
+                <%= @event.description %>
+                <%= @event.hangout_link %>
+            </p>
+        </div>
+    </div>
+
+    <div class="todobar">
+    </div>
+
+</main>

@@ -6,23 +6,15 @@ require 'fileutils'
 require 'googleauth'
 
 class EventsController < ApplicationController
+  # before_action :set_event
   before_action :set_event, only: [:show]
 
   def index
-    @events = Event.all
-  end
-  
-  def show
     if current_user.present? 
-      @calendars = get_calendar(current_user).to_a
-      @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
-      @today = Time.now.strftime("%Y-%m-%d").to_time
-      @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
-
+      set_calendar
       # Creating a new event for each item of the event_list is being called
       @calendars.each do |google_event|
         event = Event.find_by(gid: google_event.id)
-
         # Creating a new element only if this doesn't exist
         if event.present?
           # TODO : Add instructions to update existing events
@@ -32,10 +24,29 @@ class EventsController < ApplicationController
           new_event.title = google_event.summary
           new_event.description = google_event.description
           new_event.hangout_link = google_event.hangout_link
+          new_event.starts = google_event.start.date_time
+          new_event.ends = google_event.end.date_time
           new_event.save!
         end
       end
     end
+    @events = Event.all
+  end
+  
+  def show
+    set_calendar
+  end
+
+  def set_calendar
+    @calendars = get_calendar(current_user).to_a
+    @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
+    @today = Time.now.strftime("%Y-%m-%d").to_time
+    @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
+
+    @calendars.each do |google_event_link|
+      @event_link = Event.find_by(gid: google_event_link.id)
+    end
+    
   end
 
   private

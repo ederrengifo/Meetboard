@@ -1,3 +1,155 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+
+main {
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // position: relative;
+    // flex: 1;
+
+    &.board {
+        // grid-template-areas: "s w w t";
+    }
+
+    #sidebar {
+        // grid-area: s;
+        width: 22%;
+        display: flex;
+        flex-direction: column;
+        float: left;
+        background-color: $neutral-1;
+        color: #FFFFFF;
+        font-size: 14px;
+        line-height: 20px;
+        height: 100vh;
+        scroll-behavior: smooth;
+
+        .user-options {
+            padding: 8px 16px;
+            border-bottom: 1px solid $neutral-2;
+
+            a {
+                color: $purple;
+                text-decoration: none;
+                margin-left: 4px;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .scroll-bar-container {
+            flex: 1 1 auto;
+            min-height: 1px;
+            overflow-y: scroll;
+            position: relative;
+            padding-bottom: 32px;
+        }
+
+        h2 {
+            padding: 16px 16px;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            padding-bottom: 16px;
+            border-bottom: 1px solid $neutral-2;
+
+            li {
+                padding: 8px 16px;
+
+                .event-link {
+                    cursor: pointer;
+                    width: 100%;
+                    color: #FFFFFF;
+                    text-decoration: none;
+
+                    .event-name {
+                        opacity: 0.5;
+                        transition: 
+                            opacity 0.25s;
+                    }
+
+                    .timelapse {
+                        opacity: 0.25;
+                        font-weight: 300;
+                        transition: 
+                            opacity 0.25s;
+                    }
+                }
+                
+                .event-link:hover {
+                    
+
+                    .event-name {
+                        opacity: 1;
+                    }
+
+                    .timelapse {
+                        opacity: 0.5;
+                    }
+                }
+            }
+
+        }
+ 
+    }
+
+    .workspace {
+        // grid-area: w;
+        display: flex;
+        flex-direction: column;
+        width: 48%;
+        float: left;     
+        height: 100vh;  
+        scroll-behavior: smooth;
+
+        .scroll-workspace-container {
+            flex: 1 1 auto;
+            min-height: 1px;
+            overflow-y: scroll;
+            position: relative;
+            padding: 32px;
+        }
+
+        h1 {
+            color: $neutral-1;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        li {
+            margin-top: 16px;
+        }
+    }
+
+    .todobar {
+        // grid-area: t;
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        float: left;
+        height: 100vh;
+        border-left: 1px solid #F2F2F2;
+        padding: 32px;
+
+        h2 {
+            color: $neutral-1;
+            font-size: 20px;
+            font-weight: 600;
+        }
+    }
+}

@@ -2,12 +2,24 @@
     
     <%= render "sidebar" %>
 
-    <div id="workspace">
-        <h1>Meeting Title </h1>
-        <p>This is the meeting description and the beginning of the notes!</p>
-        
+    <div class="workspace">
+        <div class="scroll-workspace-container">
+            <h1>Meeting Title </h1>
+            <p>This is the meeting description and the beginning of the notes!</p>
+            <ul>
+                <% @events.each do |event| %>
+                    <li>
+                        <strong><%= event.title %></strong>
+                        <p><%= event.description %></p>
+                        <p><%= event.starts %></p>
+                        <p><%= event.ends %></p>
+                        <%= link_to 'Show', event %>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
     </div>
-    <div id="todobar">
+    <div class="todobar">
         <h2>Meeting Tasks</h2>
     </div>
 </main>
