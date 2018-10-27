@@ -3,6 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "variables";
 
+a {
+    color: $purple;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 
 main {
     // display: grid;
@@ -139,6 +148,8 @@ main {
         p {
             font-size: 16px;
             line-height: 24px;
+            color: $neutral-3;
+            padding-bottom: 16px;
         }
 
         li {
@@ -162,4 +173,35 @@ main {
             font-weight: 600;
         }
     }
+
+    .calendar-landing {
+        display: flex;
+        flex-direction: column;
+        width: 78%;
+        float: left;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: $neutral-3;
+
+        h3 {
+            font-size: 24px;
+            font-weight: 400;
+            padding-bottom: 8px;
+            color: $neutral-1;
+        }
+
+        a {
+            color: $purple;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }   
 }
+
+

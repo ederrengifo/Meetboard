@@ -2,24 +2,13 @@
     
     <%= render "sidebar" %>
 
-    <div class="workspace">
-        <div class="scroll-workspace-container">
-            <h1>Meeting Title </h1>
-            <p>This is the meeting description and the beginning of the notes!</p>
-            <ul>
-                <% @events.each do |event| %>
-                    <li>
-                        <strong><%= event.title %></strong>
-                        <p><%= event.description %></p>
-                        <p><%= event.starts %></p>
-                        <p><%= event.ends %></p>
-                        <%= link_to 'Show', event %>
-                    </li>
-                <% end %>
-            </ul>
+    <div class="calendar-landing">
+        <div>
+            <h3>Your next meeting:</h3>
+            <%= link_to(@calendars.first.id) do %>
+                <%= @calendars.first.summary %> 
+            <% end %>
+            at <%= @calendars.first.start.date_time&.strftime("%I:%M%p") %>
         </div>
-    </div>
-    <div class="todobar">
-        <h2>Meeting Tasks</h2>
     </div>
 </main>

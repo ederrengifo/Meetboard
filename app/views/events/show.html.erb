@@ -8,10 +8,15 @@
                 <%= @event.title %>
             </h1>
             <p>
-                <%= @event.description %>
-                <%= link_to 'Meet link', @event.hangout_link %>
-                <%= @event.hangout_link %>
+                <% if @event.description != nil %>
+                    <%= @event.description.html_safe %>
+                <% end %>
             </p>
+            <% if @event.hangout_link != nil %>
+                <a href="<%= @event.hangout_link %>" target="_blank">
+                    Meet link
+                </a>
+            <% end %>
         </div>
     </div>
 

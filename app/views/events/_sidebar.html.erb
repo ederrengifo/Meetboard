@@ -1,9 +1,9 @@
 <aside id="sidebar">
-
-    <div class="user-options">
-        <%= current_user.name %>
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-    </div>
+    <% if current_user %>
+        <div class="user-options">
+            <%= current_user.name %>
+            <%= link_to "Sign out", signout_path, id: "sign_out" %>
+        </div>
 
     <div class="scroll-bar-container">
         <% @calendar_days.each do |day, calendars| %>
@@ -39,5 +39,7 @@
             </ul>
         <% end %>
     </div>
+
+    <% end %>
     
 </aside>
