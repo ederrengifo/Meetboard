@@ -87,7 +87,6 @@ main {
                 
                 .event-link:hover {
                     
-
                     .event-name {
                         opacity: 1;
                     }
@@ -95,6 +94,17 @@ main {
                     .timelapse {
                         opacity: 0.5;
                     }
+                }
+            }
+
+            .active {
+                background-color: $purple;
+
+                .event-link .event-name {
+                    opacity: 1;
+                }
+                .event-link .timelapse {
+                    opacity: 0.5;
                 }
             }
 

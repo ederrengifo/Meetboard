@@ -20,8 +20,13 @@
             </h2>
             <ul>
                 <% for calendar in calendars %>
-                    <li>
-                        <%= link_to(@event_link, class:"event-link") do %>
+                    <% if @event.present? %>
+                        <li class="<%= 'active' if @event.gid == calendar.id %>">
+                    <% else %>
+                        <li>
+                    <% end %>
+
+                        <%= link_to(calendar.id, class:"event-link") do %>
                             <div class="event-name">
                                 <%= calendar.summary %>
                             </div>
