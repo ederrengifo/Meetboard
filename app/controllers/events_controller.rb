@@ -7,7 +7,7 @@ require 'googleauth'
 
 class EventsController < ApplicationController
   # before_action :set_event
-  before_action :set_event, only: [:show]
+  before_action :set_event, only: [:show, :update]
 
   def index
     set_calendar
@@ -44,6 +44,18 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def update 
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { redirect_to @event, notice: 'Changes saved' }
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
     def google_secret(user)
@@ -76,7 +88,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:gid, :title, :description, :hangout_link)
+      params.require(:event).permit(:gid, :title, :description, :hangout_link, :note)
     end
 
 end

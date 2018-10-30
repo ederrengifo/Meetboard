@@ -1,0 +1,34 @@
+<%= form_with(model: event, local: true) do |form| %>
+    <% if event.errors.any? %>
+        Error
+    <% end %>
+
+    <div class="note-field">
+        <%= form.text_area :note, placeholder: "Add your notes" %>
+    </div>
+
+    <div class="actions">
+        <%= form.submit "Update", :class => 'btn-primary', :accesskey => "s" %>
+
+        <div class="note-confirmation">
+            <%= notice %>
+        </div>
+    </div>
+
+    
+
+<% end %>
+
+<script>
+    var tx = document.getElementsByTagName('textarea');
+    for (var i = 0; i < tx.length; i++) {
+        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+        tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    }
+</script>
+
