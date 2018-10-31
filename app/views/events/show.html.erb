@@ -7,16 +7,34 @@
             <h1>
                 <%= @event.title %>
             </h1>
-            <p>
+            <div class="event-tabs">
                 <% if @event.description != nil %>
-                    <%= @event.description.html_safe %>
+                    <button class="details" onclick="showDetails()" id="event-details-btn">
+                        Details
+                    </button>
                 <% end %>
-            </p>
-            <% if @event.hangout_link != nil %>
-                <a href="<%= @event.hangout_link %>" target="_blank">
-                    Meet link
-                </a>
-            <% end %>
+                <button class="details">
+                    Participants
+                </button>
+                <% if @event.hangout_link != nil %>
+                    <a href="<%= @event.hangout_link %>" target="_blank">
+                        Meet link
+                    </a>
+                <% end %>
+
+                <div id="event-details">
+                    <div class="details-wrapper">
+                        <p>
+                            <% if @event.description != nil %>
+                                <%= @event.description.html_safe %>
+                            <% end %>
+                        </p>
+                        
+                    </div>
+                </div>
+            
+            </div>
+            
 
             <%= render 'form', event: @event %>
 
@@ -26,4 +44,20 @@
     <div class="todobar">
     </div>
 
+    <script>
+        function showDetails() {
+            var eventDetails = document.getElementById("event-details");
+            var buttonDetails = document.getElementById("event-details-btn");
+            
+            if (eventDetails.style.display === "none") {
+                eventDetails.style.display = "block";
+                buttonDetails.classList.add("active");
+            } else {
+                eventDetails.style.display = "none";
+                buttonDetails.classList.remove("active");
+            }
+        }
+    </script>
+  
 </main>
+

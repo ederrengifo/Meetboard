@@ -4,13 +4,13 @@
     <% end %>
 
     <div class="note-field">
-        <%= form.text_area :note, placeholder: "Add your notes" %>
+        <%= form.text_area :note, placeholder: "Add your notes", :id => 'note-textarea' %>
     </div>
 
     <div class="actions">
-        <%= form.submit "Update", :class => 'btn-primary', :accesskey => "s" %>
+        <%= form.submit "Update", :class => 'btn-primary hidden', :accesskey => 's', :id => 'update-btn' %>
 
-        <div class="note-confirmation">
+        <div class="note-confirmation" id="update-confirmation">
             <%= notice %>
         </div>
     </div>
@@ -21,6 +21,10 @@
 
 <script>
     var tx = document.getElementsByTagName('textarea');
+    var update_btn = document.getElementById("update-btn");
+    var update_confirmation = document.getElementById("update-confirmation");
+    var Delay
+
     for (var i = 0; i < tx.length; i++) {
         tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
         tx[i].addEventListener("input", OnInput, false);
@@ -29,6 +33,18 @@
     function OnInput() {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
+        update_btn.classList.remove("hidden");
     }
+
+    function ShowNotice() {
+        update_confirmation.classList.add("hidden");
+    }
+
+    function DelayNotice() {
+        Delay = setTimeout(ShowNotice, 2000);
+    }
+
+    window.onload = DelayNotice;
+
 </script>
 

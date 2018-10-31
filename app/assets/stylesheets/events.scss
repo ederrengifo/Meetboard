@@ -204,9 +204,7 @@ main {
     }
     
     .note-field {
-
-        border-top: 2px dashed $neutral-5;
-        padding-top: 24px;
+        padding-top: 8px;
         margin-top: 24px;
         margin-bottom: 24px;
 
@@ -254,8 +252,70 @@ main {
             color: $green;
             margin-top: 8px;
             float: left;
-            margin-left: 24px;
         }
+
+        .hidden {
+            display: none;
+        }
+    }
+
+    .event-tabs {
+        .details {
+            background-color: $neutral-7;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 12px;
+            color: $neutral-3;
+            border: none;
+            cursor: pointer;
+            margin-right: 4px;
+        }
+        .details:hover {
+            color: $purple;
+        }
+        .details:focus {
+            outline-color: transparent;
+            outline-style: none;
+        }
+        .active {
+            background-color: $purple;
+            color: #FFFFFF; 
+        }
+        .active:hover {
+            color: #FFFFFF;
+        }
+        .details-wrapper {
+            background-color: $neutral-7;
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 8px;
+
+            p {
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 300;
+
+                span {
+                    color: $neutral-3;
+                }
+            }
+
+            li {
+                margin-left: 16px;
+            }
+        }
+
+        a {
+            font-size: 14px;
+            padding-left: 8px;
+
+        }
+
+        #event-details {
+            display: none;
+        }
+        
     }
 
     
