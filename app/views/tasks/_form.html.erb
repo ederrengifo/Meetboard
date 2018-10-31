@@ -1,0 +1,25 @@
+<%= form_for([@event, @event.tasks.build]) do |form| %>
+    <div class="task-field">
+        <div>
+            <%= form.text_field :title, placeholder: "+ Task", autocomplete: "off", id: "task-textarea" %>
+        </div>
+        <div class="actions">
+            <%= form.submit "Create" %>
+        </div>
+    </div>
+<% end %>
+
+<script>
+    var tx = document.getElementsByTagName('textarea');
+
+    for (var i = 0; i < tx.length; i++) {
+        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+        tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    }
+
+</script>

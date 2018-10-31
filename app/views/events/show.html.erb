@@ -28,11 +28,9 @@
                             <% if @event.description != nil %>
                                 <%= @event.description.html_safe %>
                             <% end %>
-                        </p>
-                        
+                        </p>  
                     </div>
                 </div>
-            
             </div>
             
 
@@ -42,6 +40,26 @@
     </div>
 
     <div class="todobar">
+        <div class="tabs">
+            <a class="todo-tab active">
+                <% if @event.tasks.count == 1 %>
+                    1 Task
+                <% else %>
+                    <%= @event.tasks.count %> Tasks
+                <% end %>
+            </a>
+            <a class="todo-tab">
+                All Tasks
+            </a>
+        </div>
+
+        <div class="tasks-container">
+            <%= render @event.tasks %>
+        </div>
+
+        
+
+        <%= render 'tasks/form' %>
     </div>
 
     <script>
