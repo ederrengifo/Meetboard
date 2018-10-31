@@ -22,7 +22,7 @@
                     </a>
                 <% end %>
 
-                <div id="event-details">
+                <div id="event-details" class="hidden">
                     <div class="details-wrapper">
                         <p>
                             <% if @event.description != nil %>
@@ -45,17 +45,13 @@
     </div>
 
     <script>
+
+        var eventDetails = document.getElementById("event-details");
+        var buttonDetails = document.getElementById("event-details-btn");
+
         function showDetails() {
-            var eventDetails = document.getElementById("event-details");
-            var buttonDetails = document.getElementById("event-details-btn");
-            
-            if (eventDetails.style.display === "none") {
-                eventDetails.style.display = "block";
-                buttonDetails.classList.add("active");
-            } else {
-                eventDetails.style.display = "none";
-                buttonDetails.classList.remove("active");
-            }
+            eventDetails.classList.toggle("hidden");
+            buttonDetails.classList.toggle("active");
         }
     </script>
   
