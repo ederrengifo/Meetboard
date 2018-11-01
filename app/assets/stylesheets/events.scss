@@ -176,23 +176,32 @@ main {
         .tabs {
             margin-bottom: 24px;
 
-            a.todo-tab {
+            button.todo-tab {
                 font-size: 14px;
                 font-weight: 500;
-                color: $neutral-1;
+                color: $neutral-4;
                 padding-bottom: 4px;
                 margin-right: 24px;
                 cursor: pointer;
-                opacity: 0.5;
+                opacity: 1;
+                border: none;
+                background-color: none;
                 transition: 
                     opacity 0.25s;
             }
-            a.todo-tab:hover {
+            button.todo-tab:hover {
                 text-decoration: none;
+                color: $neutral-1;
                 opacity: 1;
             }
+            button.todo-tab:focus {
+                text-decoration: none;
+                opacity: 1;
+                outline-color: transparent;
+                outline-style: none;
+            }
 
-            a.active {
+            button.active {
                 border-bottom: 2px solid $purple;
                 color: $neutral-1;
                 opacity: 1;
@@ -283,10 +292,6 @@ main {
             margin-top: 8px;
             float: left;
         }
-
-        .hidden {
-            display: none;
-        }
     }
 
     .event-tabs {
@@ -318,13 +323,20 @@ main {
         .details-wrapper {
             background-color: $neutral-7;
             border-radius: 8px;
-            padding: 16px;
-            margin-top: 8px;
+            padding: 16px 16px 8px 16px;
+            margin-top: 16px;
+
+            h4 {
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 500;
+            }
 
             p {
                 font-size: 14px;
                 line-height: 20px;
-                font-weight: 300;
+                font-weight: 400;
+                color: $neutral-3;
 
                 span {
                     color: $neutral-3;
@@ -350,17 +362,12 @@ main {
 
     }
 
-    .tasks-container {
-        margin-bottom: 8px;
-        margin-top: 8px;
-    }
-
     .task {
         
         .container {
             display: block;
             position: relative;
-            padding: 6px 16px 6px 32px;
+            padding: 4px 16px 4px 32px;
             margin-bottom: 0px;
             cursor: pointer;
             font-size: 16px;
@@ -377,6 +384,11 @@ main {
                 font-weight: 400;
                 opacity: 0;
                 padding-left: 4px;
+            }
+
+            a.event {
+                opacity: 1;
+                color: $neutral-4;
             }
         }
 
@@ -453,6 +465,7 @@ main {
             color: $neutral-1;
             width: 100%;
             padding: 8px 16px 8px 0px;
+            margin-top: 8px;
             line-height: 24px;
             border: none;
             resize: none;
@@ -480,5 +493,7 @@ main {
     
 }
 
-
+.hidden {
+    display: none;
+}
 

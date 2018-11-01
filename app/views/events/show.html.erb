@@ -8,11 +8,11 @@
                 <%= @event.title %>
             </h1>
             <div class="event-tabs">
-                <% if @event.description != nil %>
-                    <button class="details" onclick="showDetails()" id="event-details-btn">
-                        Details
-                    </button>
-                <% end %>
+                
+                <button class="details" onclick="showDetails()" id="event-details-btn">
+                    Details
+                </button>
+                
                 <button class="details">
                     Participants
                 </button>
@@ -24,11 +24,30 @@
 
                 <div id="event-details" class="hidden">
                     <div class="details-wrapper">
-                        <p>
-                            <% if @event.description != nil %>
+                        <% if @event.description != nil %>
+                            <h4>Description</h4>
+                            <p>
                                 <%= @event.description.html_safe %>
-                            <% end %>
-                        </p>  
+                            </p>
+                        <% end %>
+                        <h4>Date</h4>
+                        <p>
+                            <%= @event.starts.strftime("%A, %B %d") %>
+                        </p>
+                        <h4>Hour</h4>
+                        <p>
+                            From <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %>
+                        </p>
+                        <h4>Created by</h4>
+                        <p>
+                            <%= @event.creator %>
+                        </p>
+                        <% if @event.location != nil %>
+                            <h4>Location</h4> 
+                            <p>
+                                <%= @event.location %>
+                            </p> 
+                        <% end %>
                     </div>
                 </div>
             </div>
@@ -41,29 +60,42 @@
 
     <div class="todobar">
         <div class="tabs">
-            <a class="todo-tab active">
+            <button class="todo-tab active" id="event-task-tab" onclick="showEventTasks()">
                 <% if @event.tasks.count == 1 %>
                     1 Task
                 <% else %>
                     <%= @event.tasks.count %> Tasks
                 <% end %>
-            </a>
-            <a class="todo-tab">
+            </button>
+            <button class="todo-tab" id="all-tasks-tab" onclick="showAllTasks()">
                 All Tasks
-            </a>
+            </button>
         </div>
 
-        <div class="tasks-container">
+        <div class="tasks-container" id="event-task-block">
             <%= render @event.tasks %>
+            <%= render 'tasks/form' %>
         </div>
 
         
 
-        <%= render 'tasks/form' %>
+        <div class="task-container hidden" id="all-tasks-block">
+            <% @tasks.each do |t| %>
+                <div class="task">
+                    <label class="container">
+                        <%= t.title %><br>
+                        <a href="<%= t.event_id %>" class="event">
+                            <%= t.event_title %>
+                        </a>
+                        <input type="checkbox" class="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            <% end %>
+        </div>
     </div>
 
     <script>
-
         var eventDetails = document.getElementById("event-details");
         var buttonDetails = document.getElementById("event-details-btn");
 
@@ -71,6 +103,26 @@
             eventDetails.classList.toggle("hidden");
             buttonDetails.classList.toggle("active");
         }
+
+        var eventTaskTab = document.getElementById("event-task-tab");
+        var allTasksTab = document.getElementById("all-tasks-tab");
+        var eventTaskBlock = document.getElementById("event-task-block");
+        var allTasksBlock = document.getElementById("all-tasks-block")
+
+        function showEventTasks() {
+            eventTaskBlock.classList.remove("hidden");
+            allTasksBlock.classList.add("hidden");
+            eventTaskTab.classList.add("active");
+            allTasksTab.classList.remove("active");
+        }
+
+        function showAllTasks() {
+            eventTaskBlock.classList.add("hidden");
+            allTasksBlock.classList.remove("hidden");
+            eventTaskTab.classList.remove("active");
+            allTasksTab.classList.add("active");
+        }
+
     </script>
   
 </main>

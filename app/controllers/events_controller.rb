@@ -1,12 +1,9 @@
-# TEST!
-
 require 'google/api_client/client_secrets.rb'
 require 'google/apis/calendar_v3'
 require 'fileutils'
 require 'googleauth'
 
 class EventsController < ApplicationController
-  # before_action :set_event
   before_action :set_event, only: [:show, :update]
 
   def index
@@ -19,16 +16,23 @@ class EventsController < ApplicationController
 
   def set_calendar
     if current_user.present? 
+      # SETTING CALENDARS FROM GOOGLE + DAY VARIABLES
       @calendars = get_calendar(current_user).to_a
       @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
       @today = Time.now.strftime("%Y-%m-%d").to_time
       @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
-
+      # UPDATING AND CREATING EVENTS FROM GOOGLE CALENDAR EVENTS
       @calendars.each do |google_event|
         event = Event.find_by(gid: google_event.id)
-        # Creating a new element only if this doesn't exist
         if event.present?
-          # TODO : Add instructions to update existing events
+          event.title = google_event.summary
+          event.description = google_event.description
+          event.hangout_link = google_event.hangout_link
+          event.starts = google_event.start.date_time
+          event.ends = google_event.end.date_time
+          event.creator = google_event.organizer.email
+          event.location = google_event.location
+          event.save!
         else
           new_event = Event.new
           new_event.gid = google_event.id
@@ -37,11 +41,23 @@ class EventsController < ApplicationController
           new_event.hangout_link = google_event.hangout_link
           new_event.starts = google_event.start.date_time
           new_event.ends = google_event.end.date_time
+          new_event.creator = google_event.organizer.email
+          new_event.location = google_event.location
           new_event.save!
         end
       end
+      # SETTING EVENTS AND TASKS
+      @events = Event.all
+      @tasks = Task.all
+      # UPDATING TASK WITH EVENT NAME
+      @events.each do |event|
+        task = Task.find_by(event_id: event.gid)
+        if task.present?
+          task.event_title = event.title
+          task.save!
+        end
+      end
     end
-    @events = Event.all
   end
 
   def update 
@@ -78,7 +94,7 @@ class EventsController < ApplicationController
       event_list = service.list_events('primary',
                                         single_events: true, 
                                         order_by: 'startTime', 
-                                        max_results: 20,
+                                        max_results: 30,
                                         time_min: Time.now.iso8601,).items
   
     end
