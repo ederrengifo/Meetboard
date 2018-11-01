@@ -383,7 +383,35 @@ main {
 
     }
 
+    .task-container {
+
+        .task-group {
+
+            padding: 4px 0px 8px 0px;
+            border-top: 1px solid $neutral-7;
+            margin-top: 12px;
+
+            a.event {
+                font-size: 12px;
+                opacity: 1;
+                font-weight: 400;
+                color: $neutral-4;
+                padding-bottom: 20px;
+            }
+
+            a.event:hover {
+                color: $neutral-1;
+                text-decoration: none;
+            }
+        }
+
+        .task-group:first-child {
+            margin-top: 0px;
+        }
+    }
+
     .task {
+
         
         .container {
             display: block;
@@ -405,11 +433,6 @@ main {
                 font-weight: 400;
                 opacity: 0;
                 padding-left: 4px;
-            }
-
-            a.event {
-                opacity: 1;
-                color: $neutral-4;
             }
         }
 

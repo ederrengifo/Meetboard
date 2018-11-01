@@ -61,14 +61,18 @@
     <div class="todobar">
         <div class="tabs">
             <button class="todo-tab active" id="event-task-tab" onclick="showEventTasks()">
-                <% if @event.tasks.count == 1 %>
-                    1 Task
+                Action items
+                <% if @event.tasks.count == 0 %>
                 <% else %>
-                    <%= @event.tasks.count %> Tasks
+                    (<%= @event.tasks.count %>)
                 <% end %>
             </button>
             <button class="todo-tab" id="all-tasks-tab" onclick="showAllTasks()">
-                All Tasks
+                All Time
+                <% if @tasks.count == 0 %>
+                <% else %>
+                    (<%= @tasks.count %>)
+                <% end %>
             </button>
         </div>
 
@@ -77,16 +81,18 @@
             <%= render 'tasks/form' %>
         </div>
 
-        
-
         <div class="task-container hidden" id="all-tasks-block">
             <% @tasks.each do |t| %>
-                <div class="task">
-                    <label class="container">
-                        <%= t.title %><br>
+                <% if t.event_title != nil %>
+                    <div class="task-group">
                         <a href="<%= t.event_id %>" class="event">
                             <%= t.event_title %>
                         </a>
+                    </div>
+                <% end %>
+                <div class="task">
+                    <label class="container">
+                        <%= t.title %><br>
                         <input type="checkbox" class="checkbox">
                         <span class="checkmark"></span>
                     </label>

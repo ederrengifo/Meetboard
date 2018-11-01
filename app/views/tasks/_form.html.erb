@@ -1,7 +1,7 @@
 <%= form_for([@event, @event.tasks.build]) do |form| %>
     <div class="task-field">
         <div>
-            <%= form.text_field :title, placeholder: "+ Task", autocomplete: "off", id: "task-textarea" %>
+            <%= form.text_field :title, placeholder: "+ Item", autocomplete: "off", id: "task-textarea" %>
         </div>
         <div class="actions">
             <%= form.submit "Create" %>
