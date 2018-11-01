@@ -41,14 +41,28 @@ main {
             border-bottom: 1px solid $neutral-2;
 
             a {
-                color: $purple;
+                color: #FFF;
                 text-decoration: none;
                 margin-left: 4px;
+                opacity: 0.75;
+                transition: 
+                    opacity 0.25s;
             }
 
             a:hover {
-                text-decoration: underline;
+                text-decoration: none;
+                opacity: 1;
             }
+
+            a.signout {
+                opacity: 0.25;
+            }
+
+            a.signout:hover {
+                opacity: 0.75;
+            }
+            
+            
         }
 
         .scroll-bar-container {
@@ -173,11 +187,18 @@ main {
             font-weight: 600;
         }
 
+        h4 {
+            color: $neutral-1;
+            font-weight: 500;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
         .tabs {
             margin-bottom: 24px;
 
             button.todo-tab {
-                font-size: 14px;
+                font-size: 15px;
                 font-weight: 500;
                 color: $neutral-4;
                 padding-bottom: 4px;
@@ -216,7 +237,7 @@ main {
     .calendar-landing {
         display: flex;
         flex-direction: column;
-        width: 78%;
+        width: 100%;
         float: left;
         height: 100vh;
         align-items: center;

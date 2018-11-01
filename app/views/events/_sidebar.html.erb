@@ -1,8 +1,10 @@
 <aside id="sidebar">
     <% if current_user %>
         <div class="user-options">
-            <%= current_user.name %>
-            <%= link_to "Sign out", signout_path, id: "sign_out" %>
+            <a href="/" class="username">
+                <%= current_user.name %>
+            </a>
+            <%= link_to "Sign out", signout_path, id: "sign_out", class: "signout" %>
         </div>
 
     <div class="scroll-bar-container">
