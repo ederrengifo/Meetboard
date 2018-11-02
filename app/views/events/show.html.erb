@@ -75,10 +75,7 @@
                 </button>
                 <button class="todo-tab" id="all-tasks-tab" onclick="showAllTasks()">
                     All Time
-                    <% if @tasks.count == 0 %>
-                    <% else %>
-                        (<%= @tasks.count %>)
-                    <% end %>
+                        (<%= @tasks.count unless @tasks.count == 0 %>)
                 </button>
             </div>
 
@@ -88,12 +85,10 @@
             </div>
 
             <div class="task-container hidden" id="all-tasks-block">
-                <% @task_grouping.each do |event, tasks| %>
+                <% @task_grouping.each do |event_id, tasks| %>
                     <div class="task-group">
-                        <a href="<%= event %>" class="event">
-                            <% for task in tasks %>
-                                <%= task.event_title %>
-                            <% end %>
+                        <a href="<%= event_id %>" class="event">
+                            <%= Event.find(event_id).title %>
                         </a>
                     </div>
 
