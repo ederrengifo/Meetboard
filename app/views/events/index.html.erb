@@ -22,23 +22,25 @@
             <h4>You have <%= @tasks.count %> items</h4>
 
             <div class="task-container" id="all-tasks-block">
-            <% @tasks.each do |t| %>
-                <% if t.event_title != nil %>
-                    <div class="task-group">
-                        <a href="<%= t.event_id %>" class="event">
-                            <%= t.event_title %>
-                        </a>
-                    </div>
-                <% end %>
-            
-                <div class="task">
-                    <label class="container">
-                        <%= t.title %><br>
-                        <input type="checkbox" class="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
+            <% @task_grouping.each do |event_id, tasks| %>
+                <div class="task-group">
+                    <a href="<%= event_id %>" class="event">
+                        <%= Event.find(event_id).title %>
+                    </a>
                 </div>
+
+                <% for task in tasks %>
+                        <div class="task">
+                            <label class="container">
+                                <%= task.title %><br>
+                                <input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    <% end %>
+
             <% end %>
+    
         </div>
         </div>
     </div>

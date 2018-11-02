@@ -15,36 +15,54 @@
         </div>
     </div>
 
-    
+
 
 <% end %>
 
 <script>
-    var tx = document.getElementsByTagName('textarea');
-    var update_btn = document.getElementById("update-btn");
-    var update_confirmation = document.getElementById("update-confirmation");
-    var Delay
 
-    for (var i = 0; i < tx.length; i++) {
-        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
-        tx[i].addEventListener("input", OnInput, false);
-    }
+ let textArea = document.getElementById('note-textarea');
+ let csrfToken = document.querySelector('form').querySelector('[name=authenticity_token]').value
+ let saveCounter;
+ textArea.onchange = (ev) => {
+     console.log("Hola Eder");
+     if (saveCounter)
+         clearTimeout(saveCounter);
 
-    function OnInput() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-        update_btn.classList.remove("hidden");
-    }
+     saveCounter = setTimeout(() => {
+         fetch("<%= event_path(@event) %>",
+               {method: "PATCH",
+                headers: {
+                    "X-CSRF-Token": csrfToken,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({event: {note: textArea.value}})} )
+     }, 2000)
+ };
 
-    function ShowNotice() {
-        update_confirmation.classList.add("hidden");
-    }
 
-    function DelayNotice() {
-        Delay = setTimeout(ShowNotice, 2000);
-    }
+ var update_btn = document.getElementById("update-btn");
+ var update_confirmation = document.getElementById("update-confirmation");
+ var Delay
 
-    window.onload = DelayNotice;
+ textArea.setAttribute('style', 'height:' + (textArea.scrollHeight) + 'px;overflow-y:hidden;');
+ textArea.addEventListener("input", OnInput, false);
+
+
+ function OnInput() {
+     this.style.height = 'auto';
+     this.style.height = (this.scrollHeight) + 'px';
+     update_btn.classList.remove("hidden");
+ }
+
+ function ShowNotice() {
+     update_confirmation.classList.add("hidden");
+ }
+
+ function DelayNotice() {
+     Delay = setTimeout(ShowNotice, 2000);
+ }
+
+ window.onload = DelayNotice;
 
 </script>
-
