@@ -88,23 +88,28 @@
             </div>
 
             <div class="task-container hidden" id="all-tasks-block">
-                <% @tasks.each do |t| %>
-                    <% if t.event_title != nil %>
-                        <div class="task-group">
-                            <a href="<%= t.event_id %>" class="event">
-                                <%= t.event_title %>
-                            </a>
+                <% @task_grouping.each do |event, tasks| %>
+                    <div class="task-group">
+                        <a href="<%= event %>" class="event">
+                            <% for task in tasks %>
+                                <%= task.event_title %>
+                            <% end %>
+                        </a>
+                    </div>
+
+                    <% for task in tasks %>
+                        <div class="task">
+                            <label class="container">
+                                <%= task.title %><br>
+                                <input type="checkbox" class="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
                         </div>
                     <% end %>
-                    <div class="task">
-                        <label class="container">
-                            <%= t.title %><br>
-                            <input type="checkbox" class="checkbox">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
+
                 <% end %>
             </div>
+            
         </div>
     </div>
 

@@ -49,7 +49,8 @@ class EventsController < ApplicationController
       # SETTING EVENTS AND TASKS
       @events = Event.all
       @tasks = Task.all
-
+      @task_grouping = @tasks.group_by {|t| t.event_id }
+     
       # CALCULATING TIME BETWEEN START AND END TIME
       if @event.present?
         event_time = @event.ends - @event.starts
