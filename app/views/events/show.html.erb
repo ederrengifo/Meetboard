@@ -39,9 +39,9 @@
                         <p>
                             <%= @event.starts.strftime("%A, %B %d") %>
                         </p>
-                        <h4>Hour</h4>
+                        <h4>Time</h4>
                         <p>
-                            From <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %>
+                            From <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %> (<%= @event_difference %>)
                         </p>
                         <h4>Created by</h4>
                         <p>
