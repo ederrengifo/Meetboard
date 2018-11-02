@@ -2,8 +2,13 @@
 
     <%= render "sidebar" %>
 
-    <div class="workspace">
+    <div id="workspace" class="width-48">
         <div class="scroll-workspace-container">
+            <div class="layout-control">
+                <button class="sidebar-toggle" id="toggle-left" onclick="toggleLeft()">
+                    Sidebar
+                </button>
+            </div>
             <h1>
                 <%= @event.title %>
             </h1>
@@ -58,7 +63,7 @@
         </div>
     </div>
 
-    <div class="todobar">
+    <div id="todobar" class="width-30">
         <div class="tabs">
             <button class="todo-tab active" id="event-task-tab" onclick="showEventTasks()">
                 Action items
@@ -127,6 +132,23 @@
             allTasksBlock.classList.remove("hidden");
             eventTaskTab.classList.remove("active");
             allTasksTab.classList.add("active");
+        }
+
+        var toggleLeftBtn = document.getElementById("toggle-left");
+        var leftBlock = document.getElementById("sidebar");
+        var centerBlock = document.getElementById("workspace");
+
+        function toggleLeft() {
+            toggleLeftBtn.classList.toggle("layout-active");
+            leftBlock.classList.toggle("width-22");
+            leftBlock.classList.toggle("hidden");
+            centerBlock.classList.toggle("width-48");
+            centerBlock.classList.toggle("width-59");
+            rightBlock.classList.toggle("width-30");
+            rightBlock.classList.toggle("width-41");
+
+            
+            
         }
 
     </script>
