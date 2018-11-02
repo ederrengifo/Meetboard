@@ -51,20 +51,22 @@ class EventsController < ApplicationController
       @tasks = Task.all
 
       # CALCULATING TIME BETWEEN START AND END TIME
-      event_time = @event.ends - @event.starts
+      if @event.present?
+        event_time = @event.ends - @event.starts
 
-      if event_time < 3600
-        difference = ((event_time / 60) % 60)
-        @event_difference = "#{difference.round(0)} minutes"
-      else
-        difference = event_time / (60 * 60)
-        if difference == 1 
-          @event_difference = "#{difference.round(0)} hour"
+        if event_time < 3600
+          difference = ((event_time / 60) % 60)
+          @event_difference = "#{difference.round(0)} minutes"
         else
-          @event_difference = "#{difference.round(1)} hours"
+          difference = event_time / (60 * 60)
+          if difference == 1 
+            @event_difference = "#{difference.round(0)} hour"
+          else
+            @event_difference = "#{difference.round(1)} hours"
+          end
         end
-        
       end
+      
 
       # UPDATING TASK WITH EVENT NAME
       @events.each do |event|
