@@ -336,9 +336,13 @@ main {
         .note-confirmation {
             font-size: 14px;
             font-weight: 300;
-            color: $green;
+            color: $neutral-4;
             margin-top: 8px;
             float: left;
+        }
+
+        .saved {
+            color: $green !important;
         }
     }
 

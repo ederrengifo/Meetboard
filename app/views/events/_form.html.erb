@@ -10,9 +10,7 @@
     <div class="actions">
         <%= form.submit "Update", :class => 'btn-primary hidden', :accesskey => 's', :id => 'update-btn' %>
 
-        <div class="note-confirmation" id="update-confirmation">
-            <%= notice %>
-        </div>
+        <span id="note-confirmation" class="note-confirmation hidden">Saving...</span>
     </div>
 
 
@@ -21,28 +19,29 @@
 
 <script>
 
- let textArea = document.getElementById('note-textarea');
- let csrfToken = document.querySelector('form').querySelector('[name=authenticity_token]').value
- let saveCounter;
- textArea.onchange = (ev) => {
+ var textArea = document.getElementById('note-textarea');
+ var csrfToken = document.querySelector('form').querySelector('[name=authenticity_token]').value
+ var saveCounter;
+ textArea.onkeyup = (ev) => {
+     ShowNotice();
      console.log("Hola Eder");
      if (saveCounter)
          clearTimeout(saveCounter);
 
      saveCounter = setTimeout(() => {
-         fetch("<%= event_path(@event) %>",
+         fetch("<%= @event %>",
                {method: "PATCH",
                 headers: {
                     "X-CSRF-Token": csrfToken,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({event: {note: textArea.value}})} )
-     }, 2000)
+                body: JSON.stringify({event: {note: textArea.value}})}).then(ShowSaving()).then(DelayNotice())
+     }, 1000);
  };
 
 
  var update_btn = document.getElementById("update-btn");
- var update_confirmation = document.getElementById("update-confirmation");
+ var note_confirmation = document.getElementById("note-confirmation");
  var Delay
 
  textArea.setAttribute('style', 'height:' + (textArea.scrollHeight) + 'px;overflow-y:hidden;');
@@ -52,17 +51,26 @@
  function OnInput() {
      this.style.height = 'auto';
      this.style.height = (this.scrollHeight) + 'px';
-     update_btn.classList.remove("hidden");
  }
 
  function ShowNotice() {
-     update_confirmation.classList.add("hidden");
+    note_confirmation.classList.remove("hidden");
+    note_confirmation.innerHTML="Saving...";
+ }
+
+ function ShowSaving() {
+    note_confirmation.classList.add("saved");
+    note_confirmation.innerHTML="Saved"
+ }
+
+ function RemoveNotice() {
+     note_confirmation.classList.add("hidden");
+     note_confirmation.classList.remove("saved")
  }
 
  function DelayNotice() {
-     Delay = setTimeout(ShowNotice, 2000);
+     Delay = setTimeout(RemoveNotice, 1800);
+     
  }
-
- window.onload = DelayNotice;
 
 </script>
