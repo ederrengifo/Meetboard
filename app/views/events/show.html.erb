@@ -64,45 +64,47 @@
     </div>
 
     <div id="todobar" class="width-30">
-        <div class="tabs">
-            <button class="todo-tab active" id="event-task-tab" onclick="showEventTasks()">
-                Action items
-                <% if @event.tasks.count == 0 %>
-                <% else %>
-                    (<%= @event.tasks.count %>)
-                <% end %>
-            </button>
-            <button class="todo-tab" id="all-tasks-tab" onclick="showAllTasks()">
-                All Time
-                <% if @tasks.count == 0 %>
-                <% else %>
-                    (<%= @tasks.count %>)
-                <% end %>
-            </button>
-        </div>
+        <div class="scroll-todobar-container">
+            <div class="tabs">
+                <button class="todo-tab active" id="event-task-tab" onclick="showEventTasks()">
+                    Action items
+                    <% if @event.tasks.count == 0 %>
+                    <% else %>
+                        (<%= @event.tasks.count %>)
+                    <% end %>
+                </button>
+                <button class="todo-tab" id="all-tasks-tab" onclick="showAllTasks()">
+                    All Time
+                    <% if @tasks.count == 0 %>
+                    <% else %>
+                        (<%= @tasks.count %>)
+                    <% end %>
+                </button>
+            </div>
 
-        <div class="tasks-container" id="event-task-block">
-            <%= render @event.tasks %>
-            <%= render 'tasks/form' %>
-        </div>
+            <div class="tasks-container" id="event-task-block">
+                <%= render @event.tasks %>
+                <%= render 'tasks/form' %>
+            </div>
 
-        <div class="task-container hidden" id="all-tasks-block">
-            <% @tasks.each do |t| %>
-                <% if t.event_title != nil %>
-                    <div class="task-group">
-                        <a href="<%= t.event_id %>" class="event">
-                            <%= t.event_title %>
-                        </a>
+            <div class="task-container hidden" id="all-tasks-block">
+                <% @tasks.each do |t| %>
+                    <% if t.event_title != nil %>
+                        <div class="task-group">
+                            <a href="<%= t.event_id %>" class="event">
+                                <%= t.event_title %>
+                            </a>
+                        </div>
+                    <% end %>
+                    <div class="task">
+                        <label class="container">
+                            <%= t.title %><br>
+                            <input type="checkbox" class="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
                 <% end %>
-                <div class="task">
-                    <label class="container">
-                        <%= t.title %><br>
-                        <input type="checkbox" class="checkbox">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-            <% end %>
+            </div>
         </div>
     </div>
 

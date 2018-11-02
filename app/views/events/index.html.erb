@@ -18,26 +18,28 @@
 
     </div>
     <div id="todobar" class="width-30">
-        <h4>You have <%= @tasks.count %> items</h4>
+        <div class="scroll-todobar-container">
+            <h4>You have <%= @tasks.count %> items</h4>
 
-        <div class="task-container" id="all-tasks-block">
-        <% @tasks.each do |t| %>
-            <% if t.event_title != nil %>
-                <div class="task-group">
-                    <a href="<%= t.event_id %>" class="event">
-                        <%= t.event_title %>
-                    </a>
+            <div class="task-container" id="all-tasks-block">
+            <% @tasks.each do |t| %>
+                <% if t.event_title != nil %>
+                    <div class="task-group">
+                        <a href="<%= t.event_id %>" class="event">
+                            <%= t.event_title %>
+                        </a>
+                    </div>
+                <% end %>
+            
+                <div class="task">
+                    <label class="container">
+                        <%= t.title %><br>
+                        <input type="checkbox" class="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
             <% end %>
-            
-            <div class="task">
-                <label class="container">
-                    <%= t.title %><br>
-                    <input type="checkbox" class="checkbox">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-        <% end %>
+        </div>
         </div>
     </div>
 </main>

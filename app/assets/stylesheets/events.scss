@@ -197,7 +197,14 @@ main {
         float: left;
         height: 100vh;
         border-left: 1px solid #F2F2F2;
-        padding: 32px;
+
+        .scroll-todobar-container {
+            flex: 1 1 auto;
+            min-height: 1px;
+            overflow-y: scroll;
+            position: relative;
+            padding: 32px;
+        }
 
         h2 {
             color: $neutral-1;
