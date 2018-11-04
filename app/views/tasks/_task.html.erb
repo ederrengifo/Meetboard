@@ -1,8 +1,15 @@
 <div class="task">
-    <label class="container"><%= task.title %>  <%= link_to 'Delete', [task.event, task], method: :delete, class: "delete-task" %>
-        <input type="checkbox" class="checkbox">
-        <span class="checkmark"></span>
+    <label class="container-update">
+    <%= task.title %>  <%= link_to 'Delete', [task.event, task], method: :delete, class: "delete-task" %>
+        <%= form_with(model: [task.event, task], local: true) do |f| %>
+            <% if task.completed == false %>
+                <%= f.check_box :completed, :checked => true, :style => 'display: none' %>
+                <%= f.submit "", class: "mark" %>
+            <% else %>
+                <%= f.check_box :completed, :checked => false, :style => 'display: none' %>
+                <%= f.submit "", class: "unmark" %>
+            <% end %>
+        <% end %>
     </label>
-    
 </div>
 

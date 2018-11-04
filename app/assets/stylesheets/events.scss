@@ -443,7 +443,93 @@ main {
 
     .task {
 
+        .container-update {
+            display: block;
+            position: relative;
+            padding: 4px 16px 4px 32px;
+            margin-bottom: 0px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 24px;
+            color: $neutral-3;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            a {
+                font-size: 12px;
+                color: $neutral-3;
+                font-weight: 400;
+                opacity: 0;
+                padding-left: 4px;
+            }
+
+            input:focus {
+                outline-color: transparent;
+                outline-style: none;
+            }
+
+            .mark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 22px;
+                width: 22px;
+                margin-top: 5px;
+                border-radius: 20px;
+                border: 1px solid $neutral-3;
+                background-color: #FFF;
+                opacity: 0.25;
+                cursor: pointer;
+                transition: 
+                    opacity 0.25s;
+            }
+
+            .mark:hover {
+                background-color: $green;
+                border: 1px solid $green;
+                opacity: 1;
+            }
+
+            .unmark{
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 22px;
+                width: 22px;
+                margin-top: 5px;
+                border-radius: 20px;
+                border: 1px solid $green;
+                background-color: $green;
+                opacity: 1;
+                cursor: pointer;
+                transition: 
+                    opacity 0.25s;
+            }
+            
+        }
         
+        .container-update .unmark:after {
+            content: "h";
+            color: $neutral-1;
+            position: absolute;
+            display: block;
+            width: 5px;
+            height: 10px;
+            opacity: 1;
+            
+        }
+
+        .container-update:hover a.delete-task {
+            opacity: 0.25;
+        }
+
+        .container-update:hover a.delete-task:hover {
+            opacity: 0.5;
+        }
+
+        // TO REMOVE
         .container {
             display: block;
             position: relative;

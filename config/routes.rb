@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   resource :home, only: [:show]
   resource :calendars, only: [:show]
   resources :events do
-    resources :tasks
+    resources :tasks do
+      get :update
+    end
   end 
 
   root to: "home#show"

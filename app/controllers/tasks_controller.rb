@@ -4,6 +4,7 @@ require 'fileutils'
 require 'googleauth'
 
 class TasksController < ApplicationController
+    before_action :set_event, only: [:create, :update]
 
     def create  
         set_event
@@ -11,11 +12,26 @@ class TasksController < ApplicationController
         redirect_to @event
     end
 
+    def edit
+    end
+
+    def update 
+        @task = @event.tasks.find(params[:id])
+        respond_to do |format|
+            if @task.update(task_params) 
+                format.html { redirect_back fallback_location: @event }
+                format.json { render :show, status: :ok, location: @event }
+            else
+                # Error messages
+            end
+        end
+    end
+
     def destroy
         set_event
         @task = @event.tasks.find(params[:id])
         @task.destroy
-        redirect_to @event
+        redirect_back fallback_location: @event
     end
 
     private
@@ -25,7 +41,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-        params.require(:task).permit(:title)
+        params.require(:task).permit(:title, :completed)
     end
 
 

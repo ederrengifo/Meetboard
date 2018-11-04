@@ -86,8 +86,7 @@ class EventsController < ApplicationController
         format.html { redirect_to @event, notice: 'Changes saved' }
         format.json { render :show, status: :ok, location: @event }
       else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        # Error messages
       end
     end
   end
