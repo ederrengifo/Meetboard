@@ -6,8 +6,13 @@
             </a>
             <%= link_to "Sign out", signout_path, id: "sign_out", class: "signout" %>
         </div>
+        <div class="events-toggle">
+            <button id="show-new-events" onclick="showUpcoming()" class="active">Upcoming</button>
+            <button id="show-past-events" onclick="showPast()" class="">Latest</button>
+        </div>
 
     <div class="scroll-bar-container">
+        <div id="new-events" class="">
         <% @calendar_days.each do |day, calendars| %>
             <h2>
                 <% if day == @today %>
@@ -40,8 +45,56 @@
                 <% end %>
             </ul>
         <% end %>
+        </div>
+
+        <div id="past-events" class="hidden">
+            <h2>Latest events</h2>
+            <ul>
+                <% @latest_events.each do |event| %>
+                    <% if event.ends.to_i < Time.now.to_i %>
+                        <% if @event.present? %>
+                            <li class="<%= 'active' if @event.gid == event.gid %>">
+                        <% else %>
+                            <li>
+                        <% end %>
+                                <%= link_to(event.id, class:"event-link") do %>
+                                    <div class="event-name">
+                                        <%= event.title %>
+                                    </div>
+                                    <div class="timelapse">
+                                        <%= event.starts&.strftime("%B, %d") %> at <%= event.starts&.strftime("%I:%M%p") %>
+                                    </div>
+                                <% end %>
+                            </li>
+                    <% end %>
+                <% end %>
+            </ul>
+        </div>
+
     </div>
 
     <% end %>
+
+    <script>
+        var showUpcomingBtn = document.getElementById("show-new-events");
+        var showPastBtn = document.getElementById("show-past-events");
+        var upcomingEvents = document.getElementById("new-events");
+        var pastEvents = document.getElementById("past-events");
+
+        function showPast() {
+            upcomingEvents.classList.add("hidden");
+            pastEvents.classList.remove("hidden");
+            showUpcomingBtn.classList.remove("active");
+            showPastBtn.classList.add("active");
+        }
+
+        function showUpcoming() {
+            upcomingEvents.classList.remove("hidden");
+            pastEvents.classList.add("hidden");
+            showUpcomingBtn.classList.add("active");
+            showPastBtn.classList.remove("active");
+        }
+
+    </script>
     
 </aside>

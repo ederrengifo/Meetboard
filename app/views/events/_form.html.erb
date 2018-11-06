@@ -12,9 +12,6 @@
 
         <span id="note-confirmation" class="note-confirmation hidden">Saving...</span>
     </div>
-
-
-
 <% end %>
 
 <script>
@@ -24,7 +21,6 @@
  var saveCounter;
  textArea.onkeyup = (ev) => {
      ShowNotice();
-     console.log("Hola Eder");
      if (saveCounter)
          clearTimeout(saveCounter);
 

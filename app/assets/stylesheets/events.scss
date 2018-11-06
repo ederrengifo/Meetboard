@@ -130,6 +130,41 @@ main {
             }
 
         }
+
+        .events-toggle {
+            width: 100%;
+            padding: 8px 16px;
+
+            button {
+                width: 48%;
+                margin: 0;
+                height: 24px;
+                background-color: $neutral-1;
+                color: #FFF;
+                font-size: 14px;
+                border-radius: 4px;
+                opacity: 0.32;
+                font-weight: 400;
+                cursor: pointer;
+                transition: 
+                            opacity 0.25s;
+            }
+
+            button:hover {
+                opacity: 1;
+            }
+
+            button:focus {
+                outline-color: transparent;
+                outline-style: none;
+            }
+
+            .active {
+                background-color: $neutral-3;
+                border: 1px $neutral-3 solid;
+                opacity: 0.72;
+            }
+        }
  
     }
 

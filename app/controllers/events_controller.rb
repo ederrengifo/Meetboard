@@ -25,14 +25,7 @@ class EventsController < ApplicationController
       @calendars.each do |google_event|
         event = Event.find_by(gid: google_event.id)
         if event.present?
-          event.title = google_event.summary
-          event.description = google_event.description
-          event.hangout_link = google_event.hangout_link
-          event.starts = google_event.start.date_time
-          event.ends = google_event.end.date_time
-          event.creator = google_event.organizer.email
-          event.location = google_event.location
-          event.save!
+          # Call function here to update event information
         else
           new_event = Event.new
           new_event.gid = google_event.id
@@ -50,6 +43,9 @@ class EventsController < ApplicationController
       @events = Event.all
       @tasks = Task.all
       @task_grouping = @tasks.group_by {|t| t.event_id }
+
+      # DIPSLAYING LATEST EVENTS
+      @latest_events = @events.order("starts DESC")
      
       # CALCULATING TIME BETWEEN START AND END TIME
       if @event.present?
@@ -81,6 +77,7 @@ class EventsController < ApplicationController
   end
 
   def update 
+    @event = Event.find_by_gid(params[:id])
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Changes saved' }
