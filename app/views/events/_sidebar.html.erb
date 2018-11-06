@@ -6,13 +6,24 @@
             </a>
             <%= link_to "Sign out", signout_path, id: "sign_out", class: "signout" %>
         </div>
-        <div class="events-toggle">
-            <button id="show-new-events" onclick="showUpcoming()" class="<%= 'active' if @event.ends.to_i > Time.now.to_i %>">Upcoming</button>
-            <button id="show-past-events" onclick="showPast()" class="<%= 'active' if @event.ends.to_i < Time.now.to_i %>">Latest</button>
-        </div>
+        <% if @event.present? %>
+            <div class="events-toggle">
+                <button id="show-new-events" onclick="showUpcoming()" class="<%= 'active' if @event.ends.to_i > Time.now.to_i %>">Upcoming</button>
+                <button id="show-past-events" onclick="showPast()" class="<%= 'active' if @event.ends.to_i < Time.now.to_i %>">Latest</button>
+            </div>
+        <% else %>
+            <div class="events-toggle">
+                <button id="show-new-events" onclick="showUpcoming()" class="active">Upcoming</button>
+                <button id="show-past-events" onclick="showPast()" class="">Latest</button>
+            </div>
+        <% end %>
 
     <div class="scroll-bar-container">
-        <div id="new-events" class="<%= 'hidden' if @event.ends.to_i < Time.now.to_i %>">
+        <% if @event.present? %>
+            <div id="new-events" class="<%= 'hidden' if @event.ends.to_i < Time.now.to_i %>">
+        <% else %>
+            <div id="new-events" class="">
+        <% end %>
         <% @calendar_days.each do |day, calendars| %>
             <h2>
                 <% if day == @today %>
@@ -46,8 +57,11 @@
             </ul>
         <% end %>
         </div>
-
-        <div id="past-events" class="<%= 'hidden' if @event.ends.to_i > Time.now.to_i %>">
+        <% if @event.present? %>
+            <div id="past-events" class="<%= 'hidden' if @event.ends.to_i > Time.now.to_i %>">
+        <% else %>
+            <div id="past-events" class="hidden">
+        <% end %>
             <h2>Latest events</h2>
             <ul>
                 <% @latest_events.each do |event| %>
