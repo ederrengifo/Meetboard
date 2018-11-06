@@ -19,36 +19,37 @@
     </div>
     <div id="todobar" class="width-30">
         <div class="scroll-todobar-container">
-            <h4>You have <%= @tasks.count %> items</h4>
+        
+            <h4>You have <%= @tasks.where(completed: false).count %> pending items</h4>
 
             <div class="task-container" id="all-tasks-block">
-            <% @task_grouping.each do |event_id, tasks| %>
-                <div class="task-group">
-                    <a href="<%= event_id %>" class="event">
-                        <%= Event.find(event_id).title %>
-                    </a>
-                </div>
-
-                <% for task in tasks %>
-                    <div class="task">
-                        <label class="container-update">
-                            <%= task.title %>  <%= link_to 'Delete', [task.event, task], method: :delete, class: "delete-task" %>
-                            <%= form_with(model: [task.event, task], local: true) do |f| %>
-                                <% if task.completed == false %>
-                                    <%= f.check_box :completed, :checked => true, :style => 'display: none' %>
-                                    <%= f.submit "", class: "mark" %>
-                                <% else %>
-                                    <%= f.check_box :completed, :checked => false, :style => 'display: none' %>
-                                    <%= f.submit "", class: "unmark" %>
-                                <% end %>
-                            <% end %>
-                        </label>
+                <% @task_grouping.each do |event_id, tasks| %>
+                    <div class="task-group">
+                        <a href="<%= event_id %>" class="event">
+                            <%= Event.find(event_id).title %>
+                        </a>
                     </div>
-                <% end %>
 
-            <% end %>
+                    <% for task in tasks %>
+                        <div class="task">
+                            <label class="container-update">
+                                <%= task.title %>  <%= link_to 'Delete', [task.event, task], method: :delete, class: "delete-task" %>
+                                <%= form_with(model: [task.event, task], local: true) do |f| %>
+                                    <% if task.completed == false %>
+                                        <%= f.check_box :completed, :checked => true, :style => 'display: none' %>
+                                        <%= f.submit "", class: "mark" %>
+                                    <% else %>
+                                        <%= f.check_box :completed, :checked => false, :style => 'display: none' %>
+                                        <%= f.submit "", class: "unmark" %>
+                                    <% end %>
+                                <% end %>
+                            </label>
+                        </div>
+                    <% end %>
+
+                <% end %>
     
-        </div>
+            </div>
         </div>
     </div>
 </main>

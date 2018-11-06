@@ -286,6 +286,36 @@ main {
                 opacity: 1;
             }
 
+            .cleaner {
+                float: right;
+
+                .clear-tasks {
+                    background-color: none;
+                    border: none;
+                    color: $neutral-1;
+                    font-size: 12px;
+                    cursor: pointer;
+                    opacity: 0.5;
+                    transition: 
+                        opacity 0.25s;
+                }
+                .clear-tasks:hover {
+                    opacity: 1;
+                    outline-color: transparent;
+                    outline-style: none;
+                }
+                .clear-tasks:focus {
+                    outline-color: transparent;
+                    outline-style: none;
+                }
+                button.active {
+                    color: $green;
+                    opacity: 1;
+                    padding: 0;
+                }
+
+            }
+
         }
 
         
