@@ -18,12 +18,12 @@
                     Details
                 </button>
                 
-                <button class="details">
-                    Attendees
+                <button class="details" onclick="showAttendees()" id="event-attendees-btn">
+                    Attendees (6)
                 </button>
 
-                <button class="details">
-                    Role: Participant
+                <button class="details" onclick="showType()" id="event-type-btn">
+                    Type: General
                 </button>
 
                 <% if @event.hangout_link != nil %>
@@ -60,6 +60,34 @@
                         <% end %>
                     </div>
                 </div>
+
+                <div id="event-attendees" class="hidden">
+                    <div class="details-wrapper">
+                        <h4>Confirmed (2)</h4>
+                        <ul>
+                            <li>username@able.co</li>
+                            <li>username</li>
+                        </ul>
+                        <h4>Waiting for response (2)</h4>
+                        <ul>
+                            <li>username@able.co</li>
+                            <li>username</li>
+                        </ul>
+                        <h4>Rejected (2)</h4>
+                        <ul>
+                            <li>username@able.co</li>
+                            <li>username</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="event-type" class="hidden">
+                    <div class="details-wrapper">
+                        <h4>General</h4>
+                        <p>Lorem ipsum</p>
+                    </div>
+                </div>
+
             </div>
             
 
@@ -166,10 +194,36 @@
     <script>
         var eventDetails = document.getElementById("event-details");
         var buttonDetails = document.getElementById("event-details-btn");
+        var eventAttendees = document.getElementById("event-attendees");
+        var buttonAttendees = document.getElementById("event-attendees-btn");
+        var eventType = document.getElementById("event-type");
+        var buttonType = document.getElementById("event-type-btn");
 
         function showDetails() {
             eventDetails.classList.toggle("hidden");
             buttonDetails.classList.toggle("active");
+            eventAttendees.classList.add("hidden");
+            buttonAttendees.classList.remove("active");
+            eventType.classList.add("hidden");
+            buttonType.classList.remove("active");
+        }
+
+        function showAttendees() {
+            eventAttendees.classList.toggle("hidden");
+            buttonAttendees.classList.toggle("active");
+            eventDetails.classList.add("hidden");
+            buttonDetails.classList.remove("active");
+            eventType.classList.add("hidden");
+            buttonType.classList.remove("active");
+        }
+
+        function showType() {
+            eventType.classList.toggle("hidden");
+            buttonType.classList.toggle("active");
+            eventDetails.classList.add("hidden");
+            buttonDetails.classList.remove("active");
+            eventAttendees.classList.add("hidden");
+            buttonAttendees.classList.remove("active");
         }
 
         var eventTaskTab = document.getElementById("event-task-tab");

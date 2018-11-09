@@ -460,9 +460,18 @@ main {
                 }
             }
 
+            ul {
+                margin: 4px 0px 16px 8px;
+            }
+
             li {
                 margin: 0px 0px 0px 16px !important;
+                font-size: 14px !important;
+                line-height: 20px !important;
+                font-weight: 400;
+                color: $neutral-3;
             }
+
         }
 
         a {
