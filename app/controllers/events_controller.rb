@@ -169,7 +169,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:gid, :title, :description, :hangout_link, :note)
+      params.require(:event).permit(:gid, :title, :description, :hangout_link, :note, :type)
     end
 
 end
