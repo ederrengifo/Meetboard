@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181104041905) do
+ActiveRecord::Schema.define(version: 20181110005459) do
+
+  create_table "attendees", force: :cascade do |t|
+    t.string "gid"
+    t.string "email"
+    t.string "name"
+    t.boolean "organizer"
+    t.string "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "event_id"
+  end
 
   create_table "calendars", force: :cascade do |t|
     t.datetime "created_at", null: false

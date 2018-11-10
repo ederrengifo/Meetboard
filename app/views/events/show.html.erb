@@ -18,9 +18,11 @@
                     Details
                 </button>
                 
-                <button class="details" onclick="showAttendees()" id="event-attendees-btn">
-                    Attendees (6)
-                </button>
+                <% if @event.attendees.count != 0 %>
+                    <button class="details" onclick="showAttendees()" id="event-attendees-btn">
+                        Attendees (<%= @event.attendees.count %>)
+                    </button>
+                <% end %>
 
                 <button class="details" onclick="showType()" id="event-type-btn">
                     Type: General
@@ -63,21 +65,39 @@
 
                 <div id="event-attendees" class="hidden">
                     <div class="details-wrapper">
-                        <h4>Confirmed (2)</h4>
-                        <ul>
-                            <li>username@able.co</li>
-                            <li>username</li>
-                        </ul>
-                        <h4>Waiting for response (2)</h4>
-                        <ul>
-                            <li>username@able.co</li>
-                            <li>username</li>
-                        </ul>
-                        <h4>Rejected (2)</h4>
-                        <ul>
-                            <li>username@able.co</li>
-                            <li>username</li>
-                        </ul>
+                        <% @attendee_grouping.each do |response, attendees| %>
+                            <h4>
+                                <% if response == "accepted" %>
+                                    Confirmed
+                                <% else %>
+                                    <% if response == "needsAction" %>
+                                        Pending
+                                    <% else %>
+                                        <% if response == "declined" %>
+                                            Declined
+                                        <% else %>
+                                            <% if response == "tentative" %>
+                                                Maybe
+                                            <% else %>
+                                                <%= response %>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %> 
+                                (<%= attendees.count %>)
+                            </h4>
+                            <ul>
+                            <% for attendee in attendees %>
+                                <li>
+                                    <% if attendee.name == nil %>
+                                        <%= attendee.email %>
+                                    <% else %>
+                                        <%= attendee.name %>
+                                    <% end %>
+                                </li>
+                            <% end %>
+                            </ul>
+                        <% end %>
                     </div>
                 </div>
 
