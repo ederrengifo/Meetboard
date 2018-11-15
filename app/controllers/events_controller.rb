@@ -31,7 +31,11 @@ class EventsController < ApplicationController
           event.hangout_link = google_event.hangout_link
           event.starts = google_event.start.date_time
           event.ends = google_event.end.date_time
-          event.creator = google_event.organizer.email
+          if google_event.organizer.display_name == nil 
+            event.creator = google_event.organizer.email
+          else
+            event.creator = google_event.organizer.display_name
+          end
           event.location = google_event.location
           event.save!
 
@@ -64,7 +68,11 @@ class EventsController < ApplicationController
           new_event.hangout_link = google_event.hangout_link
           new_event.starts = google_event.start.date_time
           new_event.ends = google_event.end.date_time
-          new_event.creator = google_event.organizer.email
+          if google_event.organizer.display_name == nil
+            new_event.creator = google_event.organizer.email
+          else
+            new_event.creator = google_event.organizer.display_name
+          end
           new_event.location = google_event.location
           new_event.save!
 

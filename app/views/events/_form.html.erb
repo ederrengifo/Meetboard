@@ -4,7 +4,12 @@
     <% end %>
 
     <div class="note-field">
-        <%= form.text_area :note, placeholder: "Add your notes", :id => 'note-textarea', rows: "1" %>
+        <%= form.text_area :note, placeholder: "Add your notes", :id => 'note-textarea', rows: "1", class: "hidden" %>
+        <div contenteditable="true" class="editable" id="populate-div">
+            <% if @event.note != nil %>
+                <%= @event.note.html_safe %>
+            <% end %>
+        </div>
     </div>
 
     <div class="actions">
@@ -18,9 +23,12 @@
 
  var textArea = document.getElementById('note-textarea');
  var csrfToken = document.querySelector('form').querySelector('[name=authenticity_token]').value
+ var editor = new MediumEditor('.editable');
+ var divArea = document.getElementById('populate-div');
  var saveCounter;
- textArea.onkeyup = (ev) => {
-     ShowNotice();
+ divArea.oninput = function() {
+    textArea.innerHTML = divArea.innerHTML;
+    ShowNotice();
      if (saveCounter)
          clearTimeout(saveCounter);
 
@@ -34,6 +42,8 @@
                 body: JSON.stringify({event: {note: textArea.value}})}).then(ShowSaving()).then(DelayNotice())
      }, 1000);
  };
+ 
+ 
 
 
  var update_btn = document.getElementById("update-btn");
