@@ -104,7 +104,9 @@
                 <div id="event-type" class="hidden">
                     <div class="details-wrapper">
                         <h4>General</h4>
-                        <p>Lorem ipsum</p>
+                        <% if @event.category != nil %>
+                            <p><%= @event.category %></p>
+                        <% end %>
                     </div>
                 </div>
 

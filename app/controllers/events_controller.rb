@@ -74,6 +74,21 @@ class EventsController < ApplicationController
             new_event.creator = google_event.organizer.display_name
           end
           new_event.location = google_event.location
+
+          google_category = google_event.summary.downcase
+          if google_category.include? "1:1"
+            new_event.category = "One to one"
+          else
+            if google_category.include? "check-in"
+              new_event.category = "Status Check-in"
+            else
+              if google_category.include? "retro"
+                new_event.category = "Retrospective"
+              else
+                new_event.category = "General"
+              end
+            end
+          end
           new_event.save!
 
           if google_event.attendees != nil
