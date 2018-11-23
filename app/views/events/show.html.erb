@@ -8,6 +8,9 @@
                 <button class="sidebar-toggle" id="toggle-left" onclick="toggleLeft()">
                     Sidebar
                 </button>
+                <% if @event.ends.to_i < Time.now.to_i %>
+                    <%= link_to 'Delete', @event, method: :delete, data: {confirm: "Are you sure?"} %>
+                <% end %>
             </div>
             <h1>
                 <%= @event.title %>

@@ -160,6 +160,12 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event = Event.find_by_gid(params[:id])
+    @event.destroy
+    redirect_to root_path
+  end
+
   private
 
     def google_secret(user)
