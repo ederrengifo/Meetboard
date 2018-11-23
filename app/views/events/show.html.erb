@@ -28,7 +28,7 @@
                 <% end %>
 
                 <button class="details" onclick="showType()" id="event-type-btn">
-                    Type: General
+                    Help
                 </button>
 
                 <% if @event.hangout_link != nil %>
@@ -106,10 +106,15 @@
 
                 <div id="event-type" class="hidden">
                     <div class="details-wrapper">
-                        <h4>General</h4>
-                        <% if @event.category != nil %>
-                            <p><%= @event.category %></p>
-                        <% end %>
+                        <h4>Select Type</h4>
+                        <select id="help-types" onchange="changeType()">
+                            <option value="general" <%= @event.category == "general" ? 'selected' : '' %> >General</option>
+                            <option value="personal" <%= @event.category == "1:1" ? 'selected' : '' %> >Personal 1:1</option>
+                            <option value="checkin" <%= @event.category == "check-in" ? 'selected' : '' %> >Team Check-in</option>
+                        </select>
+                        <div id="general" class="<%= @event.category == "general" ? '' : 'hidden' %>">This is a general meeting!</div>
+                        <div id="personal" class="<%= @event.category == "1:1" ? '' : 'hidden' %>">This is a personal meeting!</div>
+                        <div id="checkin" class="<%= @event.category == "check-in" ? '' : 'hidden' %>"> This is a meeting for check-in!</div>
                     </div>
                 </div>
 
@@ -298,6 +303,32 @@
             alltimeTasksAll.classList.toggle("hidden");
             clearBtn.classList.toggle("active");
         }
+
+        var ids=["general", "personal", "checkin"];
+        var typeDropdown = document.getElementById("help-types");
+        var generalType = document.getElementById("general");
+        var personalType = document.getElementById("personal");
+        var checkinType = document.getElementById("checkin");
+
+        function changeType() {
+            if (typeDropdown.value == "general") {
+                generalType.classList.remove("hidden");
+                personalType.classList.add("hidden");
+                checkinType.classList.add("hidden");
+            } else {
+                if (typeDropdown.value == "personal") {
+                    generalType.classList.add("hidden");
+                    personalType.classList.remove("hidden");
+                    checkinType.classList.add("hidden");
+                } else {
+                    if (typeDropdown.value == "checkin") {
+                        generalType.classList.add("hidden");
+                        personalType.classList.add("hidden");
+                        checkinType.classList.remove("hidden");
+                    };
+                };
+            };
+        } 
 
     </script>
   

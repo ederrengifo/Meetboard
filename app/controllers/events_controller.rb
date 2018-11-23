@@ -37,6 +37,18 @@ class EventsController < ApplicationController
             event.creator = google_event.organizer.display_name
           end
           event.location = google_event.location
+
+          google_category = google_event.summary.downcase
+          if ["1:1", "1-to-1", "one-to-one"].include? google_category
+            event.category = "1:1"
+          else
+            if ["standup", "stand-up", "stand up", "check-in", "check in"].include? google_category
+              event.category = "check-in"
+            else
+              event.category = "general"
+            end
+          end
+
           event.save!
 
           if google_event.attendees != nil
@@ -76,17 +88,13 @@ class EventsController < ApplicationController
           new_event.location = google_event.location
 
           google_category = google_event.summary.downcase
-          if google_category.include? "1:1"
-            new_event.category = "One to one"
+          if ["1:1", "1-to-1", "one-to-one"].include? google_category
+            new_event.category = "1:1 meeting"
           else
-            if google_category.include? "check-in"
-              new_event.category = "Status Check-in"
+            if ["standup", "stand-up", "stand up", "check-in", "check in"].include? google_category
+              new_event.category = "Check-in / Stand-up"
             else
-              if google_category.include? "retro"
-                new_event.category = "Retrospective"
-              else
-                new_event.category = "General"
-              end
+              new_event.category = "General"
             end
           end
           new_event.save!
