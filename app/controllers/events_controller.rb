@@ -4,9 +4,7 @@ require 'fileutils'
 require 'googleauth'
 
 class EventsController < ApplicationController
-  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
-
-  before_action :set_event, only: [:show, :update, :set_calendar, :notes]
+  before_action :set_event, only: [:show, :update, :set_calendar, :notes, :report]
 
   def index
     set_calendar
@@ -16,93 +14,60 @@ class EventsController < ApplicationController
     set_calendar
   end
 
+  def report
+  end
+
   def set_calendar
-    if current_user.present? 
-      # SETTING CALENDARS FROM GOOGLE + DAY VARIABLES
-      @calendars = get_calendar(current_user).to_a
-      @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
-      @today = Time.now.strftime("%Y-%m-%d").to_time
-      @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
-      # UPDATING AND CREATING EVENTS FROM GOOGLE CALENDAR EVENTS
-      @calendars.each do |google_event|
-        event = Event.find_by(gid: google_event.id)
+    from_google
+    update_from_google
+    set_tasks
+    calculate_time
+  end
 
-        if event.present?
-          event.title = google_event.summary
-          event.description = google_event.description
-          event.hangout_link = google_event.hangout_link
-          event.starts = google_event.start.date_time
-          event.ends = google_event.end.date_time
-          if google_event.organizer.display_name == nil 
-            event.creator = google_event.organizer.email
-          else
-            event.creator = google_event.organizer.display_name
-          end
-          event.location = google_event.location
+  # Set events directly from Google Calendar API
+  def from_google
+    @calendars = get_calendar(current_user).to_a
+    @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
+    @today = Time.now.strftime("%Y-%m-%d").to_time
+    @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
+  end
 
-          google_category = google_event.summary.downcase
-          if ["1:1", "1-to-1", "one-to-one"].include? google_category
-            event.category = "1:1"
-          else
-            if ["standup", "stand-up", "stand up", "check-in", "check in"].include? google_category
-              event.category = "check-in"
-            else
-              event.category = "general"
-            end
-          end
-
-          event.save!
-
-          if google_event.attendees != nil
-            google_event.attendees.each do |google_attendee|
-              attendee = Attendee.find_by(email: google_attendee.email, event_id: google_event.id)
-              if attendee.present?
-                attendee.email = google_attendee.email
-                attendee.name = google_attendee.display_name
-                attendee.response = google_attendee.response_status
-                attendee.save!
-              else
-                new_attendee = Attendee.new
-                new_attendee.event_id = google_event.id
-                new_attendee.gid = google_attendee.id
-                new_attendee.email = google_attendee.email
-                new_attendee.name = google_attendee.display_name
-                new_attendee.organizer = google_attendee.organizer
-                new_attendee.response = google_attendee.response_status
-                new_attendee.save!
-              end
-            end
-          end
-    
+  # Create events and ateendees from Calendar List
+  def update_from_google
+    @calendars.each do |google_event|
+      event = Event.find_by(gid: google_event.id)
+      # Update existing event with updated Calendar info
+      if event.present?
+        event.title = google_event.summary
+        event.description = google_event.description
+        event.hangout_link = google_event.hangout_link
+        event.starts = google_event.start.date_time
+        event.ends = google_event.end.date_time
+        if google_event.organizer.display_name == nil 
+          event.creator = google_event.organizer.email
         else
-          new_event = Event.new
-          new_event.gid = google_event.id
-          new_event.title = google_event.summary
-          new_event.description = google_event.description
-          new_event.hangout_link = google_event.hangout_link
-          new_event.starts = google_event.start.date_time
-          new_event.ends = google_event.end.date_time
-          if google_event.organizer.display_name == nil
-            new_event.creator = google_event.organizer.email
-          else
-            new_event.creator = google_event.organizer.display_name
-          end
-          new_event.location = google_event.location
-
-          google_category = google_event.summary.downcase
-          if ["1:1", "1-to-1", "one-to-one"].include? google_category
-            new_event.category = "1:1 meeting"
-          else
-            if ["standup", "stand-up", "stand up", "check-in", "check in"].include? google_category
-              new_event.category = "Check-in / Stand-up"
+          event.creator = google_event.organizer.display_name
+        end
+        event.location = google_event.location
+        google_category = google_event.summary.downcase
+        if ["1:1", "1-to-1", "one-to-one"].include? google_category
+          event.category = "1:1"
+        elsif ["standup", "stand-up", "stand up", "check-in", "check in"].include? google_category 
+          event.category = "check-in"
+        else
+          event.category = "general"
+        end
+        event.save!
+        # Update attendees list
+        if google_event.attendees != nil
+          google_event.attendees.each do |google_attendee|
+            attendee = Attendee.find_by(email: google_attendee.email, event_id: google_event.id)
+            if attendee.present?
+              attendee.email = google_attendee.email
+              attendee.name = google_attendee.display_name
+              attendee.response = google_attendee.response_status
+              attendee.save!
             else
-              new_event.category = "General"
-            end
-          end
-          new_event.save!
-
-          if google_event.attendees != nil
-            google_event.attendees.each do |google_attendee|
               new_attendee = Attendee.new
               new_attendee.event_id = google_event.id
               new_attendee.gid = google_attendee.id
@@ -113,46 +78,81 @@ class EventsController < ApplicationController
               new_attendee.save!
             end
           end
-
         end
-      end
-      # SETTING EVENTS AND TASKS
-      @events = Event.all
-      @tasks = Task.all
-      @task_grouping = @tasks.group_by {|t| t.event_id }
-      @attendees = Attendee.all
-      if @event.present?
-        @attendee_grouping = @event.attendees.order("response ASC").group_by {|a| a.response }
-      end
-      
-
-      # DIPSLAYING LATEST EVENTS
-      @latest_events = @events.order("starts DESC")
-     
-      # CALCULATING TIME BETWEEN START AND END TIME
-      if @event.present?
-        event_time = @event.ends - @event.starts
-        
-        if event_time < 3600
-          difference = ((event_time / 60) % 60)
-          @event_difference = "#{difference.round(0)} minutes"
+      # Create a new event in case this doesn't exist yet
+      else
+        new_event = Event.new
+        new_event.gid = google_event.id
+        new_event.title = google_event.summary
+        new_event.description = google_event.description
+        new_event.hangout_link = google_event.hangout_link
+        new_event.starts = google_event.start.date_time
+        new_event.ends = google_event.end.date_time
+        if google_event.organizer.display_name == nil
+          new_event.creator = google_event.organizer.email
         else
-          difference = event_time / (60 * 60)
-          if difference == 1 
-            @event_difference = "#{difference.round(0)} hour"
-          else
-            @event_difference = "#{difference.round(1)} hours"
+          new_event.creator = google_event.organizer.display_name
+        end
+        new_event.location = google_event.location
+        google_category = google_event.summary.downcase
+        if ["1:1", "1-to-1", "one-to-one"].include? google_category
+          new_event.category = "1:1 meeting"
+        elsif ["standup", "stand-up", "stand up", "check-in", "check in"].include? google_category
+          new_event.category = "Check-in / Stand-up"
+        else
+          new_event.category = "General"
+        end
+        new_event.save!
+        # Create attendees list
+        if google_event.attendees != nil
+          google_event.attendees.each do |google_attendee|
+            new_attendee = Attendee.new
+            new_attendee.event_id = google_event.id
+            new_attendee.gid = google_attendee.id
+            new_attendee.email = google_attendee.email
+            new_attendee.name = google_attendee.display_name
+            new_attendee.organizer = google_attendee.organizer
+            new_attendee.response = google_attendee.response_status
+            new_attendee.save!
           end
         end
       end
+    end
+  end
+  # Create methods for display tasks from events
+  def set_tasks
+    @events = Event.all
+    @tasks = Task.all
+    @task_grouping = @tasks.group_by {|t| t.event_id }
+    @attendees = Attendee.all
+    if @event.present?
+      @attendee_grouping = @event.attendees.order("response ASC").group_by {|a| a.response }
+    end
       
+    @latest_events = @events.order("starts DESC")
 
-      # UPDATING TASK WITH EVENT NAME
-      @events.each do |event|
-        task = Task.find_by(event_id: event.gid)
-        if task.present?
-          task.event_title = event.title
-          task.save!
+    @events.each do |event|
+      task = Task.find_by(event_id: event.gid)
+      if task.present?
+        task.event_title = event.title
+        task.save!
+      end
+    end
+  end
+  # Calculate meeting time lapse
+  def calculate_time
+    if @event.present?
+      event_time = @event.ends - @event.starts
+      
+      if event_time < 3600
+        difference = ((event_time / 60) % 60)
+        @event_difference = "#{difference.round(0)} minutes"
+      else
+        difference = event_time / (60 * 60)
+        if difference == 1 
+          @event_difference = "#{difference.round(0)} hour"
+        else
+          @event_difference = "#{difference.round(1)} hours"
         end
       end
     end
@@ -193,7 +193,7 @@ class EventsController < ApplicationController
           { "access_token" => user.google_token,
             "refresh_token" => user.google_refresh_token,
             "client_id" => Rails.application.secrets.google_client_id,
-            "client_secret" => Rails.application.secrets.google_client_secret,
+            "client_secret" => Rails.application.secrets.google_client_secret
           }
         }
       )
@@ -202,17 +202,19 @@ class EventsController < ApplicationController
     def get_calendar(user)
       service = Google::Apis::CalendarV3::CalendarService.new
       service_auth = google_secret(user).to_authorization
-      service_auth.update!(
-        :additional_parameters => {"access_type" => "offline"}
-      )
+      service_auth.update!(session[:authorization])
       service.authorization = service_auth
-      # service.authorization.refresh!
       
       event_list = service.list_events('primary',
                                         single_events: true, 
                                         order_by: 'startTime', 
                                         max_results: 30,
                                         time_min: Time.now.iso8601,).items
+
+    rescue Google::Apis::AuthorizationError
+      response = service_auth.refresh!
+      session[:authorization] = session[:authorization].merge(response)    
+      retry
    
     end
 

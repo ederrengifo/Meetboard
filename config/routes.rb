@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :tasks do
       get :update
     end
+    get :report
   end 
 
   root to: "home#show"
