@@ -6,7 +6,7 @@ require 'googleauth'
 class EventsController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
-  before_action :set_event, only: [:show, :update, :set_calendar]
+  before_action :set_event, only: [:show, :update, :set_calendar, :notes]
 
   def index
     set_calendar
@@ -174,6 +174,15 @@ class EventsController < ApplicationController
     @event = Event.find_by_gid(params[:id])
     @event.destroy
     redirect_to root_path
+  end
+
+  def notes
+    set_calendar
+  end
+
+  def get_txt
+    @event = "Hello world!"
+    send_data(data, filename: "hello.txt", disposition: "attachment")
   end
 
   private

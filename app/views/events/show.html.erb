@@ -37,6 +37,8 @@
                     </a>
                 <% end %>
 
+                <%= link_to 'Download', events_notes_path, target: "_blank" %>
+
                 <div id="event-details" class="hidden">
                     <div class="details-wrapper">
                         <% if @event.description != nil %>
