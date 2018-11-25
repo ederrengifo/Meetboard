@@ -4,7 +4,9 @@ require 'fileutils'
 require 'googleauth'
 
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :update, :get_calendar]
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+
+  before_action :set_event, only: [:show, :update, :set_calendar]
 
   def index
     set_calendar

@@ -1,5 +1,4 @@
 <aside id="sidebar" class="width-22">
-    <% if current_user %>
         <div class="user-options">
             <a href="/" class="username">
                 <%= current_user.name %>
@@ -89,8 +88,6 @@
         </div>
 
     </div>
-
-    <% end %>
 
     <script>
         var showUpcomingBtn = document.getElementById("show-new-events");
