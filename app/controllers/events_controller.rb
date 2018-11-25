@@ -4,7 +4,7 @@ require 'fileutils'
 require 'googleauth'
 
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :update]
+  before_action :set_event, only: [:show, :update, :get_calendar]
 
   def index
     set_calendar
@@ -190,7 +190,11 @@ class EventsController < ApplicationController
 
     def get_calendar(user)
       service = Google::Apis::CalendarV3::CalendarService.new
-      service.authorization = google_secret(user).to_authorization
+      service_auth = google_secret(user).to_authorization
+      service_auth.update!(
+        :additional_parameters => {"access_type" => "offline"}
+      )
+      service.authorization = service_auth
       # service.authorization.refresh!
       
       event_list = service.list_events('primary',
@@ -198,7 +202,7 @@ class EventsController < ApplicationController
                                         order_by: 'startTime', 
                                         max_results: 30,
                                         time_min: Time.now.iso8601,).items
-  
+   
     end
 
     def set_event
