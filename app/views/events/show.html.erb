@@ -92,7 +92,7 @@
                             <ul>
                             <% for attendee in attendees %>
                                 <li>
-                                    <% if attendee.name == nil %>
+                                    <% if attendee.name == "" || attendee.name == nil %>
                                         <%= attendee.email %>
                                     <% else %>
                                         <%= attendee.name %>
