@@ -1,11 +1,7 @@
-<% if current_user %>
-  <% controller.redirect_to logged_path %>
-<% else %>
-  <div class="wrapper">
+<div class="wrapper">
     <div class="login">
       <h1>Meetboard</h1>
       <p>Calendars meet to-do tasks</p>
       <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
     </div>
-  </div>
-<% end %>
+</div>

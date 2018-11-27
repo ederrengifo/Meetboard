@@ -43,7 +43,7 @@
                         <li>
                     <% end %>
 
-                        <%= link_to(calendar.id, class:"event-link") do %>
+                        <%= link_to(event_path(calendar.id), class:"event-link") do %>
                             <div class="event-name">
                                 <%= calendar.summary %>
                                 <% if Time.now.to_i.between?(calendar.start.date_time.to_i, calendar.end.date_time.to_i) %>
@@ -73,7 +73,7 @@
                         <% else %>
                             <li>
                         <% end %>
-                                <%= link_to(event.id, class:"event-link") do %>
+                                <%= link_to(event_path(event.id), class:"event-link") do %>
                                     <div class="event-name">
                                         <%= event.title %>
                                     </div>

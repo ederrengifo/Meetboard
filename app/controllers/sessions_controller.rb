@@ -12,17 +12,12 @@ class SessionsController < ApplicationController
     user.google_refresh_token = refresh_token if refresh_token.present?
     user.save!
     session[:user_id] = user.id
-    redirect_to logged_path
+    redirect_to events_path
   end
 
   def destroy
-    session[:user_id] = nil
     reset_session
     redirect_to root_path
-  end
-
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
 end

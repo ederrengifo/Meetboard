@@ -4,6 +4,7 @@ require 'fileutils'
 require 'googleauth'
 
 class EventsController < ApplicationController
+  before_action
   before_action :set_event, only: [:show, :update, :set_calendar, :notes, :report]
 
   def index
@@ -193,17 +194,23 @@ class EventsController < ApplicationController
           { "access_token" => user.google_token,
             "refresh_token" => user.google_refresh_token,
             "client_id" => Rails.application.secrets.google_client_id,
-            "client_secret" => Rails.application.secrets.google_client_secret
+            "client_secret" => Rails.application.secrets.google_client_secret,
+            "auth_uri" => "https://accounts.google.com/o/oauth2/auth",
+            "token_uri" => "https://accounts.google.com/o/oauth2/token",
+            "scope" => Google::Apis::CalendarV3::AUTH_CALENDAR,
+            "redirect_uris" => ["https://localhost:3000/"]
           }
         }
       )
     end
 
-    def get_calendar(user)
+    def get_calendar(user)  
+      client = google_secret(user).to_authorization
+      client.update!(session[:authorization])
+
       service = Google::Apis::CalendarV3::CalendarService.new
-      service_auth = google_secret(user).to_authorization
-      service_auth.update!(session[:authorization])
-      service.authorization = service_auth
+      service.client_options.application_name = Rails.application.secrets.application_name
+      service.authorization = client
       
       event_list = service.list_events('primary',
                                         single_events: true, 
@@ -212,8 +219,8 @@ class EventsController < ApplicationController
                                         time_min: Time.now.iso8601,).items
 
     rescue Google::Apis::AuthorizationError
-      response = service_auth.refresh!
-      session[:authorization] = session[:authorization].merge(response)    
+      response = client.fetch_access_token!
+      session[:authorization] = session[:authorization].merge(response) 
       retry
    
     end
