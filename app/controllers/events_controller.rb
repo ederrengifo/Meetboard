@@ -188,9 +188,19 @@ class EventsController < ApplicationController
 
   private
 
-    def google_secret(user)
-      Google::APIClient::ClientSecrets.new(
-        { "web" =>
+    def client_opts
+      {
+        client_id: Rails.application.secrets.google_client_id,
+        client_secret: Rails.application.secrets.google_client_secret,
+        authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+        token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+        scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+        redirect_uri: "https://localhost:3000/auth/google_oauth2/callback"
+      }
+    end
+
+    def client_options(user)
+      { "web" =>
           { "access_token" => user.google_token,
             "refresh_token" => user.google_refresh_token,
             "client_id" => Rails.application.secrets.google_client_id,
@@ -198,19 +208,32 @@ class EventsController < ApplicationController
             "auth_uri" => "https://accounts.google.com/o/oauth2/auth",
             "token_uri" => "https://accounts.google.com/o/oauth2/token",
             "scope" => Google::Apis::CalendarV3::AUTH_CALENDAR,
-            "redirect_uris" => ["https://localhost:3000/"]
+            "redirect_uris" => ["https://localhost:3000/auth/google_oauth2/callback"]
           }
         }
-      )
+    end
+
+    def google_secret(user)
+      Google::APIClient::ClientSecrets.new(client_options(user))
     end
 
     def get_calendar(user)  
+      client = Signet::OAuth2::Client.new(client_opts)
       client = google_secret(user).to_authorization
       client.update!(session[:authorization])
 
       service = Google::Apis::CalendarV3::CalendarService.new
-      service.client_options.application_name = Rails.application.secrets.application_name
       service.authorization = client
+
+      if request['code'] == nil
+        
+      else
+        client.code = request['code']
+        client.fetch_access_token!
+      end
+      # client.code = user.google_refresh_token
+      # client.fetch_access_token!
+      # client.fetch_access_token!(client_options(user))
       
       event_list = service.list_events('primary',
                                         single_events: true, 
@@ -219,9 +242,8 @@ class EventsController < ApplicationController
                                         time_min: Time.now.iso8601,).items
 
     rescue Google::Apis::AuthorizationError
-      response = client.fetch_access_token!
-      session[:authorization] = session[:authorization].merge(response) 
-      retry
+      
+      
    
     end
 

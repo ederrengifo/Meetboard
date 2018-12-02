@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   get 'home/show'
   get 'calendars/show'
-  get 'events/get_txt'
-  get 'events/notes'
+  # get 'events/get_txt'
+  # get 'events/notes'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # get 'auth/:provider/callback', to: 'sessions#googleAuth'
@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
 
   get 'signout', to: 'sessions#destroy', as: 'signout'
-  get 'events/index', to: 'events#index', as: 'logged'
 
   resources :sessions, only: [:create, :destroy]
   resource :home, only: [:show]
