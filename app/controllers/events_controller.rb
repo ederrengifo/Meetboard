@@ -4,7 +4,7 @@ require 'fileutils'
 require 'googleauth'
 
 class EventsController < ApplicationController
-  before_action
+  before_action :require_login
   before_action :set_event, only: [:show, :update, :set_calendar, :notes, :report]
 
   def index
@@ -188,63 +188,34 @@ class EventsController < ApplicationController
 
   private
 
-    def client_opts
-      {
-        client_id: Rails.application.secrets.google_client_id,
-        client_secret: Rails.application.secrets.google_client_secret,
-        authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
-        token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
-        scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
-        redirect_uri: "https://localhost:3000/auth/google_oauth2/callback"
-      }
-    end
-
-    def client_options(user)
-      { "web" =>
-          { "access_token" => user.google_token,
+    def google_secret(user)
+      Google::APIClient::ClientSecrets.new(
+        { "web" =>
+          { 
+            "access_token" => user.google_token,
             "refresh_token" => user.google_refresh_token,
-            "client_id" => Rails.application.secrets.google_client_id,
-            "client_secret" => Rails.application.secrets.google_client_secret,
+            "client_id" => ENV["GOOGLE_CLIENT_ID"],
+            "client_secret" => ENV["GOOGLE_CLIENT_SECRET"],
             "auth_uri" => "https://accounts.google.com/o/oauth2/auth",
             "token_uri" => "https://accounts.google.com/o/oauth2/token",
             "scope" => Google::Apis::CalendarV3::AUTH_CALENDAR,
             "redirect_uris" => ["https://localhost:3000/auth/google_oauth2/callback"]
           }
         }
-    end
-
-    def google_secret(user)
-      Google::APIClient::ClientSecrets.new(client_options(user))
+      )
     end
 
     def get_calendar(user)  
-      client = Signet::OAuth2::Client.new(client_opts)
-      client = google_secret(user).to_authorization
-      client.update!(session[:authorization])
-
       service = Google::Apis::CalendarV3::CalendarService.new
-      service.authorization = client
-
-      if request['code'] == nil
-        
-      else
-        client.code = request['code']
-        client.fetch_access_token!
-      end
-      # client.code = user.google_refresh_token
-      # client.fetch_access_token!
-      # client.fetch_access_token!(client_options(user))
+      service.authorization = google_secret(user).to_authorization
+      service.authorization.refresh!
       
       event_list = service.list_events('primary',
                                         single_events: true, 
                                         order_by: 'startTime', 
                                         max_results: 30,
                                         time_min: Time.now.iso8601,).items
-
-    rescue Google::Apis::AuthorizationError
       
-      
-   
     end
 
     def set_event
