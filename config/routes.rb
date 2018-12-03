@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   get 'home/show'
   get 'calendars/show'
-  # get 'events/get_txt'
-  # get 'events/notes'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # get 'auth/:provider/callback', to: 'sessions#googleAuth'
@@ -19,7 +18,6 @@ Rails.application.routes.draw do
     resources :tasks do
       get :update
     end
-    get :report
   end 
 
   root to: "home#show"
