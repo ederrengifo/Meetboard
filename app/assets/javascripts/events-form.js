@@ -1,29 +1,4 @@
-var textArea = document.getElementById('note-textarea');
- var csrfToken = document.querySelector('form').querySelector('[name=authenticity_token]').value
- var editor = new MediumEditor('.editable');
- var divArea = document.getElementById('populate-div');
- var saveCounter;
- divArea.oninput = function() {
-    textArea.innerHTML = divArea.innerHTML;
-    ShowNotice();
-     if (saveCounter)
-         clearTimeout(saveCounter);
-
-     saveCounter = setTimeout(() => {
-         fetch("<%= @event %>",
-               {method: "PATCH",
-                headers: {
-                    "X-CSRF-Token": csrfToken,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({event: {note: textArea.value}})}).then(ShowSaving()).then(DelayNotice())
-     }, 1000);
- };
- 
- 
-
-
- var update_btn = document.getElementById("update-btn");
+var update_btn = document.getElementById("update-btn");
  var note_confirmation = document.getElementById("note-confirmation");
  var Delay
 

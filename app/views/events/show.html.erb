@@ -37,7 +37,8 @@
                     </a>
                 <% end %>
 
-                Download
+                <%= link_to "Public", event_report_path(@event.id) %>
+                <a href="<%= event_download_path(@event.id) %>.txt" download="<%= @event.title %> Report">Download</a>
 
                 <div id="event-details" class="hidden">
                     <div class="details-wrapper">

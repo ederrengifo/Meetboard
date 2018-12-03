@@ -1,0 +1,16 @@
+<%= @event.title %>
+
+<% if @event.note != nil%>
+-----------
+
+NOTES:
+<%= @event.note %>
+
+<% end %>
+-----------
+
+ACTION ITEMS:
+
+<% @event.tasks.each do |task| %>
+- <%= task.title %>
+<% end %>

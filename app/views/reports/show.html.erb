@@ -1,0 +1,11 @@
+
+<h1><%= @event.title %></h2>
+<p><%= @event.note.to_s.html_safe %></p>
+
+<h2>Action Items</h2>
+
+<ul>
+    <% @event.tasks.each do |task| %>
+        <li><%= task.title %></li>
+    <% end %>
+</ul>
