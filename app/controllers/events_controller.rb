@@ -202,7 +202,7 @@ class EventsController < ApplicationController
                                         single_events: true, 
                                         order_by: 'startTime', 
                                         max_results: 30,
-                                        time_min: Time.now.iso8601,).items
+                                        time_min: Time.now.iso8601,).items      
       
     end
 
