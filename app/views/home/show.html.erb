@@ -1,7 +1,30 @@
-<div class="wrapper">
-    <div class="login">
-      <h1>Meetboard</h1>
-      <p>Calendars meet to-do tasks</p>
-      <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+<div class="wrapper">  
+
+  <div class="head">
+    <div class="logo">
+      <span><%= inline_svg('logo-m.svg') %></span>
+      <span class="logo-font">meetboard</span>
     </div>
+
+    <div class="menu">
+      <a>About</a>
+      <a>Feedback?</a>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="body">
+      <div class="illustration">
+        <%= inline_svg('img-landing.svg') %>
+      </div>
+      <div class="content">
+        <h1>One board,<br>better meetings</h1>
+        <p>Access with your Google account, write notes and set action items for your meetings in a single environment.</p>
+        <%= link_to "Sign in with Google", "/auth/google_oauth2", class: "login-btn" %>
+      </div>
+    </div>
+
+  </div>
+
 </div>

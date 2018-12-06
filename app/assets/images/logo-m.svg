@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="23px" viewBox="0 0 36 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>logo-big</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Background-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Meetboard-Landing" transform="translate(-217.000000, -17.000000)" fill-rule="nonzero">
+            <g id="Group-2" transform="translate(217.000000, 16.000000)">
+                <g id="logo-big" transform="translate(18.000000, 12.500000) scale(-1, 1) translate(-18.000000, -12.500000) translate(0.000000, 1.000000)">
+                    <circle id="Oval-Copy-9" fill="#FF48B4" cx="31.3043478" cy="18" r="4.69565217"></circle>
+                    <path d="M19.1191083,21.1758128 C18.229601,22.6583249 16.3066993,23.1390504 14.8241872,22.2495431 C13.3416751,21.3600358 12.8609496,19.4371341 13.7504569,17.954622 L23.1417613,2.30244807 C24.0312686,0.819935933 25.9541702,0.339210516 27.4366824,1.2287178 C28.9191945,2.11822508 29.3999199,4.04112675 28.5104126,5.52363889 L19.1191083,21.1758128 Z" id="Path" fill="#6E5AFF"></path>
+                    <path d="M6.59736916,21.1758128 C5.70786188,22.6583249 3.78496021,23.1390504 2.30244807,22.2495431 C0.819935933,21.3600358 0.339210516,19.4371341 1.2287178,17.954622 L10.6200221,2.30244807 C11.5095294,0.819935933 13.4324311,0.339210516 14.9149432,1.2287178 C16.3974554,2.11822508 16.8781808,4.04112675 15.9886735,5.52363889 L6.59736916,21.1758128 Z" id="Path" fill="#41DDB5"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
