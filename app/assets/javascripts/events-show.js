@@ -52,7 +52,7 @@ var allTasksBlock = document.getElementById("all-tasks-block")
         }
 
 var toggleLeftBtn = document.getElementById("toggle-left");
-var leftBlock = document.getElementById("sidebar");
+var leftBlock = document.getElementById("sidebar-dark");
 var centerBlock = document.getElementById("workspace");
 var rightBlock = document.getElementById("todobar");
 
