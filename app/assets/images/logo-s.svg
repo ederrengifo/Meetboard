@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="16px" viewBox="0 0 25 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>logo-s</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Background-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-2" transform="translate(-20.000000, -20.000000)" fill-rule="nonzero">
+            <g id="logo-s" transform="translate(32.444444, 28.000000) scale(-1, 1) translate(-32.444444, -28.000000) translate(20.000000, 20.000000)">
+                <circle id="Oval-Copy-9" fill="#FF48B4" cx="21.6425121" cy="12.4444444" r="3.24637681"></circle>
+                <path d="M13.2181489,14.6400681 C12.6031809,15.6650148 11.2737674,15.9973681 10.2488208,15.3824001 C9.22387412,14.7674322 8.89152074,13.4380187 9.50648874,12.413072 L15.9992424,1.59181595 C16.6142104,0.566869287 17.9436239,0.234515912 18.9685705,0.84948391 C19.9935172,1.46445191 20.3258706,2.79386541 19.7109026,3.81881207 L13.2181489,14.6400681 Z" id="Path" fill="#6E5AFF"></path>
+                <path d="M4.56114411,14.6400681 C3.94617611,15.6650148 2.61676261,15.9973681 1.59181595,15.3824001 C0.566869287,14.7674322 0.234515912,13.4380187 0.84948391,12.413072 L7.34223753,1.59181595 C7.95720553,0.566869287 9.28661903,0.234515912 10.3115657,0.84948391 C11.3365124,1.46445191 11.6688657,2.79386541 11.0538977,3.81881207 L4.56114411,14.6400681 Z" id="Path" fill="#41DDB5"></path>
+            </g>
+        </g>
+    </g>
+</svg>

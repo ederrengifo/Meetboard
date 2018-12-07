@@ -1,28 +1,35 @@
-<aside id="sidebar" class="width-22">
-        <div class="user-options">
-            <a href="/" class="username">
-                <%= current_user.name %>
+<aside id="sidebar-dark" class="width-22">
+    <div class="user-options-dark">
+        <span>
+            <a href="/">
+            <%= inline_svg('logo-s.svg') %>
             </a>
-            <%= link_to "Sign out", signout_path, id: "sign_out", class: "signout" %>
-        </div>
-        <% if @event.present? %>
-            <div class="events-toggle">
-                <button id="show-new-events" onclick="showUpcoming()" class="<%= 'active' if @event.ends.to_i > Time.now.to_i %>">Upcoming</button>
-                <button id="show-past-events" onclick="showPast()" class="<%= 'active' if @event.ends.to_i < Time.now.to_i %>">Latest</button>
-            </div>
-        <% else %>
-            <div class="events-toggle">
-                <button id="show-new-events" onclick="showUpcoming()" class="active">Upcoming</button>
-                <button id="show-past-events" onclick="showPast()" class="">Latest</button>
-            </div>
-        <% end %>
+        </span>
+        <a href="/" >
+            <%= current_user.name %>
+        </a>
+        <%= link_to "Sign out", signout_path, id: "sign_out", class: "signout" %>
+    </div>
+
+    <% if @event.present? %>
+    <div class="events-toggle">
+        <button id="show-new-events" onclick="showUpcoming()" class="<%= 'active' if @event.ends.to_i > Time.now.to_i %>">Upcoming</button>
+        <button id="show-past-events" onclick="showPast()" class="<%= 'active' if @event.ends.to_i < Time.now.to_i %>">Latest</button>
+    </div>
+    <% else %>
+    <div class="events-toggle">
+        <button id="show-new-events" onclick="showUpcoming()" class="active">Upcoming</button>
+        <button id="show-past-events" onclick="showPast()" class="">Latest</button>
+    </div>
+    <% end %>
 
     <div class="scroll-bar-container">
         <% if @event.present? %>
-            <div id="new-events" class="<%= 'hidden' if @event.ends.to_i < Time.now.to_i %>">
+        <div id="new-events" class="<%= 'hidden' if @event.ends.to_i < Time.now.to_i %>">
         <% else %>
-            <div id="new-events" class="">
+        <div id="new-events" class="">
         <% end %>
+
         <% @calendar_days.each do |day, calendars| %>
             <h2>
                 <% if day == @today %>
@@ -37,24 +44,30 @@
             </h2>
             <ul>
                 <% for calendar in calendars %>
+
                     <% if @event.present? %>
-                        <li class="<%= 'active' if @event.gid == calendar.id %>">
+                        <a href="<%= event_path(calendar.id) %>" class="<%= (@event.gid == calendar.id) ? 'active' : 'event-link' %>">
                     <% else %>
-                        <li>
+                        <a href="<%= event_path(calendar.id) %>" class="event-link">
                     <% end %>
 
-                        <%= link_to(event_path(calendar.id), class:"event-link") do %>
+                        <li>
+
                             <div class="event-name">
                                 <%= calendar.summary %>
-                                <% if Time.now.to_i.between?(calendar.start.date_time.to_i, calendar.end.date_time.to_i) %>
-                                    - (Now)
-                                <% end %>
                             </div>
                             <div class="timelapse">
-                                <%= calendar.start.date_time&.strftime("%I:%M%p")%> to <%=calendar.end.date_time&.strftime("%I:%M%p") %>
+                                <span class="date">
+                                    <%= calendar.start.date_time&.strftime("%I:%M%p")%> to <%=calendar.end.date_time&.strftime("%I:%M%p") %>
+                                </span>
+                                <% if Time.now.to_i.between?(calendar.start.date_time.to_i, calendar.end.date_time.to_i) %>
+                                    <span class="now">Now</span>
+                                <% end %>        
                             </div>
-                        <% end %>
-                    </li>
+                        
+                        </li>
+                    </a>
+
                 <% end %>
             </ul>
         <% end %>
@@ -65,23 +78,26 @@
             <div id="past-events" class="hidden">
         <% end %>
             <h2>Latest events</h2>
+
             <ul>
-                <% @latest_events.each do |event| %>
+                <% @latest_events.last(30).each do |event| %>
                     <% if event.ends.to_i < Time.now.to_i %>
                         <% if @event.present? %>
-                            <li class="<%= 'active' if @event.gid == event.gid %>">
+                            <a href="<%= event_path(event.id) %>" class="<%= (@event.gid == event.gid) ? 'active' : 'event-link' %>">
                         <% else %>
-                            <li>
+                            <a href="<%= event_path(event.id) %>" class="event-link">
                         <% end %>
-                                <%= link_to(event_path(event.id), class:"event-link") do %>
+                                <li>
                                     <div class="event-name">
                                         <%= event.title %>
                                     </div>
                                     <div class="timelapse">
-                                        <%= event.starts&.strftime("%B, %d") %> at <%= event.starts&.strftime("%I:%M%p") %>
+                                        <span class="date">
+                                            <%= event.starts&.strftime("%B %d") %> - <%= event.starts&.strftime("%I:%M%p") %>
+                                        </span>      
                                     </div>
-                                <% end %>
-                            </li>
+                                </li>
+                            </a>
                     <% end %>
                 <% end %>
             </ul>
