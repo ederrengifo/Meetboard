@@ -80,7 +80,7 @@
             <h2>Latest events</h2>
 
             <ul>
-                <% @latest_events.last(30).each do |event| %>
+                <% @latest_events.each do |event| %>
                     <% if event.ends.to_i < Time.now.to_i %>
                         <% if @event.present? %>
                             <a href="<%= event_path(event.id) %>" class="<%= (@event.gid == event.gid) ? 'active' : 'event-link' %>">

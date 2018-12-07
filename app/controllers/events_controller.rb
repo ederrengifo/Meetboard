@@ -127,7 +127,7 @@ class EventsController < ApplicationController
       @attendee_grouping = @event.attendees.order("response ASC").group_by {|a| a.response }
     end
       
-    @latest_events = @events.order("starts DESC")
+    @latest_events = @events.order("starts DESC").first(60)
 
     @events.each do |event|
       task = Task.find_by(event_id: event.gid)
