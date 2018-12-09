@@ -1,14 +1,24 @@
 <aside id="sidebar-dark" class="width-22">
-    <div class="user-options-dark">
+    <div class="user-options">
         <span>
             <a href="/">
-            <%= inline_svg('logo-s.svg') %>
+                <%= inline_svg('logo-s.svg') %>
             </a>
         </span>
-        <a href="/" >
+        <button onclick="showDropdown()" class="user-menu mb-dropdown-btn" >
             <%= current_user.name %>
-        </a>
-        <%= link_to "Sign out", signout_path, id: "sign_out", class: "signout" %>
+            <span>
+                <%= inline_svg('icon-down')%>
+            <span>
+        </button>
+        <div id="user-dropdown" class="mb-dropdown">
+            <button class="option">Change Theme</button>
+            <%= button_to "Sign out", signout_path, class: "option", :method => :get %>
+        </div>
+        <span class="hide-btn">
+            <%= inline_svg('icon-hide') %>
+        </span>
+                
     </div>
 
     <% if @event.present? %>
@@ -105,6 +115,8 @@
 
     </div>
 
+    <script src="/assets/components.js"></script>
     <script src="/assets/events-sidebar.js"></script>
+    
     
 </aside>

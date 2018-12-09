@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="6px" viewBox="0 0 10 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-down</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Background-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-2" transform="translate(-157.000000, -28.000000)" fill="#B6B5BC" fill-rule="nonzero">
+            <g id="Group-10" transform="translate(20.000000, 20.000000)">
+                <path d="M144.352931,14.6464754 C144.548177,14.8417534 144.548152,15.1583359 144.352874,15.3535822 C144.157596,15.5488284 143.841013,15.5488027 143.645767,15.3535246 L139.646418,11.3535246 C139.451194,11.1582691 139.451194,10.8417309 139.646418,10.6464754 L143.645767,6.64647538 C143.841013,6.45119735 144.157596,6.45117158 144.352874,6.64641784 C144.548152,6.8416641 144.548177,7.15824659 144.352931,7.35352462 L140.707049,11 L144.352931,14.6464754 Z" id="icon-down" transform="translate(141.999675, 11.000000) rotate(-90.000000) translate(-141.999675, -11.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

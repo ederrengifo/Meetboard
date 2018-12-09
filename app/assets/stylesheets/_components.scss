@@ -1,0 +1,39 @@
+@import "variables";
+
+
+.mb-dropdown {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    display: none;
+    position: absolute;
+    z-index: 2;
+    min-width: 200px;
+    overflow: auto;
+    padding: 8px;
+    margin-top: -8px;
+
+    .option {
+        font-size: 15px;
+        font-weight: 400;
+        background-color: #FFFFFF;
+        padding: 8px 12px;
+        color: $neutral-1;
+        border: 0px;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+    }
+
+    .option:focus {
+        outline-color: transparent;
+        outline-style: none;
+    }
+
+    .option:hover {
+        color: $purple;
+    }
+}
+
+.show {
+    display: block;
+}
