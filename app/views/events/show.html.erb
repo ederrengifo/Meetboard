@@ -130,7 +130,7 @@
     </div>
 
     <div id="todobar" class="width-30">
-        <div class="scroll-todobar-container">
+        <div class="todohead">
             <div class="tabs">
                 <button class="todo-tab active" id="event-task-tab" onclick="showEventTasks()">
                     Action items
@@ -146,7 +146,9 @@
                     </button>
                 </div>
             </div>
+        </div>
 
+        <div class="scroll-todobar-container">
             <div class="tasks-container" id="event-task-block">
                 <div id="event-tasks-cleaned" class="hidden">
                     <% @event.tasks.each do |task| %>
@@ -168,10 +170,12 @@
                 <div id ="alltime-tasks-cleaned" class="hidden">
                     <% @task_grouping.each do |event_id, tasks| %>
                         <div class="task-group">
-                            <a href="<%= event_id %>" class="event">
-                                <%= Event.find(event_id).title %>
-                            </a>
-                        </div>
+                            <div class="task-group-head">
+                                <a href="<%= event_id %>" class="event">
+                                    <%= Event.find(event_id).title %>
+                                </a>
+                            </div>
+                        
                         <% for task in tasks %>
                             <div class="task">
                                 <% if task.completed == false %>
@@ -185,21 +189,27 @@
                                                 <%= f.check_box :completed, :checked => false, :style => 'display: none' %>
                                                 <%= f.submit "", class: "unmark" %>
                                             <% end %>
+                                            <div class="checkmark <%= 'hidden' if task.completed == false %>">
+                                                <%= inline_svg('icon-mark') %>
+                                            </div>
                                         <% end %>
                                     </label>
                                 <% end %>
                             </div>
                         <% end %>
+                        </div>
                     <% end %>
                 </div>
 
                 <div id ="alltime-tasks-all" class="">
                     <% @task_grouping.each do |event_id, tasks| %>
                         <div class="task-group">
-                            <a href="<%= event_id %>" class="event">
-                                <%= Event.find(event_id).title %>
-                            </a>
-                        </div>
+                            <div class="task-group-head">
+                                <a href="<%= event_id %>" class="event">
+                                    <%= Event.find(event_id).title %>
+                                </a>
+                            </div>
+                        
                         <% for task in tasks %>
                             <div class="task">
                                 <label class="container-update">
@@ -213,9 +223,13 @@
                                             <%= f.submit "", class: "unmark" %>
                                         <% end %>
                                     <% end %>
+                                    <div class="checkmark <%= 'hidden' if task.completed == false %>">
+                                        <%= inline_svg('icon-mark') %>
+                                    </div>
                                 </label>
                             </div>
                         <% end %>
+                        </div>
                     <% end %>
                 </div>
 

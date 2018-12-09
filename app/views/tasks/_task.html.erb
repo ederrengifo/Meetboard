@@ -10,6 +10,9 @@
                 <%= f.submit "", class: "unmark" %>
             <% end %>
         <% end %>
+        <div class="checkmark <%= 'hidden' if task.completed == false %>">
+            <%= inline_svg('icon-mark') %>
+        </div>
     </label>
 </div>
 
