@@ -15,11 +15,13 @@
             <button class="option">Change Theme</button>
             <%= link_to "Sign out", signout_path, class: "option" %>
         </div>
-        <span class="hide-btn">
-            <button id="hide-sidebar-btn" onclick="hideLeft()">
-                <%= inline_svg('icon-hide') %>
-            </button>
-        </span>
+        <% if @event.present? %>
+            <span class="hide-btn">
+                <button id="hide-sidebar-btn" onclick="hideLeft()">
+                    <%= inline_svg('icon-hide') %>
+                </button>
+            </span>
+        <% end %>
                 
     </div>
 
