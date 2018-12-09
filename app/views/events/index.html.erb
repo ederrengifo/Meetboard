@@ -24,48 +24,26 @@
     <div id="todobar" class="width-30">
         
         <div class="todohead">
-            <h4>You have <%= @tasks.where(completed: false).count %> pending items</h4>
+            <div class="tabs">
+                <h4>You have <%= @tasks.where(completed: false).count %> pending items</h4>
+                <div class="cleaner">
+                    <button id="clear-events" onclick="cleanTasksIndex()" class="clear-tasks"></button>
+                    <button id="display-events" onclick="displayTasksIndex()" class="display-tasks hidden"></button>
+                </div>
+            </div>
         </div>
 
         <div class="scroll-todobar-container">
             <div class="task-container" id="all-tasks-block">
-                <% @task_grouping.each do |event_id, tasks| %>
-                    <div class="task-group">
-                        <div class="task-group-head">
-                            <a href="<%= event_id %>" class="event">
-                                <%= truncate((Event.find(event_id).title), length: 48) %> <span><%= Event.find(event_id).starts&.strftime("%m/%d") %></span>
-                            </a>
-                        </div>
-                    
-                    <% for task in tasks %>
-                        <div class="task">
-                            <label class="container-update">
-                                <%= task.title %>  
-                                <%= link_to [task.event, task], method: :delete, class: "delete-task" do %>
-                                    <%= inline_svg('icon-trash') %>
-                                <% end %>
-                                <%= form_with(model: [task.event, task], local: true) do |f| %>
-                                    <% if task.completed == false %>
-                                        <%= f.check_box :completed, :checked => true, :style => 'display: none' %>
-                                        <%= f.submit "", class: "mark" %>
-                                    <% else %>
-                                        <%= f.check_box :completed, :checked => false, :style => 'display: none' %>
-                                        <%= f.submit "", class: "unmark" %>
-                                    <% end %>
-                                <% end %>
-                                <div class="checkmark <%= 'hidden' if task.completed == false %>">
-                                    <%= inline_svg('icon-mark') %>
-                                </div>
-                            </label>
-                        </div>
-                    <% end %>
-                    </div>
-                <% end %>
+                <%= render 'alltasks' %>
             </div>
         </div>
     </div>
 
     <% end %>
 <% end %>
+
+    <script src="/assets/components.js"></script>
+    <script src="/assets/events-show.js"></script>
 
 </main>

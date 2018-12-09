@@ -76,6 +76,20 @@ var alltimeTasksAll = document.getElementById("alltime-tasks-all");
             displayBtn.classList.add("hidden");
         }
 
+        function cleanTasksIndex() {
+            alltimeTasksCleaned.classList.remove("hidden");
+            alltimeTasksAll.classList.add("hidden");
+            clearBtn.classList.add("hidden");
+            displayBtn.classList.remove("hidden");
+        }
+
+        function displayTasksIndex() {
+            alltimeTasksCleaned.classList.add("hidden");
+            alltimeTasksAll.classList.remove("hidden");
+            clearBtn.classList.remove("hidden");
+            displayBtn.classList.add("hidden");
+        }
+
 var ids=["general", "personal", "checkin"];
 var typeDropdown = document.getElementById("help-types");
 var generalType = document.getElementById("general");
