@@ -33,7 +33,7 @@
                     <div class="task-group">
                         <div class="task-group-head">
                             <a href="<%= event_id %>" class="event">
-                                <%= Event.find(event_id).title %>
+                                <%= truncate((Event.find(event_id).title), length: 48) %> <span><%= Event.find(event_id).starts&.strftime("%m/%d") %></span>
                             </a>
                         </div>
                     
