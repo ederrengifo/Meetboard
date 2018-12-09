@@ -22,6 +22,8 @@
         cursor: pointer;
         width: 100%;
         text-align: left;
+        display: block;
+        float: none;
     }
 
     .option:focus {
@@ -31,6 +33,7 @@
 
     .option:hover {
         color: $purple;
+        text-decoration: none;
     }
 }
 

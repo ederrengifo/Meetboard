@@ -5,7 +5,7 @@
     <div id="workspace" class="width-48">
         <div class="scroll-workspace-container">
             <div class="layout-control">
-                <button class="sidebar-toggle" id="toggle-left" onclick="toggleLeft()">
+                <button class="sidebar-toggle" onclick="showLeft()">
                     Sidebar
                 </button>
                 <% if @event.ends.to_i < Time.now.to_i %>
@@ -224,6 +224,7 @@
         </div>
     </div>
 
+    <script src="/assets/components.js"></script>
     <script src="/assets/events-show.js"></script>
   
 </main>

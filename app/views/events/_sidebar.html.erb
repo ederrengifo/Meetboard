@@ -1,4 +1,4 @@
-<aside id="sidebar-dark" class="width-22">
+<aside id="sidebar" class="width-22 theme-dark">
     <div class="user-options">
         <span>
             <a href="/">
@@ -13,10 +13,12 @@
         </button>
         <div id="user-dropdown" class="mb-dropdown">
             <button class="option">Change Theme</button>
-            <%= button_to "Sign out", signout_path, class: "option", :method => :get %>
+            <%= link_to "Sign out", signout_path, class: "option" %>
         </div>
         <span class="hide-btn">
-            <%= inline_svg('icon-hide') %>
+            <button id="hide-sidebar-btn" onclick="hideLeft()">
+                <%= inline_svg('icon-hide') %>
+            </button>
         </span>
                 
     </div>

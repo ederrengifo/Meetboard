@@ -1,6 +1,6 @@
 @import "variables";
 
-#sidebar-dark {
+.theme-dark {
     flex-direction: column;
     float: left;
     background-color: $neutral-2;
@@ -16,6 +16,10 @@
 
         span {
             vertical-align: sub;
+
+            a:hover {
+                text-decoration: none;
+            }
         }
 
         .user-menu {
@@ -54,7 +58,27 @@
 
         .hide-btn {
             float: right;
+
+            button {
+                background-color: transparent;
+                border: none;
+                opacity: 0.32;
+                cursor: pointer;
+                transition:
+                    opacity 0.25;
+
+                &:hover {
+                    opacity: 1;
+                }
+
+                &:focus {
+                    outline-color: transparent;
+                    outline-style: none;
+                }
+            }
         }
+
+
     }
 
     .events-toggle {
@@ -77,24 +101,26 @@
             cursor: pointer;
             transition: 
                         opacity 0.25s;
+
+            &:first-child {
+                float: left;
+            }
+                
+            &:last-child {
+                float: right;
+            }
+                
+            &:hover {
+                opacity: 0.8;
+            }
+                
+            &:focus {
+                outline-color: transparent;
+                outline-style: none;
+            }
         }
 
-        button:first-child {
-            float: left;
-        }
-
-        button:last-child {
-            float: right;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        button:focus {
-            outline-color: transparent;
-            outline-style: none;
-        }
+        
 
         .active {
             background-color: $neutral-4;
@@ -106,7 +132,7 @@
     .scroll-bar-container {
         flex: 1 1 auto;
         min-height: 1px;
-        overflow-y: scroll;
+        overflow: auto;
         position: relative;
         padding-bottom: 32px;
 
@@ -172,6 +198,7 @@
                 li {
                     background-color: #272237;
                     opacity: 0.8;
+                    border-radius: 0px 4px 4px 0px;
                 }
             }
 
@@ -187,6 +214,7 @@
                     padding: 8px 20px;
                     opacity: 1;
                     background-color: $purple;  
+                    border-radius: 0px 4px 4px 0px;
         
                     .event-name {
                         opacity: 1;
@@ -228,16 +256,20 @@
                     opacity: 1 !important;
                 }
             }
-    
-            
-    
+        }
+
+        &::-webkit-scrollbar {
+            background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: transparent;
+        }
+    }    
+    .scroll-bar-container:hover {
+        &::-webkit-scrollbar-thumb {
+            background-color: $neutral-4;
+            border: 2px solid $neutral-2;
         }
     }
-
-    
-
-    
-
-    
-
 }

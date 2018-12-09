@@ -9,6 +9,9 @@
 
     <div class="calendar-landing">
         <div>
+            <div>
+                <%= inline_svg("img-clock") %>
+            </div>
             <h3>Your next meeting:</h3>
                 <%= link_to(@calendars.first.id) do %>
                     <%= @calendars.first.summary %> 

@@ -51,21 +51,6 @@ var allTasksBlock = document.getElementById("all-tasks-block")
             allTasksTab.classList.add("active");
         }
 
-var toggleLeftBtn = document.getElementById("toggle-left");
-var leftBlock = document.getElementById("sidebar-dark");
-var centerBlock = document.getElementById("workspace");
-var rightBlock = document.getElementById("todobar");
-
-        function toggleLeft() {
-            toggleLeftBtn.classList.toggle("layout-active");
-            leftBlock.classList.toggle("width-22");
-            leftBlock.classList.toggle("hidden");
-            centerBlock.classList.toggle("width-48");
-            centerBlock.classList.toggle("width-59");
-            rightBlock.classList.toggle("width-30");
-            rightBlock.classList.toggle("width-41");
-        }
-
 var clearBtn = document.getElementById("clear-events");
 var eventTasksCleaned = document.getElementById("event-tasks-cleaned");
 var eventTasksAll = document.getElementById("event-tasks-all");
