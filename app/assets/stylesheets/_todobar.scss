@@ -58,32 +58,83 @@
     
         .cleaner {
             float: right;
+            display: inline;
     
             .clear-tasks {
-                background-color: none;
+                background-color: $green;
+                width: 32px;
+                height: 20px;
+                border-radius: 20px;
                 border: none;
                 color: $neutral-1;
                 font-size: 12px;
                 cursor: pointer;
-                opacity: 0.5;
-                transition: 
-                    opacity 0.25s;
+                transition: 0.25s;
+
+                &::after {
+                    content: "";
+                    z-index: 5;
+                    width: 16px;
+                    height: 16px;
+                    background-color: #FFFFFF;
+                    float: right;
+                    border-radius: 20px;
+                    margin: 0px 2px 0px 2px;
+                    transition: 0.25s;
+                }
             }
+            
             .clear-tasks:hover {
-                opacity: 1;
                 outline-color: transparent;
                 outline-style: none;
             }
             .clear-tasks:focus {
                 outline-color: transparent;
                 outline-style: none;
+                background-color: $neutral-8;
+
+                &::after {
+                    margin: 0px 14px 0px 2px;
+                }
             }
-            button.active {
-                color: $green;
-                opacity: 1;
-                padding: 0;
+
+            .display-tasks {
+                background-color: $neutral-8;
+                width: 32px;
+                height: 20px;
+                border-radius: 20px;
+                border: none;
+                color: $neutral-1;
+                font-size: 12px;
+                cursor: pointer;
+                transition: 0.25s;
+
+                &::after {
+                    content: "";
+                    z-index: 5;
+                    width: 16px;
+                    height: 16px;
+                    background-color: #FFFFFF;
+                    float: left;
+                    border-radius: 20px;
+                    margin: 0px 2px 0px 2px;
+                    transition: 0.25s;
+                }
             }
-    
+
+            .display-tasks:hover {
+                outline-color: transparent;
+                outline-style: none;
+            }
+            .display-tasks:focus {
+                outline-color: transparent;
+                outline-style: none;
+                background-color: $neutral-8;
+
+                &::after {
+                    margin: 0px 2px 0px 14px;
+                }
+            }
         }
     }
 
@@ -114,7 +165,7 @@
         margin-bottom: 24px;
 
         .task-group {
-            margin-bottom: 20px;
+            margin-bottom: 12px;
 
             .task-group-head {
                 background-color: $neutral-9;

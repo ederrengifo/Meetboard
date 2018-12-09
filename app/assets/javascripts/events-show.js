@@ -52,17 +52,28 @@ var allTasksBlock = document.getElementById("all-tasks-block")
         }
 
 var clearBtn = document.getElementById("clear-events");
+var displayBtn = document.getElementById("display-events");
 var eventTasksCleaned = document.getElementById("event-tasks-cleaned");
 var eventTasksAll = document.getElementById("event-tasks-all");
 var alltimeTasksCleaned = document.getElementById("alltime-tasks-cleaned");
 var alltimeTasksAll = document.getElementById("alltime-tasks-all");
 
         function cleanTasks() {
-            eventTasksCleaned.classList.toggle("hidden");
-            eventTasksAll.classList.toggle("hidden");
-            alltimeTasksCleaned.classList.toggle("hidden");
-            alltimeTasksAll.classList.toggle("hidden");
-            clearBtn.classList.toggle("active");
+            eventTasksCleaned.classList.remove("hidden");
+            eventTasksAll.classList.add("hidden");
+            alltimeTasksCleaned.classList.remove("hidden");
+            alltimeTasksAll.classList.add("hidden");
+            clearBtn.classList.add("hidden");
+            displayBtn.classList.remove("hidden");
+        }
+
+        function displayTasks() {
+            eventTasksCleaned.classList.add("hidden");
+            eventTasksAll.classList.remove("hidden");
+            alltimeTasksCleaned.classList.add("hidden");
+            alltimeTasksAll.classList.remove("hidden");
+            clearBtn.classList.remove("hidden");
+            displayBtn.classList.add("hidden");
         }
 
 var ids=["general", "personal", "checkin"];

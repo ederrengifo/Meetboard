@@ -1,0 +1,71 @@
+<div id ="alltime-tasks-cleaned" class="hidden">
+                    <% @task_grouping.each do |event_id, tasks| %>
+                        <div class="task-group">
+                            <div class="task-group-head">
+                                <a href="<%= event_id %>" class="event">
+                                    <%= Event.find(event_id).title %>
+                                </a>
+                            </div>
+                        
+                        <% for task in tasks %>
+                            <div class="task">
+                                <% if task.completed == false %>
+                                    <label class="container-update">
+                                        <%= task.title %>
+                                        <%= link_to [task.event, task], method: :delete, class: "delete-task" do %>
+                                            <%= inline_svg('icon-trash') %>
+                                        <% end %>
+                                        <%= form_with(model: [task.event, task], local: true) do |f| %>
+                                            <% if task.completed == false %>
+                                                <%= f.check_box :completed, :checked => true, :style => 'display: none' %>
+                                                <%= f.submit "", class: "mark" %>
+                                            <% else %>
+                                                <%= f.check_box :completed, :checked => false, :style => 'display: none' %>
+                                                <%= f.submit "", class: "unmark" %>
+                                            <% end %>
+                                            <div class="checkmark <%= 'hidden' if task.completed == false %>">
+                                                <%= inline_svg('icon-mark') %>
+                                            </div>
+                                        <% end %>
+                                    </label>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        </div>
+                    <% end %>
+                </div>
+
+                <div id ="alltime-tasks-all" class="">
+                    <% @task_grouping.each do |event_id, tasks| %>
+                        <div class="task-group">
+                            <div class="task-group-head">
+                                <a href="<%= event_id %>" class="event">
+                                    <%= Event.find(event_id).title %>
+                                </a>
+                            </div>
+                        
+                        <% for task in tasks %>
+                            <div class="task">
+                                <label class="container-update">
+                                    <%= task.title %>
+                                    <%= link_to [task.event, task], method: :delete, class: "delete-task" do %>
+                                        <%= inline_svg('icon-trash') %>
+                                    <% end %>
+                                    <%= form_with(model: [task.event, task], local: true) do |f| %>
+                                        <% if task.completed == false %>
+                                            <%= f.check_box :completed, :checked => true, :style => 'display: none' %>
+                                            <%= f.submit "", class: "mark" %>
+                                        <% else %>
+                                            <%= f.check_box :completed, :checked => false, :style => 'display: none' %>
+                                            <%= f.submit "", class: "unmark" %>
+                                        <% end %>
+                                    <% end %>
+                                    <div class="checkmark <%= 'hidden' if task.completed == false %>">
+                                        <%= inline_svg('icon-mark') %>
+                                    </div>
+                                </label>
+                            </div>
+                        <% end %>
+                        </div>
+                    <% end %>
+                </div>
