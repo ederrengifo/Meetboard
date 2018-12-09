@@ -22,18 +22,21 @@
 
     </div>
     <div id="todobar" class="width-30">
-        <div class="scroll-todobar-container">
         
+        <div class="todohead">
             <h4>You have <%= @tasks.where(completed: false).count %> pending items</h4>
+        </div>
 
+        <div class="scroll-todobar-container">
             <div class="task-container" id="all-tasks-block">
                 <% @task_grouping.each do |event_id, tasks| %>
                     <div class="task-group">
-                        <a href="<%= event_id %>" class="event">
-                            <%= Event.find(event_id).title %>
-                        </a>
-                    </div>
-
+                        <div class="task-group-head">
+                            <a href="<%= event_id %>" class="event">
+                                <%= Event.find(event_id).title %>
+                            </a>
+                        </div>
+                    
                     <% for task in tasks %>
                         <div class="task">
                             <label class="container-update">
@@ -47,12 +50,14 @@
                                         <%= f.submit "", class: "unmark" %>
                                     <% end %>
                                 <% end %>
+                                <div class="checkmark <%= 'hidden' if task.completed == false %>">
+                                    <%= inline_svg('icon-mark') %>
+                                </div>
                             </label>
                         </div>
                     <% end %>
-
+                    </div>
                 <% end %>
-    
             </div>
         </div>
     </div>
