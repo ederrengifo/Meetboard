@@ -1,14 +1,15 @@
 @import "variables";
 
-.theme-dark {
+.theme-snow {
     flex-direction: column;
     float: left;
-    background-color: $neutral-2;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: $neutral-1;
     font-size: 14px;
     line-height: 20px;
     height: 100vh;
     scroll-behavior: smooth;
+    border-right: 1px solid $neutral-8;
 
     .user-options {
         padding: 20px;
@@ -24,13 +25,13 @@
 
         .user-menu {
             border: none;
-            color: #FFF;
+            color: $neutral-1;
             font-size: 15px;
             font-weight: 500;
             padding: 0px;
             line-height: 20px;
             opacity: 0.75;
-            background-color: $neutral-2;
+            background-color: transparent;
             cursor: pointer;
             margin-left: 4px;
             transition: 
@@ -39,7 +40,7 @@
             span {
                 margin-left: 4px;
                 vertical-align: baseline;
-                opacity: 0.5;
+                opacity: 1;
             }
         }
 
@@ -62,7 +63,7 @@
             button {
                 background-color: transparent;
                 border: none;
-                opacity: 0.32;
+                opacity: 0.64;
                 cursor: pointer;
                 transition:
                     opacity 0.25;
@@ -84,20 +85,21 @@
     .events-toggle {
         width: 100%;
         padding: 0px 16px 16px 16px;
-        border-bottom: 1px solid $neutral-3;
+        border-bottom: 1px solid $neutral-8;
 
         button {
             width: 49%;
             margin: 0;
-            background-color: $neutral-2;
-            color: #FFF;
+            background-color: transparent;
+            color: $neutral-1;
             font-size: 14px;
             line-height: 20px;
             border-radius: 24px;
             padding-top: 2px;
             padding-bottom: 2px;
-            opacity: 0.32;
+            opacity: 0.64;
             font-weight: 500;
+            border: 1px solid $neutral-8;
             cursor: pointer;
             transition: 
                         opacity 0.25s;
@@ -111,7 +113,7 @@
             }
                 
             &:hover {
-                opacity: 0.8;
+                opacity: 1;
             }
                 
             &:focus {
@@ -123,9 +125,9 @@
         
 
         .active {
-            background-color: $neutral-4;
-            border: 1px $neutral-4 solid;
-            opacity: 0.8;
+            background-color: $neutral-8;
+            border: 1px $neutral-8 solid;
+            opacity: 0.9;
         }
     }
 
@@ -150,10 +152,10 @@
             list-style: none;
             padding: 0;
             padding-bottom: 16px;
-            border-bottom: 1px solid $neutral-3;
+            border-bottom: 1px solid $neutral-8;
 
             a.event-link {
-                color: #FFFFFF;
+                color: $neutral-1;
                 text-decoration: none;
                 font-size: 14px;
                 line-height: 24px;
@@ -163,7 +165,7 @@
 
                 li {
                     padding: 8px 20px;
-                    opacity: 0.64;
+                    opacity: 0.72;
                     transition:
                         background-color 0.16s,
                         opacity 0.25s;
@@ -175,7 +177,7 @@
                     }
     
                     .timelapse .date {
-                        opacity: 0.5;
+                        opacity: 0.64;
                         transition: 
                             opacity 0.25s;
                     }
@@ -186,6 +188,7 @@
                         padding: 0px 8px 1px 8px;
                         margin-left: 8px;
                         border-radius: 4px;
+                        color: #FFFFFF;
                     }
                     
                 }
@@ -195,14 +198,14 @@
             a.event-link:hover {
 
                 li {
-                    background-color: #272237;
-                    opacity: 0.8;
+                    background-color: $neutral-9;
+                    opacity: 1;
                     border-radius: 0px 4px 4px 0px;
                 }
             }
 
             a.active {
-                color: #FFFFFF;
+                color: $neutral-1;
                 text-decoration: none;
                 font-size: 14px;
                 line-height: 24px;
@@ -212,7 +215,7 @@
                 li {
                     padding: 8px 20px;
                     opacity: 1;
-                    background-color: $purple;  
+                    background-color: $purple-2;  
                     border-radius: 0px 4px 4px 0px;
         
                     .event-name {
@@ -222,15 +225,15 @@
                     }
     
                     .timelapse .date {
-                        opacity: 0.8;
+                        opacity: 0.64;
                         transition: 
                             opacity 0.25s;
                     }
 
                     .timelapse .now {
                         font-weight: 500;
-                        background-color: #FFFFFF;
-                        color: $purple;
+                        background-color: $purple;
+                        color: #FFFFFF;
                         padding: 0px 8px 1px 8px;
                         margin-left: 8px;
                         border-radius: 4px;
@@ -267,8 +270,8 @@
     }    
     .scroll-bar-container:hover {
         &::-webkit-scrollbar-thumb {
-            background-color: $neutral-4;
-            border: 2px solid $neutral-2;
+            background-color: $neutral-8;
+            border: 2px solid #FFFFFF;
         }
     }
 }
