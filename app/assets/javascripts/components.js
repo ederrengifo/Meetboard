@@ -12,6 +12,7 @@ window.onclick = function(event) {
 }
 
 var toggleLeftBtn = document.getElementById("toggle-left");
+var showLeftBtn = document.getElementById("show-sidebar");
 var leftBlock = document.getElementById("sidebar");
 var centerBlock = document.getElementById("workspace");
 var rightBlock = document.getElementById("todobar");
@@ -23,6 +24,7 @@ function hideLeft() {
     centerBlock.classList.add("width-59");
     rightBlock.classList.remove("width-30");
     rightBlock.classList.add("width-41");
+    showLeftBtn.classList.remove("hidden");
 }
 
 function showLeft() {
@@ -32,4 +34,5 @@ function showLeft() {
     centerBlock.classList.remove("width-59");
     rightBlock.classList.add("width-30");
     rightBlock.classList.remove("width-41");
+    showLeftBtn.classList.add("hidden");
 }

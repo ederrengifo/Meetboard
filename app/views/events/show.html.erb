@@ -3,15 +3,35 @@
     <%= render "sidebar" %>
 
     <div id="workspace" class="width-48">
-        <div class="scroll-workspace-container">
-            <div class="layout-control">
-                <button class="sidebar-toggle" onclick="showLeft()">
-                    Sidebar
+        <div class="workspace-head">
+            <div class="left">
+                <button id="show-sidebar" class="show-sidebar hidden" onclick="showLeft()">
+                    <%= inline_svg('icon-sidebar') %>
                 </button>
+                <div class="hour">
+                    <span> 
+                        <%= inline_svg('icon-time') %>
+                    </span>
+                    <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %> (<%= @event_difference %>)
+                </div>
+            </div>
+            <div class="right">
+                <% if @event.hangout_link != nil %>
+                    <a class="option" href="<%= @event.hangout_link %>" target="_blank">
+                        <span><%= inline_svg('icon-link') %></span>
+                    </a>
+                <% end %>
+                <a class="option">
+                    <span><%= inline_svg('icon-share') %></span>
+                </a>
                 <% if @event.ends.to_i < Time.now.to_i %>
-                    <%= link_to 'Delete', @event, method: :delete, data: {confirm: "Are you sure?"} %>
+                    <%= link_to @event, method: :delete, data: {confirm: "Are you sure?"}, class: "option" do %>
+                        <%= inline_svg('icon-trash') %>
+                    <% end %>
                 <% end %>
             </div>
+        </div>
+        <div class="scroll-workspace-container">
             <h1>
                 <%= @event.title %>
             </h1>
@@ -30,12 +50,6 @@
                 <button class="details" onclick="showType()" id="event-type-btn">
                     Help
                 </button>
-
-                <% if @event.hangout_link != nil %>
-                    <a href="<%= @event.hangout_link %>" target="_blank">
-                        Meet link
-                    </a>
-                <% end %>
 
                 <%= link_to "Public", event_report_path(@event.id) %>
                 <a href="<%= event_download_path(@event.id) %>.txt" download="<%= @event.title %> Report">Download</a>
