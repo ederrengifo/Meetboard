@@ -1,5 +1,11 @@
 @import "variables";
 
+.mb-dropdown-btn {
+    display: inline-block;
+    span {
+        pointer-events: none;
+    }
+}
 
 .mb-dropdown {
     background-color: #FFFFFF;

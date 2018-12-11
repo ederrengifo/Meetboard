@@ -1,14 +1,22 @@
 var userDropdown = document.getElementById("user-dropdown");
+var shareDropdown = document.getElementById("export-dropdown");
+
 function showDropdown() {
     userDropdown.classList.toggle("show");
 }
 
+function showShare() {
+    shareDropdown.classList.toggle("show");
+}
+
 window.onclick = function(event) {
     if (!event.target.matches('.mb-dropdown-btn')) {
-        if (userDropdown.classList.contains("show")) {
+        if (shareDropdown.classList.contains("show")) {
+            shareDropdown.classList.remove("show");
+        } else if (userDropdown.classList.contains("show")) {
             userDropdown.classList.remove("show");
         }
-    }
+    } 
 }
 
 var toggleLeftBtn = document.getElementById("toggle-left");

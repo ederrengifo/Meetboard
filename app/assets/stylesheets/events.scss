@@ -71,23 +71,37 @@ main {
                 float: right;
                 width: 30%;
                 text-align: right;
+                position: relative;
 
-                a.option {
+                .share-option {
                     display: inline;
                     margin-left: 24px;
                     cursor: pointer;
                     vertical-align: baseline;
                     opacity: 0.64;
                     transition: 0.25;
+                    background-color: transparent;
+                    border: none;
 
                     span {
                         vertical-align: baseline;
                     }
                 }
 
-                a.option:hover {
+                .share-option:focus {
+                    outline-color: transparent;
+                    outline-style: none;
+                }
+
+                .share-option:hover {
                     text-decoration: none;
                     opacity: 1;
+                }
+
+                .share-dropdown {
+                    margin-top: 16px !important;
+                    min-width: 140px !important;
+                    right: -32px;
                 }
             }
         }

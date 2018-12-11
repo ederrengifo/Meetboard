@@ -17,15 +17,21 @@
             </div>
             <div class="right">
                 <% if @event.hangout_link != nil %>
-                    <a class="option" href="<%= @event.hangout_link %>" target="_blank">
+                    <a class="share-option" href="<%= @event.hangout_link %>" target="_blank">
                         <span><%= inline_svg('icon-link') %></span>
                     </a>
                 <% end %>
-                <a class="option">
-                    <span><%= inline_svg('icon-share') %></span>
-                </a>
+                <button onclick="showShare()" class="share-option mb-dropdown-btn">
+                    <span>
+                        <%= inline_svg('icon-share') %>
+                    </span>
+                </button>
+                <div id="export-dropdown" class="mb-dropdown share-dropdown">
+                    <%= link_to "Public Link", event_report_path(@event.id), class: "option" %>
+                    <a href="<%= event_download_path(@event.id) %>.txt" download="<%= @event.title %> Report" class="option">Download .txt</a>
+                </div>
                 <% if @event.ends.to_i < Time.now.to_i %>
-                    <%= link_to @event, method: :delete, data: {confirm: "Are you sure?"}, class: "option" do %>
+                    <%= link_to @event, method: :delete, data: {confirm: "Are you sure?"}, class: "share-option" do %>
                         <%= inline_svg('icon-trash') %>
                     <% end %>
                 <% end %>
@@ -51,8 +57,7 @@
                     Help
                 </button>
 
-                <%= link_to "Public", event_report_path(@event.id) %>
-                <a href="<%= event_download_path(@event.id) %>.txt" download="<%= @event.title %> Report">Download</a>
+                
 
                 <div id="event-details" class="hidden">
                     <div class="details-wrapper">
