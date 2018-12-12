@@ -32,7 +32,7 @@
             <div class="right">
                 <span id="note-confirmation" class="note-confirmation hidden">...saving</span>
                 <% if @event.hangout_link != nil %>
-                    <a class="share-option" href="<%= @event.hangout_link %>?hs=42" target="_self">
+                    <a class="share-option" href="<%= @event.hangout_link %>?hs=42" target="_blank">
                         <span><%= inline_svg('icon-link') %></span>
                     </a>
                 <% end %>
@@ -62,16 +62,14 @@
                     Details
                 </button>
                 
-                <% if @event.attendees.count != 0 %>
-                    <button class="details" onclick="showAttendees()" id="event-attendees-btn">
-                        Attendees (<%= @event.attendees.count %>)
-                    </button>
-                <% end %>
+                <button class="details" onclick="showAttendees()" id="event-attendees-btn">
+                    Attendees (<%= @event.attendees.count %>)
+                </button>
+                
 
                 <button class="details" onclick="showType()" id="event-type-btn">
                     Help
                 </button>
-
                 
 
                 <div id="event-details" class="hidden">
@@ -112,6 +110,7 @@
 
                 <div id="event-attendees" class="hidden">
                     <div class="details-wrapper">
+                    <% if @event.attendees.count != 0 %>
                         <% @attendee_grouping.each do |response, attendees| %>
                             <% if response == "accepted" %>
                                 <div class="at-accepted">
@@ -143,6 +142,11 @@
                             <% end %>
                         </div>
                         <% end %>
+        
+                    <% else %>
+                        <p>No attendees for this meeting</p>
+                    <% end %>
+                        
                     </div>
                 </div>
 

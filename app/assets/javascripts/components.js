@@ -1,5 +1,6 @@
 var userDropdown = document.getElementById("user-dropdown");
 var shareDropdown = document.getElementById("export-dropdown");
+var contentDropdown = document.getElementsByClassName("mb-dropdown");
 
 function showDropdown() {
     userDropdown.classList.toggle("show");
@@ -11,10 +12,10 @@ function showShare() {
 
 window.onclick = function(event) {
     if (!event.target.matches('.mb-dropdown-btn')) {
-        if (shareDropdown.classList.contains("show")) {
-            shareDropdown.classList.remove("show");
-        } else if (userDropdown.classList.contains("show")) {
-            userDropdown.classList.remove("show");
+        for (e = 0; e < contentDropdown.length; e++) {
+            if (contentDropdown[e].classList.contains("show")) {
+                contentDropdown[e].classList.remove("show");
+            } 
         }
     } 
 }
