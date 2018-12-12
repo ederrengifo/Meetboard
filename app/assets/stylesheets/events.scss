@@ -64,6 +64,30 @@ main {
                     margin-right: 4px;
                     vertical-align: sub;
                 }
+
+                .past-event-label {
+                    background-color: $red-soft; 
+                    vertical-align: baseline;
+                    opacity: 1;
+                    color: $red;
+                    font-weight: 500;
+                    border-radius: 20px;
+                    padding: 2px 8px;
+                    margin-left: 8px;
+                    font-size: 12px;
+                }
+
+                .time-event-label {
+                    background-color: $purple-2; 
+                    vertical-align: baseline;
+                    opacity: 1;
+                    color: $purple;
+                    font-weight: 500;
+                    border-radius: 20px;
+                    padding: 2px 8px;
+                    margin-left: 8px;
+                    font-size: 12px;
+                }
             }
 
             .right {
@@ -329,8 +353,8 @@ main {
 
             .note-field {
                 padding-top: 8px;
-                margin-top: 16px;
-                margin-bottom: 16px;
+                margin-top: 24px;
+                margin-bottom: 24px;
                 color: neutral-5;
 
                 p {

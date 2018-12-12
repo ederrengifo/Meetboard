@@ -12,7 +12,18 @@
                     <span> 
                         <%= inline_svg('icon-time') %>
                     </span>
-                    <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %> (<%= @event_difference %>)
+                    
+                    <% if @event.ends.to_i < Time.now.to_i %>
+                        <%= @event.starts&.strftime("%B %d") %> - <%= @event.starts&.strftime("%I:%M%p") %>
+                        <span class="past-event-label">
+                            Past event
+                        </span>
+                    <% else %>
+                        <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %> 
+                        <span class="time-event-label">
+                            <%= @event_difference %>
+                        </span>
+                    <% end %>
                 </div>
             </div>
             <div class="right">
