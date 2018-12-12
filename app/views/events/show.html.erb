@@ -12,24 +12,27 @@
                     <span> 
                         <%= inline_svg('icon-time') %>
                     </span>
-                    
-                    <% if @event.ends.to_i < Time.now.to_i %>
-                        <%= @event.starts&.strftime("%B %d") %> - <%= @event.starts&.strftime("%I:%M%p") %>
-                        <span class="past-event-label">
-                            Past event
-                        </span>
+                    <% if @event.starts != nil %>
+                        <% if @event.ends.to_i < Time.now.to_i %>
+                            <%= @event.starts&.strftime("%B %d") %> - <%= @event.starts&.strftime("%I:%M%p") %>
+                            <span class="past-event-label">
+                                Past event
+                            </span>
+                        <% else %>
+                            <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %> 
+                            <span class="time-event-label">
+                                <%= @event_difference %>
+                            </span>
+                        <% end %>
                     <% else %>
-                        <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %> 
-                        <span class="time-event-label">
-                            <%= @event_difference %>
-                        </span>
+                        All day
                     <% end %>
                 </div>
             </div>
             <div class="right">
                 <span id="note-confirmation" class="note-confirmation hidden">...saving</span>
                 <% if @event.hangout_link != nil %>
-                    <a class="share-option" href="<%= @event.hangout_link %>" target="_blank">
+                    <a class="share-option" href="<%= @event.hangout_link %>?hs=42" target="_self">
                         <span><%= inline_svg('icon-link') %></span>
                     </a>
                 <% end %>
@@ -78,13 +81,15 @@
                                 <%= @event.description.html_safe %>
                             </p>
                         <% end %>
-                        <div>
-                            <span><%= inline_svg('icon-calendar') %></span>
-                            <h4>Date</h4>
-                        </div>
-                        <p>
-                            <%= @event.starts.strftime("%A, %B %d") %>
-                        </p>
+                        <% if @event.starts != nil %>
+                            <div>
+                                <span><%= inline_svg('icon-calendar') %></span>
+                                <h4>Date</h4>
+                            </div>
+                            <p>
+                                <%= @event.starts.strftime("%A, %B %d") %> 
+                            </p>
+                        <% end %>
                         <div>
                             <span><%= inline_svg('icon-person') %></span>
                             <h4>Created by</h4>

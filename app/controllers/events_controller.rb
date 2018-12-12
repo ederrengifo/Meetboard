@@ -25,7 +25,11 @@ class EventsController < ApplicationController
   # Set events directly from Google Calendar API
   def from_google
     @calendars = get_calendar(current_user).to_a
-    @calendar_days = @calendars.group_by {|e| e.start.date_time.strftime("%Y-%m-%d").to_time}
+    @calendar_days = @calendars.group_by {|e| 
+      if e.start.date_time != nil 
+        e.start.date_time.strftime("%Y-%m-%d").to_time
+      end
+    }
     @today = Time.now.strftime("%Y-%m-%d").to_time
     @tomorrow = Time.now.tomorrow.strftime("%Y-%m-%d").to_time
   end
@@ -139,7 +143,7 @@ class EventsController < ApplicationController
   end
   # Calculate meeting time lapse
   def calculate_time
-    if @event.present?
+    if @event.present? && @event.ends != nil
       event_time = @event.ends - @event.starts
       
       if event_time < 3600

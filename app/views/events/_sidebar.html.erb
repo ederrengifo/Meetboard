@@ -52,7 +52,11 @@
                     <% if day == @tomorrow %>
                         Tomorrow
                     <% else %>
-                        <%= day.strftime("%A %d") %> 
+                        <% if day != nil %>
+                            <%= day.strftime("%A %d") %> 
+                        <% else %>
+                            No defined
+                        <% end %>
                     <% end %>
                 <% end %>
             </h2>
@@ -70,14 +74,17 @@
                             <div class="event-name">
                                 <%= calendar.summary %>
                             </div>
-                            <div class="timelapse">
-                                <span class="date">
-                                    <%= calendar.start.date_time&.strftime("%I:%M%p")%> to <%=calendar.end.date_time&.strftime("%I:%M%p") %>
-                                </span>
-                                <% if Time.now.to_i.between?(calendar.start.date_time.to_i, calendar.end.date_time.to_i) %>
-                                    <span class="now">Now</span>
-                                <% end %>        
-                            </div>
+                            <% if calendar.start.date_time != nil %>
+                                <div class="timelapse">
+                                
+                                    <span class="date">
+                                        <%= calendar.start.date_time&.strftime("%I:%M%p")%> to <%=calendar.end.date_time&.strftime("%I:%M%p") %>
+                                    </span>
+                                    <% if Time.now.to_i.between?(calendar.start.date_time.to_i, calendar.end.date_time.to_i) %>
+                                        <span class="now">Now</span>
+                                    <% end %>   
+                                </div>
+                            <% end %>
                         
                         </li>
                     </a>
