@@ -48,3 +48,70 @@
 .show {
     display: block;
 }
+
+.custom-select {
+    position: relative;
+    width: 280px;
+    margin: 4px 0px;
+}
+
+.custom-select select {
+    display: none;
+}
+
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 20px;
+    right: 12px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-radius: 2px;
+    border-color: $neutral-8 transparent transparent transparent;
+}
+.select-selected.select-arrow-active:after {
+    border-color: transparent transparent $neutral-8 transparent;
+    top: 14px;
+}
+
+.select-items div {
+    color: $neutral-1;
+    padding: 8px 16px !important;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #FFFFFF;
+}
+
+.select-selected {
+    color: $neutral-1;
+    padding: 8px 16px !important;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.05);
+    border-radius: 4px;
+}
+.select-items {
+    position: absolute;
+    background-color: #FFFFFF;;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    border-radius: 4px;
+    margin-top: 4px;
+    padding: 4px 0px !important;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+}
+.select-hide {
+    display: none;
+}
+.select-items div:hover, .same-as-selected {
+    background-color: $purple-2;
+}

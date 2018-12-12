@@ -259,6 +259,18 @@ main {
                         opacity: 0.88;
                         margin: 4px 0px 12px 0px;
                     }
+
+                    .help-content {
+                        margin: 20px 0px 8px 0px;
+                        padding: 12px 8px 0px 8px;
+                        border-top: 1px solid $neutral-8;
+
+                        .tip {
+                            font-size: 13px !important;
+                            opacity: 0.5 !important;
+                            margin-top: 0px;
+                        }
+                    }
         
                 }
         
@@ -355,12 +367,12 @@ main {
                 padding-top: 8px;
                 margin-top: 24px;
                 margin-bottom: 24px;
-                color: neutral-5;
+                color: neutral-3;
 
                 p {
                     font-size: 16px;
                     line-height: 24px;
-                    color: $neutral-5;
+                    color: $neutral-3;
                     margin: 0px 0px 12px 0px;
                     opacity: 1;
                     padding: 0px;
@@ -369,7 +381,7 @@ main {
                 h2 {
                     font-size: 22px;
                     line-height: 28px;
-                    color: $neutral-4;
+                    color: $neutral-2;
                     font-weight: 500;
                     margin: 0px 0px 4px 0px;
                 }
@@ -377,7 +389,7 @@ main {
                 h3 {
                     font-size: 20px;
                     line-height: 26px;
-                    color: $neutral-4;
+                    color: $neutral-2;
                     font-weight: 500;
                     margin: 0px 0px 4px 0px;
                 }

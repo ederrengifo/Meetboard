@@ -4,6 +4,7 @@ var eventAttendees = document.getElementById("event-attendees");
 var buttonAttendees = document.getElementById("event-attendees-btn");
 var eventType = document.getElementById("event-type");
 var buttonType = document.getElementById("event-type-btn");
+var typeDropdownDiv = document.getElementsByClassName("select-selected");
 
         function showDetails() {
             eventDetails.classList.toggle("hidden");
@@ -30,6 +31,9 @@ var buttonType = document.getElementById("event-type-btn");
             buttonDetails.classList.remove("active");
             eventAttendees.classList.add("hidden");
             buttonAttendees.classList.remove("active");
+            if (typeDropdownDiv.length == 0) {
+                generateSelect();
+            }
         }
 
 var eventTaskTab = document.getElementById("event-task-tab");
@@ -95,6 +99,7 @@ var typeDropdown = document.getElementById("help-types");
 var generalType = document.getElementById("general");
 var personalType = document.getElementById("personal");
 var checkinType = document.getElementById("checkin");
+
 
         function changeType() {
             if (typeDropdown.value == "general") {

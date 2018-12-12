@@ -144,14 +144,15 @@
                 <div id="event-type" class="hidden">
                     <div class="details-wrapper">
                         <h4>Select Type</h4>
-                        <select id="help-types" onchange="changeType()">
-                            <option value="general" <%= @event.category == "general" ? 'selected' : '' %> >General</option>
-                            <option value="personal" <%= @event.category == "1:1" ? 'selected' : '' %> >Personal 1:1</option>
-                            <option value="checkin" <%= @event.category == "check-in" ? 'selected' : '' %> >Team Check-in</option>
-                        </select>
-                        <div id="general" class="<%= @event.category == "general" ? '' : 'hidden' %>">This is a general meeting!</div>
-                        <div id="personal" class="<%= @event.category == "1:1" ? '' : 'hidden' %>">This is a personal meeting!</div>
-                        <div id="checkin" class="<%= @event.category == "check-in" ? '' : 'hidden' %>"> This is a meeting for check-in!</div>
+                        <div class="custom-select" id="custom-select-id">
+                            <select id="help-types">
+                                <option value="placeholder">Select an option</option>
+                                <option value="general" <%= @event.category == "general" ? 'selected' : '' %> >General</option>
+                                <option value="personal" <%= @event.category == "1:1" ? 'selected' : '' %> >Personal 1:1</option>
+                                <option value="checkin" <%= @event.category == "check-in" ? 'selected' : '' %> >Team Check-in</option>
+                            </select>
+                        </div>
+                        <%= render 'help' %>
                     </div>
                 </div>
 
@@ -207,8 +208,8 @@
         </div>
     </div>
 
-    <script src="/assets/components.js"></script>
     <script src="/assets/events-show.js"></script>
+    <script src="/assets/components.js"></script>
   
 </main>
 

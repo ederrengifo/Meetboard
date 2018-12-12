@@ -1,0 +1,27 @@
+<div id="general" class="help-content <%= @event.category == "general" ? '' : 'hidden' %>">
+                            <p>For general purposes, try to answer the following questions:</p>
+                            <h4>What is the desired outcome?</h4>
+                            <p class="tip">(E.g. I want to buy more time for my team)</p>
+                            <h4>Are the roles and expectations clear?</h4>
+                            <p class="tip">(E.g. As a moderator, I need to prepare a presentation)</p>
+                            <h4>Are participants aware of the meeting agenda?</h4>
+                            <p class="tip">(E.g. In this meeting, everybody knows that we are addressing 3 topics)</p>
+                        </div>
+                        <div id="personal" class="help-content <%= @event.category == "1:1" ? '' : 'hidden' %>">
+                            <p>In order to have effective 1:1 meetings, try to answer the following questions:</p>
+                            <h4>Do I have a list of topics I want to talk about?</h4>
+                            <p class="tip">(E.g. In this meeting I want to have an asnwer for this 3 topics)</p>
+                            <h4>What are the desired agreements I want to achieve?</h4>
+                            <p class="tip">(E.g. In the best scenario I want C, worst case scenario I want B)</p>
+                            <h4>Do I have a customized agenda based on the other person's preferences?</h4>
+                            <p class="tip">(E.g. The other person likes to chit chat, then that's the first point in my agenda)</p>
+                        </div>
+                        <div id="checkin" class="help-content <%= @event.category == "check-in" ? '' : 'hidden' %>">
+                            <p>In order to have effective check-in meeting, try to answer the following questions:</p>
+                            <h4>Is the meeting dynamic clear enough for everybody?</h4>
+                            <p class="tip">(E.g. According our dynamic, we have 10 minutes to solve doubts)</p>
+                            <h4>Do we know how to make a decision?</h4>
+                            <p class="tip">(E.g. In case of any conflict, the decision maker is this person)</p>
+                            <h4>Does everybody is aware of their action items once the meeting finishes?</h4>
+                            <p class="tip">(E.g. As a recap, this person is reponsible for these tasks)</p>
+                        </div>
