@@ -16,6 +16,7 @@
                 </div>
             </div>
             <div class="right">
+                <span id="note-confirmation" class="note-confirmation hidden">...saving</span>
                 <% if @event.hangout_link != nil %>
                     <a class="share-option" href="<%= @event.hangout_link %>" target="_blank">
                         <span><%= inline_svg('icon-link') %></span>

@@ -103,6 +103,19 @@ main {
                     min-width: 140px !important;
                     right: -32px;
                 }
+
+                .note-confirmation {
+                    font-size: 13px;
+                    font-weight: 400;
+                    color: $neutral-7;
+                    text-align: right;
+                    padding-top: 1px;
+                    vertical-align: text-top;
+                }
+        
+                .saved {
+                    color: $neutral-7 !important;
+                }
             }
         }
 
@@ -113,173 +126,210 @@ main {
             position: relative;
             padding: 16px 7% 32px 7%;
 
-        }
-
-        h1 {
-            color: $neutral-1;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 24px;
-            color: $neutral-3;
-            padding-bottom: 16px;
-        }
-
-        li {
-            margin-top: 16px;
-        }        
-    }
+            h1 {
+                color: $neutral-1;
+                font-size: 28px;
+                font-weight: 600;
+                margin-bottom: 16px;
+                line-height: 36px;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            }
     
-    .note-field {
-        padding-top: 8px;
-        margin-top: 24px;
-        margin-bottom: 24px;
-
-        textarea {
-            padding: 0px;
-            font-size: 16px;
-            line-height: 24px;
-            color: $neutral-3;
-            border: none;
-            width: 100%;
-            resize: none;
-        }
-
-        textarea:focus {
-            border: none;
-            outline-color: transparent;
-            outline-style: none;
-        }
-
-        textarea::placeholder {
-            color: $neutral-4;
-        }
-
-        div {
-            padding: 0px;
-            font-size: 16px;
-            line-height: 24px;
-            color: $neutral-3;
-            border: none;
-            width: 100%;
-            resize: none;
-        }
-
-        div:focus {
-            border: none;
-            outline-color: transparent;
-            outline-style: none;
-        }
-    }
-
-    .actions {
-        input {
-            font-size: 14px;
-            color: $purple;
-            text-decoration: none;
-            border: 1px solid $purple;
-            padding: 6px 16px;
-            border-radius: 4px;
-            background-color: #FFFFFF;
-            float: left;
-            cursor: pointer;
-            transition: 
-                background-color 0.25s;
-        }
-        input:hover, :focus {
-            background-color: $purple;
-            color: #FFFFFF;
-            outline-color: transparent;
-            outline-style: none;
-        }
-
-        .note-confirmation {
-            font-size: 14px;
-            font-weight: 300;
-            color: $neutral-4;
-            margin-top: 8px;
-            float: left;
-        }
-
-        .saved {
-            color: $green !important;
-        }
-    }
-
-    .event-tabs {
-        .details {
-            background-color: $neutral-9;
-            font-size: 12px;
-            font-weight: 500;
-            padding: 4px 8px;
-            border-radius: 12px;
-            color: $neutral-3;
-            border: none;
-            cursor: pointer;
-            margin-right: 4px;
-        }
-        .details:hover {
-            color: $purple;
-        }
-        .details:focus {
-            outline-color: transparent;
-            outline-style: none;
-        }
-        .active {
-            background-color: $purple;
-            color: #FFFFFF; 
-        }
-        .active:hover {
-            color: #FFFFFF;
-        }
-        .details-wrapper {
-            background-color: $neutral-9;
-            border-radius: 8px;
-            padding: 16px 16px 8px 16px;
-            margin-top: 16px;
-
-            h4 {
-                font-size: 14px;
-                line-height: 20px;
-                font-weight: 500;
+            p {
+                font-size: 16px;
+                line-height: 24px;
+                color: $neutral-3;
+                padding-bottom: 16px;
+            }
+    
+            li {
+                margin-top: 16px;
+            } 
+            
+            .event-tabs {
+                .details {
+                    background-color: transparent;
+                    font-size: 12px;
+                    line-height: 20px;
+                    font-weight: 500;
+                    padding: 2px 12px;
+                    border-radius: 16px;
+                    color: $neutral-1;
+                    border: 1px solid $neutral-8;
+                    cursor: pointer;
+                    margin-right: 6px;
+                    transition: 0.20s;
+                }
+                .details:hover {
+                    color: $purple;
+                }
+                .details:focus {
+                    outline-color: transparent;
+                    outline-style: none;
+                }
+                .active {
+                    background-color: $purple;
+                    color: #FFFFFF; 
+                    border: 1px solid $purple;
+                }
+                .active:hover {
+                    color: #FFFFFF;
+                }
+                .details-wrapper {
+                    background-color: $neutral-9;
+                    border-radius: 8px;
+                    padding: 16px 16px 8px 16px;
+                    margin-top: 16px;
+        
+                    h4 {
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 500;
+                    }
+        
+                    p {
+                        font-size: 14px !important;
+                        line-height: 20px !important;
+                        font-weight: 400;
+                        color: $neutral-3;
+        
+                        span {
+                            color: $neutral-3;
+                        }
+                    }
+        
+                    ul {
+                        margin: 4px 0px 16px 8px;
+                    }
+        
+                    li {
+                        margin: 0px 0px 0px 16px !important;
+                        font-size: 14px !important;
+                        line-height: 20px !important;
+                        font-weight: 400;
+                        color: $neutral-3;
+                    }
+        
+                }
+        
+                a {
+                    font-size: 14px;
+                    padding-left: 8px;
+        
+                }
+        
             }
 
-            p {
-                font-size: 14px !important;
-                line-height: 20px !important;
-                font-weight: 400;
-                color: $neutral-3;
+            .note-field {
+                padding-top: 8px;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                color: neutral-5;
 
-                span {
+                p {
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: $neutral-5;
+                    margin: 0px 0px 12px 0px;
+                    opacity: 1;
+                    padding: 0px;
+                }
+
+                h2 {
+                    font-size: 22px;
+                    line-height: 28px;
+                    color: $neutral-4;
+                    font-weight: 500;
+                    margin: 0px 0px 4px 0px;
+                }
+
+                h3 {
+                    font-size: 20px;
+                    line-height: 26px;
+                    color: $neutral-4;
+                    font-weight: 500;
+                    margin: 0px 0px 4px 0px;
+                }
+
+                blockquote {
+                    margin: 0px 0px 12px 0px;
+                    padding: 8px 8px 8px 16px;
+                    color: $neutral-5;
+                    opacity: 0.88;
+                    font-style: italic;
+                    border-left: 2px solid $neutral-8;
+                    background-color: $neutral-9;
+                    border-radius: 0px 8px 8px 0px;
+                    font-weight: 400;
+                }
+        
+                textarea {
+                    padding: 0px;
+                    font-size: 16px;
+                    line-height: 24px;
+                    color: $neutral-2;
+                    border: none;
+                    width: 100%;
+                    resize: none;
+                }
+        
+                textarea:focus {
+                    border: none;
+                    outline-color: transparent;
+                    outline-style: none;
+                }
+        
+                textarea::placeholder {
+                    color: $neutral-4;
+                }
+        
+                div {
+                    padding: 0px;
+                    font-size: 16px;
+                    line-height: 24px;
                     color: $neutral-3;
+                    border: none;
+                    width: 100%;
+                    resize: none;
+                }
+        
+                div:focus {
+                    border: none;
+                    outline-color: transparent;
+                    outline-style: none;
+                }
+            }
+        
+            .actions {
+                input {
+                    font-size: 14px;
+                    color: $purple;
+                    text-decoration: none;
+                    border: 1px solid $purple;
+                    padding: 6px 16px;
+                    border-radius: 4px;
+                    background-color: #FFFFFF;
+                    float: left;
+                    cursor: pointer;
+                    transition: 
+                        background-color 0.25s;
+                }
+                input:hover, :focus {
+                    background-color: $purple;
+                    color: #FFFFFF;
+                    outline-color: transparent;
+                    outline-style: none;
                 }
             }
 
-            ul {
-                margin: 4px 0px 16px 8px;
-            }
-
-            li {
-                margin: 0px 0px 0px 16px !important;
-                font-size: 14px !important;
-                line-height: 20px !important;
-                font-weight: 400;
-                color: $neutral-3;
-            }
-
         }
 
-        a {
-            font-size: 14px;
-            padding-left: 8px;
-
-        }
-
+              
     }
+    
+    
+
+    
     
 }
 

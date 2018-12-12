@@ -14,20 +14,20 @@
 
     <div class="actions">
         <%= form.submit "Update", :class => 'btn-primary hidden', :id => 'update-btn' %>
-
-        <span id="note-confirmation" class="note-confirmation hidden">Saving...</span>
     </div>
 <% end %>
+
+
 
 <script src="/assets/events-form.js"></script>
 
 <script>
     var textArea = document.getElementById('note-textarea');
- var csrfToken = document.querySelector('form').querySelector('[name=authenticity_token]').value
- var editor = new MediumEditor('.editable');
- var divArea = document.getElementById('populate-div');
- var saveCounter;
- divArea.oninput = function() {
+    var csrfToken = document.querySelector('form').querySelector('[name=authenticity_token]').value
+    var editor = new MediumEditor('.editable');
+    var divArea = document.getElementById('populate-div');
+    var saveCounter;
+    divArea.oninput = function() {
     textArea.innerHTML = divArea.innerHTML;
     ShowNotice();
      if (saveCounter)
