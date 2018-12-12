@@ -122,7 +122,7 @@ main {
         .scroll-workspace-container {
             flex: 1 1 auto;
             min-height: 1px;
-            overflow-y: scroll;
+            overflow: auto;
             position: relative;
             padding: 16px 7% 32px 7%;
 
@@ -179,7 +179,7 @@ main {
                     background-color: $neutral-9;
                     border-radius: 8px;
                     padding: 16px 16px 8px 16px;
-                    margin-top: 16px;
+                    margin-top: 8px;
 
                     div {
                         padding-top: 4px;
@@ -433,6 +433,21 @@ main {
                 }
             }
 
+            &::-webkit-scrollbar {
+                background-color: transparent;
+            }
+    
+            &::-webkit-scrollbar-thumb {
+                background-color: transparent;
+            }
+
+        }
+
+        .scroll-workspace-container:hover {
+            &::-webkit-scrollbar-thumb {
+                background-color: $neutral-8;
+                border: 2px solid #FFFFFF;
+            }
         }
 
               
