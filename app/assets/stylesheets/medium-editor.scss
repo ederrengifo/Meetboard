@@ -84,16 +84,19 @@
   width: 40px; }
 
 .medium-editor-placeholder {
-  position: relative; }
+  position: relative; 
+  color: $purple;
+}
   .medium-editor-placeholder:after {
     content: attr(data-placeholder) !important;
-    font-style: italic;
     position: absolute;
     left: 0;
     top: 0;
     white-space: pre;
     padding: inherit;
-    margin: inherit; }
+    margin: inherit;
+    color: $neutral-7 !important;
+   }
 
 .medium-editor-placeholder-relative {
   position: relative; }
@@ -103,7 +106,10 @@
     position: relative;
     white-space: pre;
     padding: inherit;
-    margin: inherit; }
+    margin: inherit; 
+    color: $purple;
+  
+  }
 
 .medium-toolbar-arrow-under:after, .medium-toolbar-arrow-over:before {
   border-style: solid;

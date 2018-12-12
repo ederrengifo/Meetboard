@@ -63,25 +63,30 @@
                 <div id="event-details" class="hidden">
                     <div class="details-wrapper">
                         <% if @event.description != nil %>
-                            <h4>Description</h4>
                             <p>
                                 <%= @event.description.html_safe %>
                             </p>
                         <% end %>
-                        <h4>Date</h4>
+                        <div>
+                            <span><%= inline_svg('icon-calendar') %></span>
+                            <h4>Date</h4>
+                        </div>
                         <p>
                             <%= @event.starts.strftime("%A, %B %d") %>
                         </p>
-                        <h4>Time</h4>
-                        <p>
-                            From <%= @event.starts.strftime("%I:%M%p") %> to <%= @event.ends.strftime("%I:%M%p") %> (<%= @event_difference %>)
-                        </p>
-                        <h4>Created by</h4>
+                        <div>
+                            <span><%= inline_svg('icon-person') %></span>
+                            <h4>Created by</h4>
+                        </div>
                         <p>
                             <%= @event.creator %>
                         </p>
                         <% if @event.location != nil %>
-                            <h4>Location</h4> 
+                            <div>
+                                <span><%= inline_svg('icon-location') %></span>
+                                <h4>Location</h4> 
+                            </div>
+                            
                             <p>
                                 <%= @event.location %>
                             </p> 
@@ -92,37 +97,35 @@
                 <div id="event-attendees" class="hidden">
                     <div class="details-wrapper">
                         <% @attendee_grouping.each do |response, attendees| %>
-                            <h4>
-                                <% if response == "accepted" %>
-                                    Confirmed
-                                <% else %>
-                                    <% if response == "needsAction" %>
-                                        Pending
-                                    <% else %>
-                                        <% if response == "declined" %>
-                                            Declined
-                                        <% else %>
-                                            <% if response == "tentative" %>
-                                                Maybe
-                                            <% else %>
-                                                <%= response %>
-                                            <% end %>
-                                        <% end %>
-                                    <% end %>
-                                <% end %> 
+                            <% if response == "accepted" %>
+                                <div class="at-accepted">
+                                    <h4>Confirmed
+                            <% elsif response == "needsAction" %>
+                                <div class="at-pending">
+                                    <h4>Pending
+                            <% elsif response == "declined" %>
+                                <div class="at-declined">
+                                    <h4>Declined
+                            <% elsif response == "tentative" %>
+                                <div class="at-maybe">
+                                    <h4>Maybe
+                            <% else %>
+                                <div class="at-pending">
+                                    <h4>Maybe
+                                    %= response %>
+                            <% end %>
                                 (<%= attendees.count %>)
                             </h4>
-                            <ul>
                             <% for attendee in attendees %>
-                                <li>
+                                <div class="attendee">
                                     <% if attendee.name == "" || attendee.name == nil %>
                                         <%= attendee.email %>
                                     <% else %>
                                         <%= attendee.name %>
                                     <% end %>
-                                </li>
+                                </div>
                             <% end %>
-                            </ul>
+                        </div>
                         <% end %>
                     </div>
                 </div>

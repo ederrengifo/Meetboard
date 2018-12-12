@@ -180,18 +180,32 @@ main {
                     border-radius: 8px;
                     padding: 16px 16px 8px 16px;
                     margin-top: 16px;
+
+                    div {
+                        padding-top: 4px;
+                    }
+
+                    span {
+                        display: inline;
+                        margin-right: 4px;
+                        vertical-align: baseline;
+                    }
         
                     h4 {
                         font-size: 14px;
                         line-height: 20px;
                         font-weight: 500;
+                        display: inline;
                     }
         
                     p {
                         font-size: 14px !important;
-                        line-height: 20px !important;
+                        line-height: 22px !important;
                         font-weight: 400;
                         color: $neutral-3;
+                        opacity: 0.88;
+                        margin: 4px 0px 12px 0px;
+                        padding: 0px;
         
                         span {
                             color: $neutral-3;
@@ -199,7 +213,8 @@ main {
                     }
         
                     ul {
-                        margin: 4px 0px 16px 8px;
+                        margin: 4px 0px 8px 8px;
+                        opacity: 0.88;
                     }
         
                     li {
@@ -209,6 +224,17 @@ main {
                         font-weight: 400;
                         color: $neutral-3;
                     }
+
+                    br {
+                        display: none;
+                    }
+
+                    b {
+                        font-weight: 500px;
+                        font-size: 14px;
+                        opacity: 0.88;
+                        margin: 4px 0px 12px 0px;
+                    }
         
                 }
         
@@ -216,6 +242,87 @@ main {
                     font-size: 14px;
                     padding-left: 8px;
         
+                }
+
+                .at-accepted {
+                    margin-bottom: 12px;
+
+                    .attendee {
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: $neutral-3;
+                    }
+                    .attendee::before {
+                        content: "";
+                        width: 6px;
+                        height: 6px;
+                        display: inline-block;
+                        background-color: $green;
+                        border-radius: 20px;
+                        margin-right: 4px;
+                        margin-left: 4px;
+                    }
+                }
+
+                .at-pending {
+                    margin-bottom: 12px;
+
+                    .attendee {
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: $neutral-3;
+                    }
+                    .attendee::before {
+                        content: "";
+                        width: 6px;
+                        height: 6px;
+                        display: inline-block;
+                        background-color: $yellow;
+                        border-radius: 20px;
+                        margin-right: 4px;
+                        margin-left: 4px;
+                    }
+                }
+
+                .at-declined {
+                    margin-bottom: 12px;
+
+                    .attendee {
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: $neutral-3;
+                    }
+                    .attendee::before {
+                        content: "";
+                        width: 6px;
+                        height: 6px;
+                        display: inline-block;
+                        background-color: $red;
+                        border-radius: 20px;
+                        margin-right: 4px;
+                        margin-left: 4px;
+                    }
+                }
+
+                .at-maybe {
+                    margin-bottom: 12px;
+
+                    .attendee {
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: $neutral-3;
+                    }
+                    .attendee::before {
+                        content: "";
+                        width: 6px;
+                        height: 6px;
+                        display: inline-block;
+                        background-color: transparent;
+                        border: 1px solid $neutral-8;
+                        border-radius: 20px;
+                        margin-right: 4px;
+                        margin-left: 4px;
+                    }
                 }
         
             }
@@ -280,7 +387,11 @@ main {
                 }
         
                 textarea::placeholder {
-                    color: $neutral-4;
+                    color: $purple !important;
+                }
+
+                div::placeholder {
+                    color: $purple !important;
                 }
         
                 div {
