@@ -62,12 +62,13 @@
             </h2>
             <ul>
                 <% for calendar in calendars %>
+                    <% if calendar.start.date_time != nil %>
 
-                    <% if @event.present? %>
-                        <a href="<%= event_path(calendar.id) %>" class="<%= (@event.gid == calendar.id) ? 'active' : 'event-link' %>">
-                    <% else %>
-                        <a href="<%= event_path(calendar.id) %>" class="event-link">
-                    <% end %>
+                        <% if @event.present? %>
+                            <a href="<%= event_path(calendar.id) %>" class="<%= (@event.gid == calendar.id) ? 'active' : 'event-link' %>">
+                        <% else %>
+                            <a href="<%= event_path(calendar.id) %>" class="event-link">
+                        <% end %>
 
                         <li>
 
@@ -87,8 +88,8 @@
                             <% end %>
                         
                         </li>
-                    </a>
-
+                        </a>
+                    <% end %>
                 <% end %>
             </ul>
         <% end %>
@@ -112,11 +113,13 @@
                                     <div class="event-name">
                                         <%= event.title %>
                                     </div>
-                                    <div class="timelapse">
-                                        <span class="date">
-                                            <%= event.starts&.strftime("%B %d") %> - <%= event.starts&.strftime("%I:%M%p") %>
-                                        </span>      
-                                    </div>
+                                    <% if event.starts != nil %>
+                                        <div class="timelapse">
+                                            <span class="date">
+                                                <%= event.starts&.strftime("%B %d") %> - <%= event.starts&.strftime("%I:%M%p") %>
+                                            </span>      
+                                        </div>
+                                    <% end %>
                                 </li>
                             </a>
                     <% end %>

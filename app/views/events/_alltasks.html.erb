@@ -2,7 +2,7 @@
                     <% @task_grouping.each do |event_id, tasks| %>
                         <div class="task-group">
                             <div class="task-group-head">
-                                <a href="<%= event_id %>" class="event">
+                                <a href="../events/<%= event_id %>" class="event">
                                     <%= truncate((Event.find(event_id).title), length: 48) %> <span><%= Event.find(event_id).starts&.strftime("%m/%d") %></span>
                                 </a>
                             </div>
@@ -39,7 +39,7 @@
                     <% @task_grouping.each do |event_id, tasks| %>
                         <div class="task-group">
                             <div class="task-group-head">
-                                <a href="<%= event_id %>" class="event">
+                                <a href="../events/<%= event_id %>" class="event">
                                     <%= truncate((Event.find(event_id).title), length: 48) %> <span><%= Event.find(event_id).starts&.strftime("%m/%d") %></span>
                                 </a>
                             </div>

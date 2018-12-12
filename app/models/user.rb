@@ -1,4 +1,8 @@
 class User < ApplicationRecord  
+  has_many :events
+  has_many :tasks, through: :events
+  has_many :attendees, through: :events
+
   def self.from_omniauth(auth)
     where(email: auth.info.email).first_or_initialize do |user|
       user.name = auth.info.name

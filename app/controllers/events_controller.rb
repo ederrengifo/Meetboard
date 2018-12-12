@@ -83,28 +83,30 @@ class EventsController < ApplicationController
         end
       # Create a new event in case this doesn't exist yet
       else
-        new_event = Event.new
-        new_event.gid = google_event.id
-        new_event.title = google_event.summary
-        new_event.description = google_event.description
-        new_event.hangout_link = google_event.hangout_link
-        new_event.starts = google_event.start.date_time
-        new_event.ends = google_event.end.date_time
-        if google_event.organizer.display_name == nil
-          new_event.creator = google_event.organizer.email
-        else
-          new_event.creator = google_event.organizer.display_name
+        if google_event.start.date_time != nil
+          new_event = Event.new
+          new_event.gid = google_event.id
+          new_event.title = google_event.summary
+          new_event.description = google_event.description
+          new_event.hangout_link = google_event.hangout_link
+          new_event.starts = google_event.start.date_time
+          new_event.ends = google_event.end.date_time
+          if google_event.organizer.display_name == nil
+            new_event.creator = google_event.organizer.email
+          else
+            new_event.creator = google_event.organizer.display_name
+          end
+          new_event.location = google_event.location
+          google_category = google_event.summary.downcase
+          if ["1:1", "1-to-1", "one-to-one"].include? google_category
+            new_event.category = "1:1 meeting"
+          elsif ["standup", "stand-up", "stand up", "check-in", "check in"].include? google_category
+            new_event.category = "Check-in / Stand-up"
+          else
+            new_event.category = "General"
+          end
+          new_event.save!
         end
-        new_event.location = google_event.location
-        google_category = google_event.summary.downcase
-        if ["1:1", "1-to-1", "one-to-one"].include? google_category
-          new_event.category = "1:1 meeting"
-        elsif ["standup", "stand-up", "stand up", "check-in", "check in"].include? google_category
-          new_event.category = "Check-in / Stand-up"
-        else
-          new_event.category = "General"
-        end
-        new_event.save!
         # Create attendees list
         if google_event.attendees != nil
           google_event.attendees.each do |google_attendee|
