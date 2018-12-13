@@ -8,7 +8,7 @@
         <button onclick="showDropdown()" class="user-menu mb-dropdown-btn" >
             <%= current_user.name %>
             <span>
-                <%= inline_svg('icon-down')%>
+                <%= inline_svg('icon-down.svg')%>
             <span>
         </button>
         <div id="user-dropdown" class="mb-dropdown">
@@ -18,7 +18,7 @@
         <% if @event.present? %>
             <span class="hide-btn">
                 <button id="hide-sidebar-btn" onclick="hideLeft()">
-                    <%= inline_svg('icon-hide') %>
+                    <%= inline_svg('icon-hide.svg') %>
                 </button>
             </span>
         <% end %>

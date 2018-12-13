@@ -6,11 +6,11 @@
         <div class="workspace-head">
             <div class="left">
                 <button id="show-sidebar" class="show-sidebar hidden" onclick="showLeft()">
-                    <%= inline_svg('icon-sidebar') %>
+                    <%= inline_svg('icon-sidebar.svg') %>
                 </button>
                 <div class="hour">
                     <span> 
-                        <%= inline_svg('icon-time') %>
+                        <%= inline_svg('icon-time.svg') %>
                     </span>
                     <% if @event.starts != nil %>
                         <% if @event.ends.to_i < Time.now.to_i %>
@@ -33,12 +33,12 @@
                 <span id="note-confirmation" class="note-confirmation hidden">...saving</span>
                 <% if @event.hangout_link != nil %>
                     <a class="share-option" href="<%= @event.hangout_link %>?hs=42" target="_blank">
-                        <span><%= inline_svg('icon-link') %></span>
+                        <span><%= inline_svg('icon-link.svg') %></span>
                     </a>
                 <% end %>
                 <button onclick="showShare()" class="share-option mb-dropdown-btn">
                     <span>
-                        <%= inline_svg('icon-share') %>
+                        <%= inline_svg('icon-share.svg') %>
                     </span>
                 </button>
                 <div id="export-dropdown" class="mb-dropdown share-dropdown">
@@ -47,7 +47,7 @@
                 </div>
                 <% if @event.ends.to_i < Time.now.to_i %>
                     <%= link_to @event, method: :delete, data: {confirm: "Are you sure?"}, class: "share-option" do %>
-                        <%= inline_svg('icon-trash') %>
+                        <%= inline_svg('icon-trash.svg') %>
                     <% end %>
                 <% end %>
             </div>
@@ -81,7 +81,7 @@
                         <% end %>
                         <% if @event.starts != nil %>
                             <div>
-                                <span><%= inline_svg('icon-calendar') %></span>
+                                <span><%= inline_svg('icon-calendar.svg') %></span>
                                 <h4>Date</h4>
                             </div>
                             <p>
@@ -89,7 +89,7 @@
                             </p>
                         <% end %>
                         <div>
-                            <span><%= inline_svg('icon-person') %></span>
+                            <span><%= inline_svg('icon-person.svg') %></span>
                             <h4>Created by</h4>
                         </div>
                         <p>
@@ -97,7 +97,7 @@
                         </p>
                         <% if @event.location != nil %>
                             <div>
-                                <span><%= inline_svg('icon-location') %></span>
+                                <span><%= inline_svg('icon-location.svg') %></span>
                                 <h4>Location</h4> 
                             </div>
                             
