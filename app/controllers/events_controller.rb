@@ -206,7 +206,7 @@ class EventsController < ApplicationController
             "auth_uri" => "https://accounts.google.com/o/oauth2/auth",
             "token_uri" => "https://accounts.google.com/o/oauth2/token",
             "scope" => Google::Apis::CalendarV3::AUTH_CALENDAR,
-            "redirect_uris" => ["https://localhost:3000/auth/google_oauth2/callback"]
+            "redirect_uris" => ["https://meetboard.herokuapp.com/auth/google_oauth2/callback"]
           }
         }
       )
