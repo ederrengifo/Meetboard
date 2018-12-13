@@ -84,7 +84,7 @@ class EventsController < ApplicationController
       # Create a new event in case this doesn't exist yet
       else
         if google_event.start.date_time != nil
-          new_event = Event.new
+          new_event = current_user.events.new
           new_event.gid = google_event.id
           new_event.title = google_event.summary
           new_event.description = google_event.description
@@ -125,10 +125,10 @@ class EventsController < ApplicationController
   end
   # Create methods for display tasks from events
   def set_tasks
-    @events = Event.all
-    @tasks = Task.all
+    @events = current_user.events.all
+    @tasks = current_user.tasks.all
     @task_grouping = @tasks.group_by {|t| t.event_id }
-    @attendees = Attendee.all
+    @attendees = current_user.attendees.all
     if @event.present?
       @attendee_grouping = @event.attendees.order("response ASC").group_by {|a| a.response }
     end
