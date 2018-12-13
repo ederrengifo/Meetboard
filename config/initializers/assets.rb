@@ -11,4 +11,4 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
-Rails.application.config.assets.precompile += %w( components.js events-show.js events-sidebar.js admin.css )
+Rails.application.config.assets.precompile += %w( components.js events-show.js events-sidebar.js events-form.js medium-editor.js tasks-form.js admin.css )
