@@ -12,5 +12,11 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
+//= require components.js
+//= require events-form.js
+//= require events-show.js
+//= require events-sidebar.js
+//= require medium-editor.js
+//= require tasks-form.js
+
 
