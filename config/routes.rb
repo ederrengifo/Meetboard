@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       get :update
     end
     get 'reports/:id/download', to: 'reports#download', as: 'download'
+    get :update_theme
     resources :reports
   end 
 

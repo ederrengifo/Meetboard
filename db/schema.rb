@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181203044610) do
+ActiveRecord::Schema.define(version: 20181212231637) do
 
   create_table "attendees", force: :cascade do |t|
     t.string "gid"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20181203044610) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "theme", default: "dark", null: false
   end
 
 end

@@ -1,4 +1,4 @@
-<aside id="sidebar" class="width-22 theme-dark">
+<aside id="sidebar" class="width-22 theme-<%= current_user.theme %>">
     <div class="user-options">
         <span>
             <a href="/">
@@ -12,7 +12,7 @@
             <span>
         </button>
         <div id="user-dropdown" class="mb-dropdown">
-            <button class="option">Change Theme</button>
+            <%= link_to "Change Theme", event_update_theme_path(current_user), class: "option" %>
             <%= link_to "Sign out", signout_path, class: "option" %>
         </div>
         <% if @event.present? %>

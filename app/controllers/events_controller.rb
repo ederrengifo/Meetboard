@@ -180,6 +180,19 @@ class EventsController < ApplicationController
     redirect_to root_path
   end
 
+  def update_theme
+    set_event
+    user = current_user
+    if user.theme == "dark"
+      user.theme = "snow"
+      user.save!
+    elsif user.theme == "snow"
+      user.theme = "dark"
+      user.save!
+    end
+    redirect_back fallback_location: root_path
+  end
+
   private
 
     def google_secret(user)
