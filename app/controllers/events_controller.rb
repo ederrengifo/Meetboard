@@ -220,7 +220,7 @@ class EventsController < ApplicationController
       event_list = service.list_events('primary',
                                         single_events: true, 
                                         order_by: 'startTime', 
-                                        max_results: 30,
+                                        max_results: 20,
                                         time_min: Time.now.iso8601,).items      
       
     end
