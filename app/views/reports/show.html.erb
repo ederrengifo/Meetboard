@@ -1,11 +1,33 @@
+<div class="report-wrapper">
+    <div class="report-container">
+        <div class="report-head">
+            <h1><%= @event.title %></h1>
+        </div>
+        <div class="report-body">
+            <div class="report-note">
+                <%= @event.note.to_s.html_safe %>
+            </div>
+        </div>
+        <div class="report-items">
+            <h2>Action Items</h2>
+            <ul>
+            <% @event.tasks.each do |task| %>
+                <% if task.completed == false %>
+                    <li class="report-task">
+                <% else %>
+                    <li class="report-task-completed">
+                <% end %>
+                        <%= task.title %>
+                    </li>
+            <% end %>
+            </ul>
+        </div>
+    </div>
+</div>
 
-<h1><%= @event.title %></h2>
-<p><%= @event.note.to_s.html_safe %></p>
 
-<h2>Action Items</h2>
 
-<ul>
-    <% @event.tasks.each do |task| %>
-        <li><%= task.title %></li>
-    <% end %>
-</ul>
+
+
+
+

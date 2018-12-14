@@ -194,14 +194,14 @@
         <div class="scroll-todobar-container">
             <div class="tasks-container" id="event-task-block">
                 <div id="event-tasks-cleaned" class="hidden">
-                    <% @event.tasks.each do |task| %>
+                    <% @event.tasks.sort_by(&:created_at).each do |task| %>
                         <% if task.completed == false %>
                             <%= render partial: 'tasks/task', locals: { task: task } %>
                         <% end %>
                     <% end %>
                 </div>
                 <div id="event-tasks-all" class="">
-                    <% @event.tasks.each do |task| %>
+                    <% @event.tasks.sort_by(&:created_at).each do |task| %>
                         <%= render partial: 'tasks/task', locals: { task: task } %>
                     <% end %>
                 </div>
