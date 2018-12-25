@@ -29,7 +29,7 @@ class TasksController < ApplicationController
 
     def destroy
         set_event
-        @task = @event.tasks.find(params[:id]) q
+        @task = @event.tasks.find(params[:id])
         @task.destroy
         redirect_back fallback_location: @event
     end
