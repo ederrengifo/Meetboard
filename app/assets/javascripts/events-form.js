@@ -1,10 +1,6 @@
-var update_btn = document.getElementById("update-btn");
+ var update_btn = document.getElementById("update-btn");
  var note_confirmation = document.getElementById("note-confirmation");
  var Delay
-
- textArea.setAttribute('style', 'height:' + (textArea.scrollHeight) + 'px;overflow-y:hidden;');
- textArea.addEventListener("input", OnInput, false);
-
 
  function OnInput() {
      this.style.height = 'auto';
