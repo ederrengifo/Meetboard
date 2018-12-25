@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     def create  
         set_event
         @task = @event.tasks.create(task_params)
-        redirect_to @event
+        redirect_back fallback_location: root_path
     end
 
     def edit
@@ -19,7 +19,7 @@ class TasksController < ApplicationController
         @task = @event.tasks.find(params[:id])
         respond_to do |format|
             if @task.update(task_params) 
-                format.html { redirect_back fallback_location: @event }
+                format.html { redirect_back fallback_location: root_path }
                 format.json { render :show, status: :ok, location: @event }
             else
                 # Error messages
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
 
     def destroy
         set_event
-        @task = @event.tasks.find(params[:id])
+        @task = @event.tasks.find(params[:id]) q
         @task.destroy
         redirect_back fallback_location: @event
     end

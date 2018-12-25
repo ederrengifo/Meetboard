@@ -7,6 +7,41 @@ h1 {
     color: $neutral-1;
 }
 
+h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: $neutral-1;
+}
+
+ul {
+    margin-top: 32px;
+    list-style: none;
+}
+
+li {
+    color: $neutral-1;
+    font-size: 17px;
+    line-height: 28px;
+    opacity: 0.72;
+    margin-bottom: 28px;
+    border-left: 2px solid $neutral-8;
+    padding-left: 16px;
+
+    span {
+        background: $purple-2;
+        font-size: 14px;
+        line-height: 32px;
+        font-weight: 500;
+        padding: 1px 8px;
+        border-radius: 3px;
+        margin-right: 4px;
+    }
+}
+
+li:first-child {
+    border-left: 2px solid $purple;
+}
+
 p {
     font-size: 17px;
     line-height: 28px;
@@ -24,14 +59,22 @@ p {
 }
 
 .head {
-    position: absolute;
-    width: 1024px;
+    position: fixed;
+    width: 100%;
+    text-align: center;
     height: 64px; 
     margin: 0 auto; 
     padding: 16px 0px;
     left: 50%;
     transform: translate(-50%);
     z-index: 1;
+    background-color: #FFFFFF;
+
+    .head-content {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 0px 16px;
+    }
     
     .logo {
         float: left;
@@ -65,11 +108,15 @@ p {
             }
         }
 
+        a.active{
+            opacity: 1 !important;
+        }
+
     }
 }
 
 .container {
-    width: 1024px;
+    max-width: 1024px;
     height: 100%;
     margin: 0 auto;
     position: relative;
@@ -111,5 +158,25 @@ p {
             }
 
         }
+    }
+}
+
+.content-container {
+    width: 100%;
+    text-align: center;
+
+    a {
+        color: $neutral-1;
+        text-decoration: underline;
+    }
+
+    .content-body {
+        width: 1024px;
+        padding-top: 128px;
+        padding-bottom: 64px;
+        padding-left: 12%;
+        padding-right: 12%;
+        margin: 0 auto;
+        text-align: left;
     }
 }
