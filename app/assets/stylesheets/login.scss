@@ -13,34 +13,35 @@ h2 {
     color: $neutral-1;
 }
 
-ul {
+ul.changelog {
     margin-top: 32px;
     list-style: none;
-}
 
-li {
-    color: $neutral-1;
-    font-size: 17px;
-    line-height: 28px;
-    opacity: 0.72;
-    margin-bottom: 28px;
-    border-left: 2px solid $neutral-8;
-    padding-left: 16px;
-
-    span {
-        background: $purple-2;
-        font-size: 14px;
-        line-height: 32px;
-        font-weight: 500;
-        padding: 1px 8px;
-        border-radius: 3px;
-        margin-right: 4px;
+    li {
+        color: $neutral-1;
+        font-size: 17px;
+        line-height: 28px;
+        opacity: 0.72;
+        margin-bottom: 28px;
+        border-left: 2px solid $neutral-8;
+        padding-left: 16px;
+    
+        span {
+            background: $purple-2;
+            font-size: 14px;
+            line-height: 32px;
+            font-weight: 500;
+            padding: 1px 8px;
+            border-radius: 3px;
+            margin-right: 4px;
+        }
+    }
+    
+    li:first-child {
+        border-left: 2px solid $purple;
     }
 }
 
-li:first-child {
-    border-left: 2px solid $purple;
-}
 
 p {
     font-size: 17px;
