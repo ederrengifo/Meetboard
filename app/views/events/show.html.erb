@@ -57,7 +57,7 @@
                         <p>The event and all its action items will no longer be available. Are you sure you want to delete it?</p>
                         <div>
                             <button id="cancel-delete-btn" class="btn" onclick="hideDeleteEvent()">No, Cancel</button>
-                            <%= link_to "Yes, Delete it", @event, method: :delete, class: "btn btn-primary" %>
+                            <%= link_to "Yes, Delete it", @event, method: :delete, class: "btn btn-error" %>
                         </div>
                     </div>
                 </div>
