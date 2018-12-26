@@ -113,3 +113,16 @@ function closeAllSelect(elmnt) {
 }
 
 document.addEventListener("click", closeAllSelect);
+
+var modal = document.getElementById('delete-event-modal');
+var trigger_delete_btn = document.getElementById('delete-event-btn');
+var confirm_delete_btn = document.getElementById('confirm-delete-event-btn');
+var cancel_delete_btn = document.getElementById('cancel-delete-btn');
+
+function showDeleteEvent() {
+    modal.classList.remove('hidden')
+}
+
+function hideDeleteEvent() {
+    modal.classList.add('hidden')
+}

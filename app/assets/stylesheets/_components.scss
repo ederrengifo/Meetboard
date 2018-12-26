@@ -115,3 +115,73 @@
 .select-items div:hover, .same-as-selected {
     background-color: $purple-2;
 }
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(11,6,27,0.8);
+    z-index: 100;
+    text-align: center;
+    transition:
+        opacity 0.3s 0s,
+        visibility 0s 0.3s;
+
+    .modal-box {
+        position: relative;
+        max-width: 480px;
+        background-color: #FFFFFF;
+        margin: 0 auto;
+        top: 20%;
+        border-radius: 8px;
+        padding: 32px;
+        text-align: left;
+        transition:
+            opacity 0.3s 0s,
+            visibility 0s 0.3s;
+
+        .btn-primary {
+            float: right;
+        }
+    }
+}
+
+.btn {
+    font-weight: 500;
+    padding: 6px 24px;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 20px;
+    box-shadow: none;
+    border: 1px solid $neutral-8;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    transition:
+        opacity 0.3s,
+        background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: $neutral-9;
+}
+
+.btn:focus {
+    outline-color: transparent;
+    outline-style: none;
+}
+
+.btn-primary {
+    border: 1px solid $purple;
+    background-color: $purple;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+.btn-primary:hover {
+    border: 1px solid $purple;
+    background-color: $purple;
+    color: #FFFFFF;
+    text-decoration: underline;
+}
